@@ -1,0 +1,109 @@
+@mixin light-theme-colour($hue) {
+--background-color: #{hsl($hue, 84%, 95%)};
+--background-contrast: #{hsl($hue, 84%, 90%)};
+--background-contrast-alpha: #{hsla($hue, 84%, 90%, 0.7)};
+--background-input: #{hsl($hue, 39%, 88%)};
+--border-input: #{hsl($hue, 58%, 80%)};
+
+--underline: #{hsl($hue, 39%, 86%)};
+
+--text-color: #{hsl($hue, 24%, 30%)};
+--text-color-light: #{hsl($hue, 10%, 59%)};
+--text-color-low-contrast: #{hsl($hue, 17%, 75%)};
+
+--light-button-color: #{hsl($hue, 36%, 60%)};
+--light-button-text-color: #{hsl($hue, 30%, 85%)};
+
+--dark-button-color: #{hsl($hue, 45%, 80%)};
+--dark-button-text-color: #{hsl($hue, 40%, 70%)};
+
+--dark-button-color-selected: #{hsl($hue, 50%, 70%)};
+--dark-button-text-color-selected: #{hsl($hue, 30%, 40%)};
+
+--dark-button-disactivated-color: #{hsl($hue, 10%, 70%)};
+--dark-button-disactivated-text-color: #{hsl($hue, 10%, 40%)};
+
+--accent-color: #{hsl($hue, 23%, 37%)};
+--underline-color: #{hsl($hue, 22%, 13%)};
+--text-color-on-accent-color: white;
+--border-color-on-accent-color: white;
+
+--text-color-on-secondary-accent-color: white;
+
+--focus-color: white;
+--text-color-on-focus-color: black;
+
+--highlight-color: #db621d;
+
+--backdrop-color: rgba(0, 0, 0, 0.4);
+}
+
+@mixin dark-theme-colour($hue) {
+	--background-color: #{hsl($hue, 84%, 5%)};
+	--background-contrast: #{hsl($hue, 84%, 3%)};
+	--background-contrast-alpha: #{hsla($hue, 84%, 2%, 0.7)};
+	--background-input: #{hsl($hue, 39%, 12%)};
+	--border-input: #{hsl($hue, 58%, 6%)};
+
+	--underline: #{hsl($hue, 39%, 14%)};
+
+	--text-color: #{hsl($hue, 24%, 74%)};
+	--text-color-light: #{hsl($hue, 10%, 41%)};
+	--text-color-low-contrast: #{hsl($hue, 17%, 25%)};
+
+	--light-button-color: #{hsl($hue, 36%, 40%)};
+	--light-button-text-color: #{hsl($hue, 30%, 15%)};
+
+	--dark-button-color: #{hsl($hue, 45%, 15%)};
+	--dark-button-text-color: #{hsl($hue, 30%, 30%)};
+
+	--dark-button-disactivated-color: #{hsl($hue, 10%, 15%)};
+	--dark-button-disactivated-text-color: #{hsl($hue, 10%, 30%)};
+
+
+	--dark-button-color-selected: #{hsl($hue, 50%, 23%)};
+	--dark-button-text-color-selected: #{hsl($hue, 30%, 65%)};
+
+	--accent-color: #{hsl($hue, 23%, 37%)};
+	--underline-color: #{hsl($hue, 22%, 13%)};
+	--text-color-on-accent-color: white;
+	--border-color-on-accent-color: white;
+
+	--text-color-on-secondary-accent-color: white;
+
+	--focus-color: white;
+	--text-color-on-focus-color: black;
+
+	--highlight-color: #db621d;
+
+	--backdrop-color: rgba(0, 0, 0, 0.4);
+}
+
+$themes: (
+  red: 0,
+  yellow: 50,
+  lime: 100,
+  teal: 157,
+  blue: 200,
+  indigo: 250,
+  purple: 287,
+);
+
+@mixin generate-theme-colors {
+  @each $theme, $hue in $themes {
+    .light-theme-#{$theme} {
+      @include light-theme-colour($hue);
+    }
+    .dark-theme-#{$theme} {
+      @include dark-theme-colour($hue);
+    }
+  }
+}
+
+@include generate-theme-colors;
+
+
+a {
+	text-decoration: none;
+	color: var(--text-color);
+}
