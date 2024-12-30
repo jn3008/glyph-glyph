@@ -1,0 +1,11 @@
+# Ignore everything
+*
+
+# Allow only build output
+!index.html
+!_app/
+!favicon.png
+!manifest.json
+!service-worker.js
+!CNAME
+!version.json
