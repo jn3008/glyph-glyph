@@ -25,3 +25,5 @@ vite.config.ts.timestamp-*
 .prettierignore
 
 eslint.config.js
+
+todo.md

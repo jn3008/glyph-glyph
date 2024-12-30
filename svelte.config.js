@@ -33,9 +33,17 @@ const config = {
 		},
 		
 		paths: {
-      // base: dev ? '' : '/glyph-glyph', // Use base path only in production
       base: '',
     },
+
+		prerender: {
+			entries: [
+				"*",        // Automatically include all static routes
+				"/",        // Root route
+				"/play",    // Play route
+				"/setup"    // Setup route
+			]
+		}
 	}
 };
 
