@@ -11,6 +11,7 @@ git checkout gh-pages -f
 
 echo "Copying new build files..."
 cp -r build/* .
+cp -r index.html 404.html
 
 echo "Staging and committing changes..."
 git add .
