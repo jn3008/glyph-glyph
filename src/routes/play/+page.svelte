@@ -92,10 +92,8 @@
 			if (using_stopwatch && !stopwatch_is_paused) {
 				stopwatch.stopTimer();
 
-				if (perfect_answers) {
-					updateHighScore(configuration, elapsed_time);
-					new_record_set = true;
-				}
+				if (perfect_answers)
+					new_record_set = updateHighScore(configuration, elapsed_time);
 			}
 
 		await tick();
