@@ -14,9 +14,9 @@ function generatePathArray(id: string) {
 export const game_config = sessionPersistentStore<Configuration>(
   "game-config",
   {
-    id: "hiragana-monographs",
-    path: generatePathArray("hiragana-monographs"),
-    is_valid: true,
+    id: "", // kana-hiragana-monographs
+    path: generatePathArray(""),
+    is_valid: false,
   }
 );
 

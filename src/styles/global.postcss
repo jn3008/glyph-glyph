@@ -1,175 +1,175 @@
 @keyframes fade-in {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 :root {
-	--standard-curve: cubic-bezier(0.4, 0, 0.2, 1);
-	--deceleration-curve: cubic-bezier(0, 0, 0.2, 1);
-	--standard-border-radius: 0.9rem;
-	--line-height: 1.5;
-	--line-space: 1.5rem;
+  --standard-curve: cubic-bezier(0.4, 0, 0.2, 1);
+  --deceleration-curve: cubic-bezier(0, 0, 0.2, 1);
+  --standard-border-radius: 0.9rem;
+  --line-height: 1.5;
+  --line-space: 1.5rem;
 }
 
 body {
-	margin: 0;
-	color: var(--text-color);
-	background: var(--background-color);
-	position: relative;
+  margin: 0;
+  color: var(--text-color);
+  background: var(--background-color);
+  position: relative;
 
-	font-family: 'Funnel Display', 'Onest', 'Noto Sans Japanese', sans-serif;
-	font-optical-sizing: auto;
-	font-style: normal;
+  font-family: "Funnel Display", "Onest", "Noto Sans Japanese", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 * {
-	touch-action: pan-y; /* Prevent zooming in mobile Safari. */
+  touch-action: pan-y; /* Prevent zooming in mobile Safari. */
 }
 
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 :focus {
-	outline-color: var(--focus-color);
+  outline-color: var(--focus-color);
 }
 
 p {
-	font-size: 1em;
-	font-kerning: normal;
-	font-variant-ligatures: common-ligatures contextual;
-	font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-	margin-top: 0;
-	margin-bottom: var(--line-space);
+  font-size: 1em;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures contextual;
+  font-feature-settings: "kern", "liga", "clig", "calt";
+  margin-top: 0;
+  margin-bottom: var(--line-space);
 }
 
 h1 {
-	font-size: 2em;
-	font-weight: 500;
-	margin-top: 0;
-	margin-bottom: var(--line-space);
-	line-height: 1.25;
+  font-size: 2em;
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: var(--line-space);
+  line-height: 1.25;
 }
 
 h2 {
-	font-size: 1.5em;
-	font-weight: 500;
-	margin-top: 0;
-	/* margin-bottom: var(--line-space); */
-	/* line-height: 1.25; */
-	margin: 0;
-	padding: 0;
+  font-size: 1.5em;
+  font-weight: 500;
+  margin-top: 0;
+  /* margin-bottom: var(--line-space); */
+  /* line-height: 1.25; */
+  margin: 0;
+  padding: 0;
 }
 
 h3 {
-	font-size: 1.25em;
-	font-weight: 500;
-	margin-top: 0;
-	margin-bottom: var(--line-space);
-	line-height: 1.25;
+  font-size: 1.25em;
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: var(--line-space);
+  line-height: 1.25;
 }
 
 hr {
-	border: none;
-	background: var(--text-color-lighter);
-	height: 1px;
-	margin: calc(1.5 * var(--line-space)) 0;
+  border: none;
+  background: var(--text-color-lighter);
+  height: 1px;
+  margin: calc(1.5 * var(--line-space)) 0;
 }
 
 .text-link {
-	color: var(--secondary-accent-color);
-	text-decoration: none;
-	border-bottom: 1px solid var(--secondary-accent-color);
+  color: var(--secondary-accent-color);
+  text-decoration: none;
+  border-bottom: 1px solid var(--secondary-accent-color);
 
-	&:active,
-	&:focus-visible {
-		outline: none;
-		color: var(--text-color-on-focus-color);
-		background: var(--focus-color);
-		border-color: var(--focus-color);
-	}
+  &:active,
+  &:focus-visible {
+    outline: none;
+    color: var(--text-color-on-focus-color);
+    background: var(--focus-color);
+    border-color: var(--focus-color);
+  }
 
-	&[target='_blank'] {
-		&:before {
-			content: '';
-			display: inline-block;
-			vertical-align: baseline;
-			position: relative;
-			top: 0.15em; /* visual balance */
-			width: 1em;
-			height: 1em;
-			background-color: var(--secondary-accent-color);
-			mask-image: url('/icon/open-in-new.svg');
-			mask-repeat: no-repeat;
-			mask-position: 50% 50%;
-		}
+  &[target="_blank"] {
+    &:before {
+      content: "";
+      display: inline-block;
+      vertical-align: baseline;
+      position: relative;
+      top: 0.15em; /* visual balance */
+      width: 1em;
+      height: 1em;
+      background-color: var(--secondary-accent-color);
+      mask-image: url("/icon/open-in-new.svg");
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+    }
 
-		&:active:before,
-		&:focus-visible:before {
-			background-color: var(--text-color-on-focus-color);
-		}
-	}
+    &:active:before,
+    &:focus-visible:before {
+      background-color: var(--text-color-on-focus-color);
+    }
+  }
 }
 
 .content-width {
-	max-width: 40rem;
+  max-width: 40rem;
 }
 
 .content-padding {
-	padding: calc(1.4 * var(--line-space));
+  padding: calc(1.4 * var(--line-space));
 
-	@media screen and (max-width: 40em) {
-		padding: var(--line-space);
-	}
+  @media screen and (max-width: 40em) {
+    padding: var(--line-space);
+  }
 }
 
 .center {
-	margin-left: auto;
-	margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .sr-only {
-	clip: rect(1px, 1px, 1px, 1px);
-	clip-path: inset(50%);
-	height: 1px;
-	width: 1px;
-	margin: -1px;
-	overflow: hidden;
-	padding: 0;
-	position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
 }
 
 .glass-morphism {
-	backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 
-	/* Fallback for crap browsers like Firefox */
-	@supports (not (backdrop-filter: none)) {
-		background: var(--background-color);
-	}
+  /* Fallback for crap browsers like Firefox */
+  @supports (not (backdrop-filter: none)) {
+    background: var(--background-color);
+  }
 
-	&:before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		z-index: -1;
-		background: var(--background-color);
-		opacity: 0.8;
-	}
+  &:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--background-color);
+    opacity: 0.8;
+  }
 
-	&.contrast {
-		/* Fallback for crap browsers like Firefox */
-		@supports (not (backdrop-filter: none)) {
-			background: var(--background-contrast);
-		}
+  &.contrast {
+    /* Fallback for crap browsers like Firefox */
+    @supports (not (backdrop-filter: none)) {
+      background: var(--background-contrast);
+    }
 
-		&:before {
-			background: var(--background-contrast);
-		}
-	}
+    &:before {
+      background: var(--background-contrast);
+    }
+  }
 }

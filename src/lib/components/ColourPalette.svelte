@@ -1,183 +1,188 @@
 <script lang="ts">
-	import { settings, theme_appearances, theme_colours } from '$/lib/stores/settings';
-	import { appearance as appearance_store } from '$/lib/stores/appearance';
-	import type { ThemeAppearance, ThemeColour } from '$/lib/stores/settings';
+  import {
+    settings,
+    theme_appearances,
+    theme_colours,
+  } from "$/lib/stores/settings";
+  import { appearance as appearance_store } from "$/lib/stores/appearance";
+  import type { ThemeAppearance, ThemeColour } from "$/lib/stores/settings";
 
-	$: theme_colour = $settings.colour;
+  $: theme_colour = $settings.colour;
 
-	let palette_drawer_open: boolean = false;
+  let palette_drawer_open: boolean = false;
 
-	const setThemeAppearance = (appearance: ThemeAppearance) => {
-		$settings.appearance = appearance;
-	};
-	const setThemeColour = (colour: ThemeColour) => {
-		$settings.colour = colour;
-	};
+  const setThemeAppearance = (appearance: ThemeAppearance) => {
+    $settings.appearance = appearance;
+  };
+  const setThemeColour = (colour: ThemeColour) => {
+    $settings.colour = colour;
+  };
 </script>
 
 <div class="palette-container">
-	<div class="palette-drawer-contents" class:open={palette_drawer_open}>
-		<div class="palette">
-			{#each theme_appearances as appearance}
-				{#if $settings.appearance !== appearance}
-					<div class="button-container">
-						<button
-							type="button"
-							class="color-button appearance"
-							aria-label={`Set theme appearance to ${appearance}`}
-							on:click={() => setThemeAppearance(appearance as ThemeAppearance)}
-						>
-							<span class="material-symbols-rounded icon">
-								{#if appearance === 'auto'}
-									brightness_auto
-								{:else if appearance === 'dark'}
-									dark_mode
-								{:else}
-									light_mode
-								{/if}
-							</span>
-						</button>
-					</div>
-				{/if}
-			{/each}
-		</div>
-		<div class="palette colour">
-			{#each theme_colours as colour}
-				<div class="button-container">
-					<button
-						type="button"
-						style="background-color: linear-gradient(to bottom right, black 47%, white 53%);"
-						class="color-button {$appearance_store}-theme-{colour} {colour === theme_colour
-							? 'active'
-							: ''}"
-						aria-label={`Set theme colour to ${colour}`}
-						on:click={() => setThemeColour(colour as ThemeColour)}
-					></button>
-				</div>
-			{/each}
-		</div>
-	</div>
+  <div class="palette-drawer-contents" class:open={palette_drawer_open}>
+    <div class="palette">
+      {#each theme_appearances as appearance}
+        {#if $settings.appearance !== appearance}
+          <div class="button-container">
+            <button
+              type="button"
+              class="color-button appearance"
+              aria-label={`Set theme appearance to ${appearance}`}
+              on:click={() => setThemeAppearance(appearance as ThemeAppearance)}
+            >
+              <span class="material-symbols-rounded icon">
+                {#if appearance === "auto"}
+                  brightness_auto
+                {:else if appearance === "dark"}
+                  dark_mode
+                {:else}
+                  light_mode
+                {/if}
+              </span>
+            </button>
+          </div>
+        {/if}
+      {/each}
+    </div>
+    <div class="palette colour">
+      {#each theme_colours as colour}
+        <div class="button-container">
+          <button
+            type="button"
+            style="background-color: linear-gradient(to bottom right, black 47%, white 53%);"
+            class="color-button {$appearance_store}-theme-{colour} {colour ===
+            theme_colour
+              ? 'active'
+              : ''}"
+            aria-label={`Set theme colour to ${colour}`}
+            on:click={() => setThemeColour(colour as ThemeColour)}
+          ></button>
+        </div>
+      {/each}
+    </div>
+  </div>
 
-	<button
-		class="palette-drawer-handle"
-		on:click={() => (palette_drawer_open = !palette_drawer_open)}
-		title="{palette_drawer_open ? 'Close' : 'Open'} palette"
-	>
-		<span class="material-symbols-rounded icon"> palette </span>
-	</button>
+  <button
+    class="palette-drawer-handle"
+    on:click={() => (palette_drawer_open = !palette_drawer_open)}
+    title="{palette_drawer_open ? 'Close' : 'Open'} palette"
+  >
+    <span class="material-symbols-rounded icon"> palette </span>
+  </button>
 </div>
 
 <style>
-	.palette-drawer-contents {
-		display: flex;
-		gap: 1em;
-		transform: scaleX(0);
+  .palette-drawer-contents {
+    display: flex;
+    gap: 1em;
+    transform: scaleX(0);
 
-		transform-origin: right;
+    transform-origin: right;
 
-		opacity: 0;
-		transition:
-			transform 0.3s ease-out,
-			opacity 0.3s ease-out;
-	}
-	.palette-drawer-contents.open {
-		opacity: 1;
-		transform: scaleX(1);
-	}
+    opacity: 0;
+    transition:
+      transform 0.3s ease-out,
+      opacity 0.3s ease-out;
+  }
+  .palette-drawer-contents.open {
+    opacity: 1;
+    transform: scaleX(1);
+  }
 
-	.palette-container {
-		height: 100%;
-		display: flex;
-		gap: 0;
-	}
+  .palette-container {
+    height: 100%;
+    display: flex;
+    gap: 0;
+  }
 
-	.icon {
-		font-size: 1rem;
-		color: inherit;
-		margin: auto;
-	}
+  .icon {
+    font-size: 1rem;
+    color: inherit;
+    margin: auto;
+  }
 
-	/* Position the palette in the top-right corner */
-	.palette {
-		position: relative;
-		top: 0px;
-		right: 0px;
-		display: flex;
-		z-index: 1000;
-	}
+  /* Position the palette in the top-right corner */
+  .palette {
+    position: relative;
+    top: 0px;
+    right: 0px;
+    display: flex;
+    z-index: 1000;
+  }
 
-	.color-button {
-		width: 100%;
-		height: 0.3em;
-		background-color: var(--light-button-color);
-		border: none;
-		cursor: pointer;
-		transition: all 0.1s ease-out;
-		z-index: 1;
-		display: flex;
+  .color-button {
+    width: 100%;
+    height: 0.3em;
+    background-color: var(--light-button-color);
+    border: none;
+    cursor: pointer;
+    transition: all 0.1s ease-out;
+    z-index: 1;
+    display: flex;
 
-		justify-content: center;
+    justify-content: center;
 
-		padding: 0;
+    padding: 0;
 
-		border-bottom-left-radius: 50%;
-		border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
 
-		overflow: hidden;
-		color: inherit;
-	}
+    overflow: hidden;
+    color: inherit;
+  }
 
-	.button-container {
-		display: flex;
-		width: 1em;
-		height: 100%;
-		background-color: none;
+  .button-container {
+    display: flex;
+    width: 1em;
+    height: 100%;
+    background-color: none;
 
-		border: red 2px;
+    border: red 2px;
 
-		transition: all 0.3s ease;
-		pointer-events: all;
-		cursor: pointer;
-		z-index: 0;
+    transition: all 0.3s ease;
+    pointer-events: all;
+    cursor: pointer;
+    z-index: 0;
 
-		color: transparent;
-	}
+    color: transparent;
+  }
 
-	.button-container:hover .color-button {
-		height: 100%;
-		border-radius: 0;
+  .button-container:hover .color-button {
+    height: 100%;
+    border-radius: 0;
 
-		color: var(--text-color);
-	}
+    color: var(--text-color);
+  }
 
-	.appearance {
-		background-color: var(--dark-button-color-selected);
-	}
+  .appearance {
+    background-color: var(--dark-button-color-selected);
+  }
 
-	.palette-drawer-handle {
-		cursor: pointer;
-		text-align: center;
+  .palette-drawer-handle {
+    cursor: pointer;
+    text-align: center;
 
-		display: flex;
-		font-size: 2.5em;
+    display: flex;
+    font-size: 2.5em;
 
-		background-color: transparent;
-		border: 2px red;
-		color: var(--accent-color);
+    background-color: transparent;
+    border: 2px red;
+    color: var(--accent-color);
 
-		transition:
-			transform 50ms var(--standard-curve),
-			color 125ms var(--standard-curve),
-			background-color 125ms var(--standard-curve),
-			border-color 125ms var(--standard-curve);
+    transition:
+      transform 50ms var(--standard-curve),
+      color 125ms var(--standard-curve),
+      background-color 125ms var(--standard-curve),
+      border-color 125ms var(--standard-curve);
 
-		&:focus-visible {
-			outline: none;
-			color: var(--text-color-on-accent-color);
-			background-color: var(--accent-color);
-		}
-		&:active {
-			transform: translateY(8%) scale(110%, 90%);
-		}
-	}
+    &:focus-visible {
+      outline: none;
+      color: var(--text-color-on-accent-color);
+      background-color: var(--accent-color);
+    }
+    &:active {
+      transform: translateY(8%) scale(110%, 90%);
+    }
+  }
 </style>
