@@ -3,6 +3,7 @@
 
 # Allow only build output
 !index.html
+!404.html
 !_app/
 !_app/**
 !favicon.png
