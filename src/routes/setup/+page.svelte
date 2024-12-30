@@ -16,6 +16,9 @@
 
   $: configuration = $game_config.id;
   $: high_score = $high_scores[configuration];
+  $: show_pronunciations = ["greek", "cyrillic"].includes(
+    $game_config?.path[0]
+  );
 
   // This function helps avoid showing incomplete or uninitialized content to the user.
   // sets `is_loading` to `false` once the store emits its first value, (once the store is loaded)
@@ -40,7 +43,9 @@
   </div>
   {#if !is_loading}
     <Config />
-    <Preview />
+    {#if $game_config.is_valid}
+      <Preview {show_pronunciations} />
+    {/if}
   {/if}
 </div>
 
