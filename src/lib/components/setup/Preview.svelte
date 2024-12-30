@@ -7,11 +7,11 @@
 
 <div class="glyphs-container">
 	{#each glyphs as glyph}
-		<div class="glyph-container">
-			<span class="glyph" data-answer={isSilent(glyph) ? 'Silent' : getAnswers(glyph).join(' / ')}
-				>{glyph}</span
-			>
+	<div class="preview-item">
+		<div class="glyph-container" data-answer={isSilent(glyph) ? 'Silent' : getAnswers(glyph).join(' / ')}>
+			<span class="glyph">{glyph}</span>
 		</div>
+	</div>
 	{/each}
 </div>
 
@@ -22,40 +22,38 @@
 		align-items: center;
 		flex-wrap: wrap;
 		justify-content: center;
-		max-width: 85vw;
+		max-width: 95vw;
 		gap: 0.2em;
 		margin: 0 auto;
 		padding: 1em;
+		position: relative;
+	}
+
+	.preview-item {
+		display: flex;
+		position: relative;
 	}
 
 	.glyph-container {
 		min-width: 2.4em;
 		box-sizing: border-box;
 		text-align: center;
-	}
-	.glyph-container::after {
-		display: block;
-		content: attr(title);
-
-		font-weight: 600;
-		height: 1px;
-		color: transparent;
-		visibility: hidden;
+		color: var(--text-color-light);
 	}
 
 	.glyph {
 		margin: auto;
 		cursor: default;
-		color: var(--text-color-light);
+		color: inherit;
 		position: relative;
 	}
 
-	.glyph:hover {
+	.glyph-container:hover {
 		font-weight: 600;
 		color: var(--text-color);
 	}
 
-	.glyph::after {
+	.glyph-container::after {
 		content: attr(data-answer);
 		display: inline-flex;
 
@@ -73,8 +71,9 @@
 		opacity: 0;
 		pointer-events: none;
 		transition: opacity 0.1s ease-in-out;
+		z-index: 3;
 	}
-	.glyph:hover::after {
+	.glyph-container:hover::after {
 		opacity: 1;
 	}
 </style>
