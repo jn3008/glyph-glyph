@@ -1,0 +1,7 @@
+{
+	"name": "glyph-glyph",
+	"description": "An app to help you practise alphabets.",
+	"display": "standalone", 
+	"start_url": "",
+	"background_color": "#ffffff"
+}

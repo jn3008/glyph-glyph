@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" class="light-theme-blue">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/glyph-glyph/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="color-scheme" content="light dark" />
+		
+		<base href="/" />
+		
+		<link rel="manifest" href="/manifest.json" crossorigin="use-credentials" />
+		
+		<!-- Embed -->
+		<meta name="title" content="glyph-glyph" />
+		<meta
+			name="description"
+			content="An app to help you practise alphabets."
+		/>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?
+			family=Chivo+Mono:wght@100..900
+			&family=Funnel+Display:wght@300..800
+			&family=Noto+Sans+JP:wght@100..900
+			&family=Onest:wght@100..900
+			&display=swap" rel="stylesheet">
+
+		<!-- <link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_back,brightness_auto,dark_mode,light_mode,palette,refresh,settings,star,timer"			
+		/> -->
+		<!-- above is the link to load only the individual icons used in this project, 
+		 however there seems to be a problem when 'star' and 'timer' are both loaded, 
+		 so we need to use the entire pack (below) -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+		
+		<link rel="modulepreload" href="/glyph-glyph/_app/immutable/entry/start.CV1QmnbZ.js">
+		<link rel="modulepreload" href="/glyph-glyph/_app/immutable/chunks/entry.BhGPZN4c.js">
+		<link rel="modulepreload" href="/glyph-glyph/_app/immutable/chunks/utils.Dhw7Y63s.js">
+		<link rel="modulepreload" href="/glyph-glyph/_app/immutable/chunks/index.qhLCbthJ.js">
+		<link rel="modulepreload" href="/glyph-glyph/_app/immutable/chunks/index-client.BhUYpw5D.js">
+		<link rel="modulepreload" href="/glyph-glyph/_app/immutable/entry/app.BR-mah-C.js">
+		<link rel="modulepreload" href="/glyph-glyph/_app/immutable/chunks/render.DlAr8I1h.js">
+		<link rel="modulepreload" href="/glyph-glyph/_app/immutable/chunks/disclose-version.BnyP3OB8.js">
+		<link rel="modulepreload" href="/glyph-glyph/_app/immutable/chunks/store.BWdm8UL4.js">
+		<link rel="modulepreload" href="/glyph-glyph/_app/immutable/chunks/props.edKkFTeU.js">
+		<link rel="modulepreload" href="/glyph-glyph/_app/immutable/chunks/this.CHCpDkWg.js">
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">
+			<script>
+				{
+					__sveltekit_1yol26t = {
+						base: "/glyph-glyph",
+						assets: "/glyph-glyph"
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("/glyph-glyph/_app/immutable/entry/start.CV1QmnbZ.js"),
+						import("/glyph-glyph/_app/immutable/entry/app.BR-mah-C.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element);
+					});
+
+					if ('serviceWorker' in navigator) {
+						addEventListener('load', function () {
+							navigator.serviceWorker.register('/glyph-glyph/service-worker.js');
+						});
+					}
+				}
+			</script>
+		</div>
+	</body>
+</html>
