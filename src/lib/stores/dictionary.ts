@@ -1,7 +1,8 @@
 import { derived } from "svelte/store";
 import { toKatakana } from "wanakana";
 import { game_config } from "./game-config";
-import { hiragana, greek, cyrillic } from "$/lib/glyph-database";
+import { hiragana, greek, cyrillic, persoarabic } from "$/lib/glyph-database";
+import { arabic_forms } from "$lib/utils";
 
 function processKana(submode: string): string[] {
   return [
@@ -11,6 +12,8 @@ function processKana(submode: string): string[] {
     ...(submode === "all" ? hiragana.digraphs_diacritics : []),
   ];
 }
+
+type ArabicForms = "isolated" | "final" | "initial" | "medial";
 
 export const dictionary = derived(game_config, ($config) => {
   if (!$config.is_valid) return [];
@@ -102,6 +105,57 @@ export const dictionary = derived(game_config, ($config) => {
         default:
           return [];
       }
+    case "persoarabic":
+      switch ($config.path[1]) {
+        case "arabic":
+          switch ($config.path[4]) {
+            case "all":
+              return persoarabic.arabic.flatMap((glyph) => {
+                const forms = arabic_forms[glyph as keyof typeof arabic_forms];
+                return forms
+                  ? ["isolated", "initial", "medial", "final"].map(
+                      (form) => forms[form as ArabicForms]
+                    )
+                  : [];
+              });
+            default:
+              return persoarabic.arabic.map(
+                (glyph) =>
+                  arabic_forms[glyph as keyof typeof arabic_forms][
+                    $config.path[4] as ArabicForms
+                  ]
+              );
+          }
+        default:
+          switch ($config.path[3]) {
+            case "all":
+              return (
+                persoarabic[
+                  $config.path[1] as keyof typeof persoarabic
+                ] as string[]
+              ).flatMap((glyph) => {
+                const forms = arabic_forms[glyph as keyof typeof arabic_forms];
+                return forms
+                  ? ["isolated", "initial", "medial", "final"].map(
+                      (form) => forms[form as ArabicForms]
+                    )
+                  : [];
+              });
+            default:
+              return (
+                persoarabic[
+                  $config.path[1] as keyof typeof persoarabic
+                ] as string[]
+              ).map(
+                (glyph) =>
+                  arabic_forms[glyph as keyof typeof arabic_forms][
+                    $config.path[3] as ArabicForms
+                  ]
+                // glyph
+              );
+          }
+      }
+
     default:
       return [];
   }

@@ -11,15 +11,16 @@
   let visible_depth: number = 10; // for animating the selection containers as they appear
   $: setTimeout(() => {
     visible_depth = selected_path.length;
-  }, 0);
+  }, 1);
 
+  // Given a config path that isn't a leaf of the config tree, provide the next possible choices
   function getModesAtDepth(path: string[]) {
     let current = configurations;
     for (const key of path)
       current = current.find((mode) => mode.key === key)?.modes || [];
     return current;
   }
-
+  // get the label of the next possible choices
   function getModesLabel(path: string[]) {
     let current_modes = configurations;
     let label: string = "";
@@ -32,6 +33,16 @@
     }
 
     return label;
+  }
+
+  // updateGameConfigAtDepth recursively if there's only one choice to make
+  async function selectConfigAtDepth(new_id: string, depth: number) {
+    await updateGameConfigAtDepth(new_id, depth);
+    const modes = getModesAtDepth(selected_path);
+    if (modes.length == 1) {
+      const next_id = modes[0];
+      selectConfigAtDepth(next_id.key, depth + 1);
+    }
   }
 </script>
 
@@ -62,7 +73,7 @@
           <div class="sub-selection">
             {#each getModesAtDepth(selected_path.slice(0, depth)) as option}
               <Button
-                on:click={() => updateGameConfigAtDepth(option.key, depth)}
+                on:click={() => selectConfigAtDepth(option.key, depth)}
                 selected={selected_path[depth] === option.key}
                 title="Select {option.label}"
               >
@@ -85,6 +96,11 @@
     margin: auto;
     padding: 1em;
     gap: 1em;
+
+    @media screen and (max-width: 40em) {
+      padding: 0.5em;
+      gap: 0.5em;
+    }
   }
   .sub-selection-container {
     position: relative;
@@ -97,6 +113,7 @@
     opacity: 0;
     transform: translateY(-3em);
     transition: 0.2s ease;
+    max-width: 100vw;
   }
   .sub-selection-container::before {
     content: attr(data-label);

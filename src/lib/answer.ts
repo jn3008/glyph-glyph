@@ -1,7 +1,13 @@
 import { toHiragana, toRomaji } from "wanakana";
 import { game_config } from "$lib/stores/game-config";
-import { greek, cyrillic, exceptional_answers } from "$/lib/glyph-database";
+import {
+  greek,
+  cyrillic,
+  exceptional_answers,
+  persoarabic,
+} from "$/lib/glyph-database";
 import { get } from "svelte/store";
+import { arabic_forms } from "$lib/utils";
 
 export function getAnswers(glyph: string): string[] {
   switch (get(game_config)?.path[0]) {
@@ -35,6 +41,34 @@ export function getAnswers(glyph: string): string[] {
         default:
           return [];
       }
+    case "persoarabic":
+      switch (get(game_config).path[1]) {
+        case "arabic":
+          switch (get(game_config).path[3]) {
+            case "standard":
+              return persoarabic.arabic_transcriptions[
+                getIsolatedForm(
+                  glyph
+                ) as keyof typeof persoarabic.arabic_transcriptions
+              ];
+            default:
+              return [];
+          }
+        case "persian":
+          return persoarabic.persian_transcriptions[
+            getIsolatedForm(
+              glyph
+            ) as keyof typeof persoarabic.persian_transcriptions
+          ];
+        case "urdu":
+          return persoarabic.urdu_transcriptions[
+            getIsolatedForm(
+              glyph
+            ) as keyof typeof persoarabic.urdu_transcriptions
+          ];
+        default:
+          return [];
+      }
     default:
       return [];
   }
@@ -43,6 +77,13 @@ export function getAnswers(glyph: string): string[] {
 // To handle silent letters
 export function isSilent(glyph: string): boolean {
   return getAnswers(glyph)[0] === "-";
+}
+
+// Reshape an arabic glyph from any form to its isolated form
+export function getIsolatedForm(char: string): string | null {
+  for (const [key, forms] of Object.entries(arabic_forms))
+    if (Object.values(forms).includes(char)) return forms.isolated;
+  return null;
 }
 
 export function isCorrectAnswer(guess: string, actual: string): boolean {

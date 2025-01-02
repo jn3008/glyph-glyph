@@ -6,6 +6,14 @@ export interface Mode {
   full_key?: string; // This is added dynamically, so it's optional
 }
 
+const arabic_forms_config: Mode[] = [
+  { key: "isolated", label: "Isolated" },
+  { key: "initial", label: "Initial" },
+  { key: "medial", label: "Medial" },
+  { key: "final", label: "Final" },
+  { key: "all", label: "All" },
+];
+
 export const configurations: Mode[] = [
   {
     key: "kana",
@@ -109,6 +117,63 @@ export const configurations: Mode[] = [
           { key: "lower", label: "Lower" },
         ],
       },
+    ],
+  },
+  {
+    key: "persoarabic",
+    label: "Perso-Arabic",
+    modes_label: "Alphabet",
+    modes: [
+      {
+        key: "arabic",
+        label: "Arabic",
+        modes_label: "Mode",
+        modes: [
+          {
+            key: "transcriptions",
+            label: "Transcriptions",
+            modes_label: "Pronunciation",
+            modes: [
+              {
+                key: "standard",
+                label: "Standard",
+                modes_label: "Form",
+                modes: arabic_forms_config,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        key: "persian",
+        label: "Farsi",
+        modes_label: "Mode",
+        modes: [
+          {
+            key: "transcriptions",
+            label: "Transcriptions",
+            modes_label: "Form",
+            modes: arabic_forms_config,
+          },
+        ],
+      },
+      {
+        key: "urdu",
+        label: "Urdu",
+        modes_label: "Mode",
+        modes: [
+          {
+            key: "transcriptions",
+            label: "Transcriptions",
+            modes_label: "Form",
+            modes: arabic_forms_config,
+          },
+        ],
+      },
+      // {
+      //   key: "numbers",
+      //   label: "Numbers",
+      // },
     ],
   },
 ];
