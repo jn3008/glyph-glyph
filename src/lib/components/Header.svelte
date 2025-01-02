@@ -26,8 +26,8 @@
               fill="var(--text-color)"
             ></path>
           </svg>
-          {stargazers.toLocaleString("en")}
           <span class="material-symbols-rounded">star</span>
+          {stargazers.toLocaleString("en")}
         </a>
       </li>
     </ul>
