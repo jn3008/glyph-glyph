@@ -1,0 +1,1 @@
+import{l as e}from"./persistent-stores.5fR2uNy4.js";const n=["light","auto","dark"],r=["red","orange","yellow","lime","teal","blue","indigo","pink"],a={appearance:"auto",colour:"teal",using_stopwatch:!0},o=e("game-settings",a);function c(){o.update(t=>({...t,using_stopwatch:!t.using_stopwatch}))}export{r as a,c as b,o as s,n as t};
