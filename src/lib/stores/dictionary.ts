@@ -66,50 +66,30 @@ export function getGlyphs(config_path: string[]): string[] {
         default:
           return [];
       }
-    case "cyrillic":
-      switch (config_path[1]) {
-        case "bulgarian": {
-          const alphabet = cyrillic.bg_lower;
-          switch (config_path[2]) {
-            case "upper":
-              return alphabet.map((glyph) => glyph.toUpperCase());
-            case "lower":
-              return alphabet;
-            default:
-              return [];
-          }
-        }
-        case "russian": {
-          const alphabet = cyrillic.ru_lower;
-          switch (config_path[2]) {
-            case "upper":
-              return alphabet.map((glyph) => glyph.toUpperCase());
-            case "lower":
-              return alphabet;
-            default:
-              return [];
-          }
-        }
-        case "serbian": {
-          const alphabet = cyrillic.sr_lower;
-          switch (config_path[2]) {
-            case "upper":
-              return alphabet.map((glyph) => glyph.toUpperCase());
-            case "lower":
-              return alphabet;
-            default:
-              return [];
-          }
-        }
+    case "cyrillic": {
+      const alphabet =
+        cyrillic.alphabets[config_path[1] as keyof typeof cyrillic.alphabets];
+
+      switch (config_path[2]) {
+        case "upper":
+          return alphabet.map((glyph) => glyph.toUpperCase());
+        case "lower":
+          return alphabet;
         default:
           return [];
       }
+    }
     case "persoarabic":
+      const alphabet =
+        persoarabic.alphabets[
+          config_path[1] as keyof typeof persoarabic.alphabets
+        ];
+
       switch (config_path[1]) {
         case "arabic":
-          switch (config_path[4]) {
+          switch (config_path[3]) {
             case "all":
-              return persoarabic.arabic.flatMap((glyph) => {
+              return alphabet.flatMap((glyph) => {
                 const forms = arabic_forms[glyph as keyof typeof arabic_forms];
                 return forms
                   ? ["isolated", "initial", "medial", "final"].map(
@@ -118,21 +98,17 @@ export function getGlyphs(config_path: string[]): string[] {
                   : [];
               });
             default:
-              return persoarabic.arabic.map(
+              return alphabet.map(
                 (glyph) =>
                   arabic_forms[glyph as keyof typeof arabic_forms][
-                    config_path[4] as ArabicForms
+                    config_path[3] as ArabicForms
                   ]
               );
           }
         default:
-          switch (config_path[3]) {
+          switch (config_path[2]) {
             case "all":
-              return (
-                persoarabic[
-                  config_path[1] as keyof typeof persoarabic
-                ] as string[]
-              ).flatMap((glyph) => {
+              return alphabet.flatMap((glyph) => {
                 const forms = arabic_forms[glyph as keyof typeof arabic_forms];
                 return forms
                   ? ["isolated", "initial", "medial", "final"].map(
@@ -141,14 +117,10 @@ export function getGlyphs(config_path: string[]): string[] {
                   : [];
               });
             default:
-              return (
-                persoarabic[
-                  config_path[1] as keyof typeof persoarabic
-                ] as string[]
-              ).map(
+              return alphabet.map(
                 (glyph) =>
                   arabic_forms[glyph as keyof typeof arabic_forms][
-                    config_path[3] as ArabicForms
+                    config_path[2] as ArabicForms
                   ]
               );
           }

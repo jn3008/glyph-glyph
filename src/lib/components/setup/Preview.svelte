@@ -1,7 +1,7 @@
 <script lang="ts">
   import { dictionary } from "$lib/stores/dictionary";
   import { getAnswers, isSilent } from "$lib/answer";
-  import { getPronunciations } from "$lib/pronunciations";
+  import { getIPA, getPronunciations } from "$lib/pronunciations";
 
   $: glyphs = $dictionary;
 
@@ -10,8 +10,8 @@
   let hovered_glyph: string | null = null;
   let pronunciations: string | null = null;
 
-  function onHover(glyph_element: string) {
-    hovered_glyph = glyph_element;
+  function onHover(glyph: string) {
+    hovered_glyph = glyph;
     pronunciations = getPronunciations(hovered_glyph); // with bold markers
   }
 
@@ -24,18 +24,22 @@
       <div class="preview-item">
         <div
           class="glyph-container"
-          data-answer={isSilent(glyph)
-            ? "Silent"
-            : getAnswers(glyph).join(" / ")}
           on:mouseenter={() => {
-            show_pronunciations && onHover(glyph);
+            onHover(glyph);
           }}
           on:mouseleave={() => {
-            show_pronunciations && (hovered_glyph = pronunciations = null);
+            hovered_glyph = pronunciations = null;
           }}
           role="tooltip"
         >
           <span class="glyph">{glyph}</span>
+
+          {#if hovered_glyph == glyph}
+            <span class="glyph-info">
+              {isSilent(glyph) ? "Silent" : getAnswers(glyph).join(" / ")}
+              <span class="ipa-style">{getIPA(glyph)}</span>
+            </span>
+          {/if}
         </div>
       </div>
     {/each}
@@ -113,6 +117,17 @@
     width: 100%;
   }
 
+  .ipa-style {
+    color: var(--text-color-light);
+    font-family: "Noto Sans";
+    font-weight: 500;
+
+    display: flex;
+    display: block;
+    margin: auto;
+    font-size: 60%;
+  }
+
   .preview-item {
     display: flex;
     position: relative;
@@ -131,6 +146,7 @@
     cursor: default;
     color: inherit;
     position: relative;
+    white-space: nowrap; /* Prevent line breaks */
   }
 
   .glyph-container:hover {
@@ -138,14 +154,16 @@
     color: var(--text-color);
   }
 
-  .glyph-container::after {
-    content: attr(data-answer);
-    display: inline-flex;
+  .glyph-info {
+    display: flex;
+    flex-direction: column;
 
     position: absolute;
     white-space: nowrap; /* Prevent line breaks */
     bottom: 100%;
     left: 50%;
+    gap: 0em;
+
     transform: translateX(-50%);
     background-color: var(--background-contrast);
     color: var(--text-color);
@@ -153,11 +171,11 @@
     overflow: visible;
     border-radius: 0.5rem;
     font-size: 1.8rem;
-    opacity: 0;
     pointer-events: none;
     transition: opacity 0.1s ease-in-out;
     z-index: 3;
   }
+
   .glyph-container:hover::after {
     opacity: 1;
   }

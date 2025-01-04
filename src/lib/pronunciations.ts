@@ -1,7 +1,8 @@
 import { game_config } from "$lib/stores/game-config";
-import { greek, cyrillic } from "$/lib/glyph-database";
+import { hiragana, greek, cyrillic, persoarabic } from "$/lib/glyph-database";
+import { toHiragana } from "wanakana";
 import { get } from "svelte/store";
-import { isSilent } from "$/lib/answer";
+import { isSilent, getIsolatedForm } from "$/lib/answer";
 
 // Format pronunciations:
 // example input: ['x1', 'y1', 'z1', ..., 'xn', 'yn', 'zn']
@@ -25,7 +26,8 @@ function formatPronunciations(glyph: string, pronunciations: string[]): string {
 }
 
 export function getPronunciations(glyph: string): string {
-  switch (get(game_config)?.path[0]) {
+  const path = get(game_config)?.path;
+  switch (path[0]) {
     case "greek":
       return formatPronunciations(
         glyph.toLowerCase(),
@@ -33,32 +35,66 @@ export function getPronunciations(glyph: string): string {
           glyph.toLowerCase() as keyof typeof greek.pronunciations
         ]
       );
-    case "cyrillic":
-      switch (get(game_config).path[1]) {
-        case "bulgarian":
-          return formatPronunciations(
-            glyph.toLowerCase(),
-            cyrillic.bg_pronunciations[
-              glyph.toLowerCase() as keyof typeof cyrillic.bg_pronunciations
+    case "cyrillic": {
+      const dict =
+        cyrillic.pronunciations[
+          path[1] as keyof typeof cyrillic.pronunciations
+        ];
+      return formatPronunciations(
+        glyph.toLowerCase(),
+        dict[glyph.toLowerCase() as keyof typeof dict]
+      );
+    }
+    default:
+      return "";
+  }
+}
+
+// Join IPA pronuncations with square brackets around each one
+function formatIPA(sounds: string[]): string {
+  let formatted_parts: string[] = [];
+
+  for (let i = 0; i < sounds.length; i++)
+    formatted_parts.push(`[${sounds[i]}]`);
+
+  return formatted_parts.join(" ");
+}
+
+export function getIPA(glyph: string): string {
+  const path = get(game_config)?.path;
+  switch (path[0]) {
+    case "kana":
+      return formatIPA(
+        hiragana.sounds[toHiragana(glyph) as keyof typeof hiragana.sounds]
+      );
+    case "greek":
+      return formatIPA(
+        greek.sounds[glyph.toLowerCase() as keyof typeof greek.sounds]
+      );
+    case "cyrillic": {
+      const sounds =
+        cyrillic.sounds[path[1] as keyof typeof cyrillic.pronunciations];
+      return formatIPA(sounds[glyph.toLowerCase() as keyof typeof sounds]);
+    }
+    case "persoarabic": {
+      const sounds =
+        persoarabic.sounds[path[1] as keyof typeof persoarabic.sounds];
+
+      switch (path[1]) {
+        case "arabic": {
+          const sounds_regional = sounds[path[2] as keyof typeof sounds];
+          return formatIPA(
+            sounds_regional[
+              getIsolatedForm(glyph) as keyof typeof sounds_regional
             ]
           );
-        case "russian":
-          return formatPronunciations(
-            glyph.toLowerCase(),
-            cyrillic.ru_pronunciations[
-              glyph.toLowerCase() as keyof typeof cyrillic.ru_pronunciations
-            ]
-          );
-        case "serbian":
-          return formatPronunciations(
-            glyph.toLowerCase(),
-            cyrillic.sr_pronunciations[
-              glyph.toLowerCase() as keyof typeof cyrillic.sr_pronunciations
-            ]
-          );
+        }
         default:
-          return "";
+          return formatIPA(
+            sounds[getIsolatedForm(glyph) as keyof typeof sounds]
+          );
       }
+    }
     default:
       return "";
   }

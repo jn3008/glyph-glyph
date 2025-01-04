@@ -10,11 +10,12 @@ import { get } from "svelte/store";
 import { arabic_forms } from "$lib/utils";
 
 export function getAnswers(glyph: string): string[] {
-  switch (get(game_config)?.path[0]) {
+  const path = get(game_config)?.path;
+  switch (path[0]) {
     case "kana":
       return exceptional_answers.get(toHiragana(glyph)) ?? [toRomaji(glyph)];
     case "greek":
-      switch (get(game_config).path[1]) {
+      switch (path[1]) {
         case "transcriptions":
           return greek.transcriptions[
             glyph.toLowerCase() as keyof typeof greek.transcriptions
@@ -24,51 +25,34 @@ export function getAnswers(glyph: string): string[] {
         default:
           return [];
       }
-    case "cyrillic":
-      switch (get(game_config).path[1]) {
-        case "bulgarian":
-          return cyrillic.bg_transcriptions[
-            glyph.toLowerCase() as keyof typeof cyrillic.bg_transcriptions
+    case "cyrillic": {
+      const transcriptions =
+        cyrillic.transcriptions[
+          path[1] as keyof typeof cyrillic.transcriptions
+        ];
+      return transcriptions[glyph.toLowerCase() as keyof typeof transcriptions];
+    }
+    case "persoarabic": {
+      const transcriptions =
+        persoarabic.transcriptions[
+          path[1] as keyof typeof persoarabic.transcriptions
+        ];
+      // return dict[glyph.toLowerCase() as keyof typeof dict]);
+
+      switch (path[1]) {
+        case "arabic": {
+          const transcriptions_regional =
+            transcriptions[path[2] as keyof typeof transcriptions];
+          return transcriptions_regional[
+            getIsolatedForm(glyph) as keyof typeof transcriptions_regional
           ];
-        case "russian":
-          return cyrillic.ru_transcriptions[
-            glyph.toLowerCase() as keyof typeof cyrillic.ru_transcriptions
-          ];
-        case "serbian":
-          return cyrillic.sr_transcriptions[
-            glyph.toLowerCase() as keyof typeof cyrillic.sr_transcriptions
-          ];
+        }
         default:
-          return [];
-      }
-    case "persoarabic":
-      switch (get(game_config).path[1]) {
-        case "arabic":
-          switch (get(game_config).path[3]) {
-            case "standard":
-              return persoarabic.arabic_transcriptions[
-                getIsolatedForm(
-                  glyph
-                ) as keyof typeof persoarabic.arabic_transcriptions
-              ];
-            default:
-              return [];
-          }
-        case "persian":
-          return persoarabic.persian_transcriptions[
-            getIsolatedForm(
-              glyph
-            ) as keyof typeof persoarabic.persian_transcriptions
+          return transcriptions[
+            getIsolatedForm(glyph) as keyof typeof transcriptions
           ];
-        case "urdu":
-          return persoarabic.urdu_transcriptions[
-            getIsolatedForm(
-              glyph
-            ) as keyof typeof persoarabic.urdu_transcriptions
-          ];
-        default:
-          return [];
       }
+    }
     default:
       return [];
   }

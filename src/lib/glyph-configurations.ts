@@ -127,53 +127,46 @@ export const configurations: Mode[] = [
       {
         key: "arabic",
         label: "Arabic",
-        modes_label: "Mode",
+        modes_label: "Pronunciation",
         modes: [
           {
-            key: "transcriptions",
-            label: "Transcriptions",
-            modes_label: "Pronunciation",
-            modes: [
-              {
-                key: "standard",
-                label: "Standard",
-                modes_label: "Form",
-                modes: arabic_forms_config,
-              },
-            ],
+            key: "standard",
+            label: "Standard",
+            modes_label: "Form",
+            modes: arabic_forms_config,
+          },
+          {
+            key: "levantine",
+            label: "Levantine",
+            modes_label: "Form",
+            modes: arabic_forms_config,
+          },
+          {
+            key: "gulf",
+            label: "Gulf",
+            modes_label: "Form",
+            modes: arabic_forms_config,
+          },
+          {
+            key: "egyptian",
+            label: "Egyptian",
+            modes_label: "Form",
+            modes: arabic_forms_config,
           },
         ],
       },
       {
         key: "persian",
         label: "Farsi",
-        modes_label: "Mode",
-        modes: [
-          {
-            key: "transcriptions",
-            label: "Transcriptions",
-            modes_label: "Form",
-            modes: arabic_forms_config,
-          },
-        ],
+        modes_label: "Form",
+        modes: arabic_forms_config,
       },
       {
         key: "urdu",
         label: "Urdu",
-        modes_label: "Mode",
-        modes: [
-          {
-            key: "transcriptions",
-            label: "Transcriptions",
-            modes_label: "Form",
-            modes: arabic_forms_config,
-          },
-        ],
+        modes_label: "Form",
+        modes: arabic_forms_config,
       },
-      // {
-      //   key: "numbers",
-      //   label: "Numbers",
-      // },
     ],
   },
 ];
