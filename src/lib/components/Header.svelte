@@ -36,7 +36,9 @@
 
 <style lang="postcss">
   .header {
-    background: var(--background-contrast);
+    background: var(--background-contrast-alpha);
+    backdrop-filter: blur(10px);
+    z-index: 200;
   }
 
   h1 {

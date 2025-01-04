@@ -95,11 +95,17 @@
 
   .quiz-container {
     display: flex;
-    overflow: hidden;
     padding: 4em 0 3em;
     position: relative;
     box-sizing: border-box;
     width: 100%;
+  }
+
+  @media (max-width: 680px) or (max-height: 680px) {
+    .quiz-container {
+      padding: 5em 0 2em;
+      font-size: 80%;
+    }
   }
 
   .quiz-glyph {

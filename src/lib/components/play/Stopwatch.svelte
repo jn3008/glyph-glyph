@@ -44,14 +44,14 @@
 </script>
 
 <div class="stopwatch">
-  <span class="time {time_style}">
+  <span class="time {time_style} nowrap">
     {#if is_disabled}--:--.-{:else}{formatTime(elapsed_time)}{/if}s
   </span>
   {#if best_time < 0}
     <span class="best-time not-set"> best: --:--.-s</span>
   {:else}
     <span class="best-time">
-      best: {formatTime(best_time)}s
+      best: <span class="nowrap">{formatTime(best_time)}s</span>
     </span>
   {/if}
 </div>
@@ -63,6 +63,8 @@
     flex-direction: column;
     justify-content: right;
     margin: 0 0.7rem;
+
+    min-width: fit-content; /* Prevents breaking due to container size */
   }
 
   .time {
@@ -71,6 +73,15 @@
     font-weight: 400;
     justify-content: right;
     align-items: right;
+  }
+
+  .nowrap {
+    /* display: inline-block;
+    white-space: nowrap; */
+
+    /* display: flex;
+    flex-wrap: nowrap;
+    white-space: nowrap; */
   }
 
   .time.record-set {

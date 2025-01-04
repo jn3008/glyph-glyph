@@ -13,7 +13,18 @@
   let is_loading: boolean = true;
   let stopwatch_is_disabled: boolean = false;
 
+  let is_keyboard_open = false;
+
+  function checkKeyboardState() {
+    if (window.visualViewport)
+      is_keyboard_open = window.visualViewport.height < window.innerHeight;
+  }
   onMount(() => {
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", checkKeyboardState);
+      checkKeyboardState();
+    }
+
     const unsubscribe = quiz.subscribe(() => {
       is_loading = false;
     });
@@ -21,7 +32,11 @@
     // if the page reloads and current idx > 0 (game in progress),
     // then disable the stopwatch until the game restarts
     stopwatch_is_disabled = current_idx > 0;
-    return () => unsubscribe();
+    return () => {
+      if (window.visualViewport)
+        window.visualViewport.removeEventListener("resize", checkKeyboardState);
+      unsubscribe();
+    };
   });
 
   const ALPHANUMERIC = /^[a-z0-9]+$/i;
@@ -122,77 +137,79 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <div>
-  <div class="top-bar">
-    <div class="title-config-container">
-      <a href="/" class="title">glyph-glyph</a>
-      <span class="config-id">{$game_config.id}</span>
-    </div>
-    {#if !is_loading}
-      {#if using_stopwatch}
-        <Stopwatch
-          bind:this={stopwatch}
-          bind:elapsed_time
-          bind:is_paused={stopwatch_is_paused}
-          is_disabled={stopwatch_is_disabled}
-          {best_time}
-          {time_style}
-        />
-      {/if}
-    {/if}
-  </div>
-
   <div class="contents">
-    {#if is_loading}{:else}
-      <Quiz {items} {current_idx} />
-      <Input
-        bind:input
-        onSubmit={handleSubmit}
-        current_glyph={current_item?.glyph}
-        bind:input_element
-      />
+    <div class="top-bar">
+      <div>
+        <a href="/">glyph-glyph</a>
+        <span class="config-id">{$game_config.id}</span>
+      </div>
+      {#if !is_loading}
+        {#if using_stopwatch}
+          <Stopwatch
+            bind:this={stopwatch}
+            bind:elapsed_time
+            bind:is_paused={stopwatch_is_paused}
+            is_disabled={stopwatch_is_disabled}
+            {best_time}
+            {time_style}
+          />
+        {/if}
+      {/if}
+    </div>
 
-      <Menu menu_event={handleMenuEvent} />
-    {/if}
+    <div class="play-contents" class:keyboard-open={is_keyboard_open}>
+      {#if is_loading}{:else}
+        <Quiz {items} {current_idx} />
+        <Input
+          bind:input
+          onSubmit={handleSubmit}
+          current_glyph={current_item?.glyph}
+          bind:input_element
+        />
+
+        <Menu menu_event={handleMenuEvent} {is_keyboard_open} />
+      {/if}
+    </div>
   </div>
 </div>
 
 <style lang="postcss">
   .contents {
-    overflow-x: hidden;
-    width: 100vw;
+    display: grid;
+    wdith: 100%;
+    max-width: 100%;
+  }
+  .play-contents {
+    width: 100%;
     padding-top: 18vh;
     overflow: hidden;
   }
 
-  @media (max-height: 680px) {
-    .contents {
-      padding-top: 10vh;
-    }
+  .keyboard-open {
+    padding-top: 0vh;
   }
 
-  @media (max-height: 380px) {
-    .contents {
-      padding-top: 0vh;
+  @media (max-width: 680px) or (max-height: 680px) {
+    .play-contents {
+      font-size: 70%;
     }
   }
 
   .top-bar {
-    position: fixed;
     display: flex;
-    width: 100vw;
+    width: 100%;
     justify-content: space-between;
-    align-items: center top;
-  }
+    font-size: 1rem;
+    padding: 0.2rem;
 
-  .title {
-    justify-content: left;
+    background-color: transparent;
+
+    position: sticky;
+    top: 0;
+    left: 0;
   }
 
   .config-id {
     color: var(--text-color-light);
-  }
-
-  .title-config-container {
-    padding-left: 0.25em;
   }
 </style>

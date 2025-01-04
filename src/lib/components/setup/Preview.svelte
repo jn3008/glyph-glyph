@@ -120,6 +120,7 @@
 
   .glyph-container {
     min-width: 2.4em;
+    min-height: 1.8em;
     box-sizing: border-box;
     text-align: center;
     color: var(--text-color-light);

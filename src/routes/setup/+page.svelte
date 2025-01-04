@@ -36,59 +36,93 @@
   <title>Setup · glyph-glyph</title>
 </svelte:head>
 
-<div class="wrapper">
+<div class="contents">
   <div class="top-bar">
-    <a href="/" class="title">glyph-glyph</a>
+    <div class="title-container">
+      <a href="/" class="title">glyph-glyph</a>
+    </div>
     <span class="palette"><ColourPalette /></span>
   </div>
   {#if !is_loading}
-    <Config />
-    {#if $game_config.is_valid}
-      <Preview {show_pronunciations} />
-    {/if}
+    <div class="config-container">
+      <Config />
+      {#if $game_config.is_valid}
+        <Preview {show_pronunciations} />
+      {/if}
+    </div>
   {/if}
+
+  <BottomBar>
+    <div class="stopwatch-section">
+      <Button
+        on:click={() => {
+          toggleStopwatch();
+        }}
+        selected={$settings.using_stopwatch}
+        title="Turn stopwatch {$settings.using_stopwatch ? 'off' : 'on'}"
+      >
+        <span class="button-content">
+          <span class="button-text"> Use Stopwatch </span>
+          <span class="material-symbols-rounded icon">timer</span>
+        </span>
+      </Button>
+
+      {#if $game_config.is_valid && $settings.using_stopwatch}
+        <span class="high-score" class:not-set={high_score < 0}>
+          {formatTime(high_score)}s
+        </span>
+      {/if}
+    </div>
+
+    {#if $game_config.is_valid}
+      <Button
+        href="play"
+        on:click={() => {
+          quiz.reset();
+        }}
+        selected={true}
+        title="Start game"
+      >
+        <span class="button-content">
+          <span class="button-text"> Start </span>
+          <span class="material-symbols-rounded icon">arrow_forward </span>
+        </span>
+      </Button>
+    {:else}
+      <Button style="disactivated">
+        <span class="button-content">
+          <span class="button-text"> Start </span>
+          <span class="material-symbols-rounded icon">arrow_forward </span>
+        </span>
+      </Button>
+    {/if}
+  </BottomBar>
 </div>
 
-<BottomBar>
-  <div class="stopwatch-section">
-    <Button
-      on:click={() => {
-        toggleStopwatch();
-      }}
-      selected={$settings.using_stopwatch}
-      title="Turn stopwatch {$settings.using_stopwatch ? 'off' : 'on'}"
-    >
-      <span class="stopwatch-button-content">
-        Use Stopwatch
-
-        <span class="material-symbols-rounded icon">timer</span>
-      </span>
-    </Button>
-
-    {#if $game_config.is_valid && $settings.using_stopwatch}
-      <span class="high-score" class:not-set={high_score < 0}>
-        {formatTime(high_score)}s
-      </span>
-    {/if}
-  </div>
-
-  {#if $game_config.is_valid}
-    <Button
-      href="play"
-      on:click={() => {
-        quiz.reset();
-      }}
-      selected={true}
-      title="Start game"
-    >
-      Start
-    </Button>
-  {:else}
-    <Button style="disactivated">Start</Button>
-  {/if}
-</BottomBar>
-
 <style lang="postcss">
+  .contents {
+    overflow: hidden;
+    display: grid;
+
+    height: 100dvh;
+
+    grid-template-rows: auto 1fr auto;
+  }
+
+  .middle-content {
+    overflow-y: auto;
+    flex-grow: 1;
+    overflow: auto;
+    min-height: 2em;
+  }
+  .config-container {
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    flex: 1;
+
+    padding-bottom: 6em;
+  }
   .stopwatch-section {
     position: relative;
     display: flex;
@@ -96,6 +130,13 @@
 
     white-space: nowrap; /* prevent line breaks */
   }
+
+  @media (max-width: 680px) or (max-height: 680px) {
+    .button-text {
+      display: none;
+    }
+  }
+
   .high-score {
     position: relative;
     border: 2px solid var(--dark-button-color-selected);
@@ -124,7 +165,7 @@
     color: var(--dark-button-color-selected);
   }
 
-  .stopwatch-button-content {
+  .button-content {
     display: flex;
     gap: 0.3em;
     height: 100%;
@@ -133,6 +174,7 @@
     margin: auto;
   }
   .icon {
+    display: flex;
     margin: auto;
     font-size: 1.2em;
   }
@@ -140,24 +182,27 @@
   .wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     overflow-x: hidden;
 
     position: relative;
-    overflow-y: auto;
+    overflow-y: hidden;
     padding-bottom: 6em;
   }
 
   .top-bar {
     display: flex;
-    width: 100vw;
     justify-content: space-between;
     align-items: center top;
+
+    top: 0;
+    left: 0;
+
+    flex-shrink: 0;
   }
-  .title {
-    justify-content: left;
-  }
-  .title {
-    justify-content: right;
+  .title-container {
+    display: flex;
+    padding: 0.2rem;
+
+    align-items: start;
   }
 </style>

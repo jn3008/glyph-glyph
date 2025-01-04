@@ -25,6 +25,9 @@ body {
     sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+
+  padding: 0;
+  overflow: hidden; /* Prevents the entire page from scrolling */
 }
 
 * {
@@ -62,8 +65,6 @@ h2 {
   font-size: 1.5em;
   font-weight: 500;
   margin-top: 0;
-  /* margin-bottom: var(--line-space); */
-  /* line-height: 1.25; */
   margin: 0;
   padding: 0;
 }
@@ -119,7 +120,7 @@ hr {
 }
 
 .content-width {
-  max-width: 40rem;
+  max-width: calc(min(40rem, 90vw));
 }
 
 .content-padding {

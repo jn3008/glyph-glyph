@@ -2,9 +2,11 @@
   let restart_animation_playing = false;
 
   export let menu_event: (input_string: string) => void; // a callback passed from the parent
+
+  export let is_keyboard_open: boolean;
 </script>
 
-<section class="menu">
+<section class="menu" class:keyboard-open={is_keyboard_open}>
   <a href="setup" class="button" title="Go back">
     <span class="material-symbols-rounded menu-icon">arrow_back</span>
   </a>
@@ -53,7 +55,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 3em;
+    margin-top: 2em;
+  }
+
+  .menu.keyboard-open {
+    margin-top: 0.5em;
   }
 
   .menu > * {

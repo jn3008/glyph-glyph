@@ -1,7 +1,7 @@
 @mixin light-theme-colour($hue) {
 --background-color: #{hsl($hue, 84%, 95%)};
 --background-contrast: #{hsl($hue, 84%, 90%)};
---background-contrast-alpha: #{hsla($hue, 84%, 90%, 0.7)};
+--background-contrast-alpha: #{hsla($hue, 84%, 90%, 0.6)};
 --background-input: #{hsl($hue, 39%, 88%)};
 --border-input: #{hsl($hue, 58%, 80%)};
 
@@ -10,6 +10,7 @@
 --text-color: #{hsl($hue, 24%, 30%)};
 --text-color-light: #{hsl($hue, 10%, 59%)};
 --text-color-low-contrast: #{hsl($hue, 17%, 75%)};
+--text-color-subtle-alpha: #{hsla($hue, 64%, 90%, 0.55)};
 
 --light-button-color: #{hsl($hue, 36%, 60%)};
 --light-button-text-color: #{hsl($hue, 30%, 85%)};
@@ -41,7 +42,7 @@
 @mixin dark-theme-colour($hue) {
 	--background-color: #{hsl($hue, 84%, 5%)};
 	--background-contrast: #{hsl($hue, 84%, 3%)};
-	--background-contrast-alpha: #{hsla($hue, 84%, 2%, 0.7)};
+	--background-contrast-alpha: #{hsla($hue, 84%, 2%, 0.6)};
 	--background-input: #{hsl($hue, 39%, 12%)};
 	--border-input: #{hsl($hue, 58%, 6%)};
 
@@ -50,6 +51,7 @@
 	--text-color: #{hsl($hue, 24%, 74%)};
 	--text-color-light: #{hsl($hue, 10%, 41%)};
 	--text-color-low-contrast: #{hsl($hue, 17%, 25%)};
+	--text-color-subtle-alpha: #{hsla($hue, 64%, 10%, 0.55)};
 
 	--light-button-color: #{hsl($hue, 36%, 40%)};
 	--light-button-text-color: #{hsl($hue, 30%, 15%)};
@@ -81,12 +83,13 @@
 
 $themes: (
   red: 0,
-  yellow: 50,
-  lime: 100,
-  teal: 157,
+	orange: 30,
+  yellow: 55,
+  lime: 90,
+  teal: 155,
   blue: 200,
-  indigo: 250,
-  purple: 287,
+  indigo: 245,
+  pink: 290,
 );
 
 @mixin generate-theme-colors {

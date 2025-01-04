@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let style: "" = "";
+  export let style: "normal" | "glass" = "normal";
   export let justify_content: "space-between" | "right" | "center" | "left" =
     "space-between";
 </script>
@@ -10,19 +10,24 @@
 
 <style lang="scss">
   .bottom-bar {
-    position: fixed;
+    position: sticky;
     bottom: 0;
     left: 0;
     right: 0;
     height: auto;
+    max-width: 100%;
     gap: 1em;
     background-color: var(--background-contrast);
-    backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     z-index: 100;
     box-shadow: 0 -2px 50px rgba(128, 128, 128, 0.1);
 
     padding: 1em;
+  }
+
+  .bottom-bar.glass {
+    background: var(--background-contrast-alpha);
+    backdrop-filter: blur(10px);
   }
 </style>

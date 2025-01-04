@@ -15,24 +15,23 @@ function processKana(submode: string): string[] {
 
 type ArabicForms = "isolated" | "final" | "initial" | "medial";
 
-export const dictionary = derived(game_config, ($config) => {
-  if (!$config.is_valid) return [];
-  switch ($config.path[0]) {
+export function getGlyphs(config_path: string[]): string[] {
+  switch (config_path[0]) {
     case "kana":
-      switch ($config.path[1]) {
+      switch (config_path[1]) {
         case "hiragana":
-          return processKana($config.path[2]);
+          return processKana(config_path[2]);
         case "katakana":
-          return processKana($config.path[2]).map((kana) => toKatakana(kana));
+          return processKana(config_path[2]).map((kana) => toKatakana(kana));
         default:
           return [];
       }
     case "greek":
-      switch ($config.path[1]) {
+      switch (config_path[1]) {
         case "transcriptions":
-          switch ($config.path[2]) {
+          switch (config_path[2]) {
             case "monographs":
-              switch ($config.path[3]) {
+              switch (config_path[3]) {
                 case "upper":
                   return greek.upper_monographs;
                 case "lower":
@@ -41,7 +40,7 @@ export const dictionary = derived(game_config, ($config) => {
                   return [];
               }
             case "digraphs":
-              switch ($config.path[3]) {
+              switch (config_path[3]) {
                 case "upper":
                   return [...greek.upper_monographs, ...greek.digraphs].map(
                     (glyph) => glyph.toUpperCase()
@@ -56,7 +55,7 @@ export const dictionary = derived(game_config, ($config) => {
           }
 
         case "names":
-          switch ($config.path[2]) {
+          switch (config_path[2]) {
             case "upper":
               return greek.upper_monographs;
             case "lower":
@@ -68,10 +67,10 @@ export const dictionary = derived(game_config, ($config) => {
           return [];
       }
     case "cyrillic":
-      switch ($config.path[1]) {
+      switch (config_path[1]) {
         case "bulgarian": {
           const alphabet = cyrillic.bg_lower;
-          switch ($config.path[2]) {
+          switch (config_path[2]) {
             case "upper":
               return alphabet.map((glyph) => glyph.toUpperCase());
             case "lower":
@@ -82,7 +81,7 @@ export const dictionary = derived(game_config, ($config) => {
         }
         case "russian": {
           const alphabet = cyrillic.ru_lower;
-          switch ($config.path[2]) {
+          switch (config_path[2]) {
             case "upper":
               return alphabet.map((glyph) => glyph.toUpperCase());
             case "lower":
@@ -93,7 +92,7 @@ export const dictionary = derived(game_config, ($config) => {
         }
         case "serbian": {
           const alphabet = cyrillic.sr_lower;
-          switch ($config.path[2]) {
+          switch (config_path[2]) {
             case "upper":
               return alphabet.map((glyph) => glyph.toUpperCase());
             case "lower":
@@ -106,9 +105,9 @@ export const dictionary = derived(game_config, ($config) => {
           return [];
       }
     case "persoarabic":
-      switch ($config.path[1]) {
+      switch (config_path[1]) {
         case "arabic":
-          switch ($config.path[4]) {
+          switch (config_path[4]) {
             case "all":
               return persoarabic.arabic.flatMap((glyph) => {
                 const forms = arabic_forms[glyph as keyof typeof arabic_forms];
@@ -122,16 +121,16 @@ export const dictionary = derived(game_config, ($config) => {
               return persoarabic.arabic.map(
                 (glyph) =>
                   arabic_forms[glyph as keyof typeof arabic_forms][
-                    $config.path[4] as ArabicForms
+                    config_path[4] as ArabicForms
                   ]
               );
           }
         default:
-          switch ($config.path[3]) {
+          switch (config_path[3]) {
             case "all":
               return (
                 persoarabic[
-                  $config.path[1] as keyof typeof persoarabic
+                  config_path[1] as keyof typeof persoarabic
                 ] as string[]
               ).flatMap((glyph) => {
                 const forms = arabic_forms[glyph as keyof typeof arabic_forms];
@@ -144,14 +143,13 @@ export const dictionary = derived(game_config, ($config) => {
             default:
               return (
                 persoarabic[
-                  $config.path[1] as keyof typeof persoarabic
+                  config_path[1] as keyof typeof persoarabic
                 ] as string[]
               ).map(
                 (glyph) =>
                   arabic_forms[glyph as keyof typeof arabic_forms][
-                    $config.path[3] as ArabicForms
+                    config_path[3] as ArabicForms
                   ]
-                // glyph
               );
           }
       }
@@ -159,4 +157,9 @@ export const dictionary = derived(game_config, ($config) => {
     default:
       return [];
   }
+}
+
+export const dictionary = derived(game_config, ($config) => {
+  if (!$config.is_valid) return [];
+  return getGlyphs($config.path);
 });

@@ -5,12 +5,13 @@ export type ThemeAppearance = (typeof theme_appearances)[number];
 
 export const theme_colours = [
   "red",
+  "orange",
   "yellow",
   "lime",
   "teal",
   "blue",
   "indigo",
-  "purple",
+  "pink",
 ] as const;
 export type ThemeColour = (typeof theme_colours)[number];
 
@@ -24,7 +25,7 @@ export interface Settings {
 // Default values for the settings
 const default_settings: Settings = {
   appearance: "auto",
-  colour: "purple",
+  colour: "teal",
   using_stopwatch: true,
 };
 

@@ -113,7 +113,6 @@
     opacity: 0;
     transform: translateY(-3em);
     transition: 0.2s ease;
-    max-width: 100vw;
   }
   .sub-selection-container::before {
     content: attr(data-label);
@@ -147,6 +146,6 @@
   }
   .alphabet-selection-container {
     background-color: var(--background-contrast);
-    width: 100vw;
+    width: 100%;
   }
 </style>

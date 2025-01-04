@@ -56,6 +56,7 @@
               ? 'active'
               : ''}"
             aria-label={`Set theme colour to ${colour}`}
+            title={`Pick ${colour}`}
             on:click={() => setThemeColour(colour as ThemeColour)}
           ></button>
         </div>
@@ -68,7 +69,7 @@
     on:click={() => (palette_drawer_open = !palette_drawer_open)}
     title="{palette_drawer_open ? 'Close' : 'Open'} palette"
   >
-    <span class="material-symbols-rounded icon"> palette </span>
+    <span class="material-symbols-rounded palette-icon"> palette </span>
   </button>
 </div>
 
@@ -164,11 +165,18 @@
     text-align: center;
 
     display: flex;
-    font-size: 2.5em;
 
     background-color: transparent;
     border: 2px red;
     color: var(--accent-color);
+
+    .palette-icon {
+      font-size: 1.5rem;
+      padding: 0.2rem;
+    }
+
+    margin: 0;
+    padding: 0;
 
     transition:
       transform 50ms var(--standard-curve),
