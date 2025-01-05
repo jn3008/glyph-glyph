@@ -1,7 +1,13 @@
 import { derived } from "svelte/store";
 import { toKatakana } from "wanakana";
 import { game_config } from "./game-config";
-import { hiragana, greek, cyrillic, persoarabic } from "$/lib/glyph-database";
+import {
+  hiragana,
+  greek,
+  cyrillic,
+  persoarabic,
+  hangul,
+} from "$/lib/glyph-database";
 import { arabic_forms } from "$lib/utils";
 
 function processKana(submode: string): string[] {
@@ -125,7 +131,29 @@ export function getGlyphs(config_path: string[]): string[] {
               );
           }
       }
+    case "hangul":
+      switch (config_path[1]) {
+        case "vowels":
+          return hangul.glyphs.vowels;
+        case "consonants":
+          switch (config_path[2]) {
+            case "choseong":
+              return [
+                ...hangul.glyphs.basic_consonants,
+                ...hangul.glyphs.tense_consonants,
+              ];
+            case "batchim":
+              return [
+                ...hangul.glyphs.basic_consonants,
+                ...hangul.glyphs.complex_batchim,
+              ];
+            default:
+              return [];
+          }
 
+        default:
+          return [];
+      }
     default:
       return [];
   }

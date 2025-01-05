@@ -5,6 +5,7 @@ import {
   cyrillic,
   exceptional_answers,
   persoarabic,
+  hangul,
 } from "$/lib/glyph-database";
 import { get } from "svelte/store";
 import { arabic_forms } from "$lib/utils";
@@ -51,6 +52,27 @@ export function getAnswers(glyph: string): string[] {
           return transcriptions[
             getIsolatedForm(glyph) as keyof typeof transcriptions
           ];
+      }
+    }
+    case "hangul": {
+      switch (path[1]) {
+        case "vowels":
+          return hangul.transcriptions.vowels[
+            glyph as keyof typeof hangul.transcriptions.vowels
+          ];
+        case "consonants":
+          switch (path[2]) {
+            case "choseong":
+              return hangul.transcriptions.initial[
+                glyph as keyof typeof hangul.transcriptions.initial
+              ];
+            case "batchim":
+              return hangul.transcriptions.final[
+                glyph as keyof typeof hangul.transcriptions.final
+              ];
+            default:
+              return [];
+          }
       }
     }
     default:

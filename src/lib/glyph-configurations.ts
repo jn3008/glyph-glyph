@@ -169,6 +169,23 @@ export const configurations: Mode[] = [
       },
     ],
   },
+  {
+    key: "hangul",
+    label: "Korean",
+    modes_label: "Glyphs",
+    modes: [
+      { key: "vowels", label: "Vowels" },
+      {
+        key: "consonants",
+        label: "Consonants",
+        modes_label: "Syllable Position",
+        modes: [
+          { key: "choseong", label: "Initial" },
+          { key: "batchim", label: "Final" },
+        ],
+      },
+    ],
+  },
 ];
 
 function generateKeys(modes: Mode[], parent_key = ""): Mode[] {
