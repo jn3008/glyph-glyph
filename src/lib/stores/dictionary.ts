@@ -8,7 +8,7 @@ import {
   persoarabic,
   hangul,
 } from "$/lib/glyph-database";
-import { arabic_forms } from "$lib/utils";
+import { arabic_forms, generateRandomHangul } from "$lib/utils";
 
 function processKana(submode: string): string[] {
   return [
@@ -138,19 +138,18 @@ export function getGlyphs(config_path: string[]): string[] {
         case "consonants":
           switch (config_path[2]) {
             case "choseong":
-              return [
-                ...hangul.glyphs.basic_consonants,
-                ...hangul.glyphs.tense_consonants,
-              ];
+              return hangul.glyphs.initial_consonants;
             case "batchim":
-              return [
-                ...hangul.glyphs.basic_consonants,
-                ...hangul.glyphs.complex_batchim,
-              ];
+              return hangul.glyphs.final_consonants;
             default:
               return [];
           }
-
+        case "syllables": {
+          const count = parseInt(config_path[2]);
+          if (!isNaN(count) && count > 0)
+            return Array.from({ length: count }, generateRandomHangul);
+          return [];
+        }
         default:
           return [];
       }

@@ -73,6 +73,10 @@ export function getAnswers(glyph: string): string[] {
             default:
               return [];
           }
+
+        case "syllables": {
+          return romaniseHangul(glyph);
+        }
       }
     }
     default:
@@ -90,6 +94,51 @@ export function getIsolatedForm(char: string): string | null {
   for (const [key, forms] of Object.entries(arabic_forms))
     if (Object.values(forms).includes(char)) return forms.isolated;
   return null;
+}
+
+export function romaniseHangul(syllable: string): string[] {
+  if (
+    syllable.length !== 1 ||
+    syllable.charCodeAt(0) < 0xac00 ||
+    syllable.charCodeAt(0) > 0xd7a3
+  ) {
+    throw new Error("Invalid Hangul syllable input.");
+  }
+
+  const syllable_code = syllable.charCodeAt(0) - 0xac00;
+
+  // Decompose the syllable into its components
+  const initial_index = Math.floor(syllable_code / 588);
+  const vowel_index = Math.floor((syllable_code % 588) / 28);
+  const final_index = syllable_code % 28;
+
+  const initial = hangul.glyphs.initial_consonants[initial_index];
+  const vowel = hangul.glyphs.vowels[vowel_index];
+  const final =
+    final_index > 0 ? hangul.glyphs.final_consonants[final_index - 1] : "";
+
+  const initial_transcription =
+    hangul.transcriptions.initial[
+      initial as keyof typeof hangul.transcriptions.initial
+    ][0];
+  const vowel_transcription =
+    hangul.transcriptions.vowels[
+      vowel as keyof typeof hangul.transcriptions.vowels
+    ][0];
+
+  const final_transcription =
+    final_index > 0
+      ? hangul.transcriptions.final[
+          final as keyof typeof hangul.transcriptions.final
+        ][0]
+      : "";
+
+  const romanisation: string =
+    (initial_transcription == "-" ? "" : initial_transcription) +
+    vowel_transcription +
+    final_transcription;
+
+  return [romanisation];
 }
 
 export function isCorrectAnswer(guess: string, actual: string): boolean {

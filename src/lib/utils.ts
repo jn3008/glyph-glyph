@@ -56,6 +56,24 @@ export function shuffleArray<T>(array: T[]): T[] {
   return new_array;
 }
 
+import { hangul } from "$lib/glyph-database";
+
+export function generateRandomHangul(): string {
+  const initial_index = Math.floor(
+    Math.random() * hangul.glyphs.initial_consonants.length
+  );
+  const vowel_index = Math.floor(Math.random() * hangul.glyphs.vowels.length);
+  const final_index = Math.floor(
+    Math.random() * (hangul.glyphs.final_consonants.length + 1)
+  );
+
+  // Calculate the Unicode character using the Hangul formula
+  const syllable_code =
+    0xac00 + initial_index * 588 + vowel_index * 28 + final_index;
+  const symbol: string = String.fromCharCode(syllable_code);
+  return symbol;
+}
+
 export const arabic_forms: Record<
   string,
   { isolated: string; initial: string; medial: string; final: string }

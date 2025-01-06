@@ -45,7 +45,7 @@
 
   .romanisation {
     position: absolute;
-    top: -1em;
+    top: -1.2em;
     left: 0;
     right: 0;
     font-size: 0.5em;
@@ -54,7 +54,7 @@
     text-align: center;
   }
   .romanisation.long {
-    transform: translate(0, 0) rotate(calc(-45deg));
+    transform: rotate(calc(-45deg));
   }
 
   .is-current {

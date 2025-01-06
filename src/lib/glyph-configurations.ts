@@ -184,6 +184,15 @@ export const configurations: Mode[] = [
           { key: "batchim", label: "Final" },
         ],
       },
+      {
+        key: "syllables",
+        label: "Syllables",
+        modes_label: "Count",
+        modes: [
+          { key: "20", label: "20 Random" },
+          { key: "50", label: "50 Random" },
+        ],
+      },
     ],
   },
 ];
@@ -235,7 +244,5 @@ function extractKeysAndPaths(
 export const { keys: full_keys, paths: full_paths } = extractKeysAndPaths(
   configurations_with_keys
 );
-
-console.log(full_paths);
 
 export type FullKey = (typeof full_keys)[number];
