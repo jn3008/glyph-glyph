@@ -3,6 +3,7 @@
 
 # Allow only build output
 !index.html
+!screenshots/
 !screenshots/**
 !404.html
 !_app/
