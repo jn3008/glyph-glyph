@@ -1,10 +1,14 @@
 <script lang="ts">
+  import { version } from "$/../package.json";
   export let stargazers: number;
 </script>
 
 <section class="header content-padding">
   <div class="content-width center">
-    <h1>glyph-glyph</h1>
+    <div class="title">
+      <h1>glyph-glyph</h1>
+      v{version}
+    </div>
     <ul>
       <li>
         <a
@@ -26,8 +30,13 @@
               fill="var(--text-color)"
             ></path>
           </svg>
-          <span class="material-symbols-rounded">star</span>
-          {stargazers.toLocaleString("en")}
+          <!-- <span class="stargazers"> -->
+          <span class="stargazers-container">
+            <span class="material-symbols-rounded">star</span>
+            <span class="stargazers">
+              {stargazers.toLocaleString("en")}
+            </span>
+          </span>
         </a>
       </li>
     </ul>
@@ -82,5 +91,18 @@
       background: var(--focus-color);
       border-color: var(--focus-color);
     }
+  }
+
+  .stargazers-container {
+    display: flex;
+  }
+
+  .stargazers {
+    margin: auto;
+    display: flex;
+  }
+
+  .title {
+    margin-bottom: var(--line-space);
   }
 </style>

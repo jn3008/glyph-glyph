@@ -1,16 +1,21 @@
-import { defineConfig } from 'vitest/config';
-import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from "vitest/config";
+import { sveltekit } from "@sveltejs/kit/vite";
 
 export default defineConfig({
-	plugins: [sveltekit()],
+  plugins: [sveltekit()],
+  server: {
+    fs: {
+      allow: ["package.json"], // allow access to get the version number
+    },
+  },
 
-	test: {
-		include: ['src/**/*.{test,spec}.{js,ts}']
-	},
+  test: {
+    include: ["src/**/*.{test,spec}.{js,ts}"],
+  },
 
-	css: {
-		preprocessorOptions: {
-			scss: {}
-		}
-	}
+  css: {
+    preprocessorOptions: {
+      scss: {},
+    },
+  },
 });
