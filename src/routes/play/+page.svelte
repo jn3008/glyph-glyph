@@ -5,7 +5,7 @@
   import Stopwatch from "$/lib/components/play/Stopwatch.svelte";
   import { quiz } from "$/lib/stores/quiz";
   import { isCorrectAnswer } from "$/lib/answer";
-  import { settings } from "$/lib/stores/settings";
+  import { settings, toggleAutoSubmit } from "$/lib/stores/settings";
   import { onMount, tick } from "svelte";
   import { high_scores, updateHighScore } from "$/lib/stores/scores";
   import { game_config, refreshGameConfig } from "$/lib/stores/game-config";
@@ -90,6 +90,8 @@
         }
         break;
 
+      case "toggle-auto-submit":
+        toggleAutoSubmit();
       default:
         break;
     }
@@ -174,7 +176,11 @@
           bind:input_element
         />
 
-        <Menu menu_event={handleMenuEvent} {is_keyboard_open} />
+        <Menu
+          menu_event={handleMenuEvent}
+          {is_keyboard_open}
+          auto_submit={$settings.auto_submit}
+        />
       {/if}
     </div>
   </div>

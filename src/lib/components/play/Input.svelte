@@ -1,5 +1,6 @@
 <script lang="ts">
   import { isCorrectAnswer } from "$/lib/answer";
+  import { settings } from "$/lib/stores/settings";
 
   export let onSubmit: (input_string: string) => void; // A callback passed from the parent
 
@@ -50,7 +51,8 @@
       return;
     }
 
-    if (isCorrectAnswer(input, current_glyph)) handleSubmit();
+    if (isCorrectAnswer(input, current_glyph) && $settings.auto_submit)
+      handleSubmit();
   }
 </script>
 

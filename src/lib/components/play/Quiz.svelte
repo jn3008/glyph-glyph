@@ -86,7 +86,7 @@
   .quiz-content {
     display: flex;
     transition: transform 0.4s ease-out;
-    transition-timing-function: cubic-bezier(0.1, 0.7, 0.05, 0.95);
+    transition-timing-function: var(--ease-out-better);
   }
 
   .quiz-content.no-transition {

@@ -20,6 +20,7 @@ export interface Settings {
   appearance: ThemeAppearance;
   colour: ThemeColour;
   using_stopwatch: boolean;
+  auto_submit: boolean;
 }
 
 // Default values for the settings
@@ -27,6 +28,7 @@ const default_settings: Settings = {
   appearance: "auto",
   colour: "teal",
   using_stopwatch: true,
+  auto_submit: true,
 };
 
 // Create the settings store
@@ -40,6 +42,15 @@ export function toggleStopwatch() {
     return {
       ...settings,
       using_stopwatch: !settings.using_stopwatch,
+    };
+  });
+}
+
+export function toggleAutoSubmit() {
+  settings.update((settings) => {
+    return {
+      ...settings,
+      auto_submit: !settings.auto_submit,
     };
   });
 }
