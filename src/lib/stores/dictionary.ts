@@ -146,8 +146,12 @@ export function getGlyphs(config_path: string[]): string[] {
           }
         case "syllables": {
           const count = parseInt(config_path[2]);
-          if (!isNaN(count) && count > 0)
-            return Array.from({ length: count }, generateRandomHangulWeighted);
+          if (!isNaN(count) && count > 0) {
+            const unique_syllables: Set<string> = new Set();
+            while (unique_syllables.size < count)
+              unique_syllables.add(generateRandomHangulWeighted()); // Only adds if unique
+            return Array.from(unique_syllables) as string[];
+          }
           return [];
         }
         default:
