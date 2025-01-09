@@ -8,7 +8,7 @@
   import { settings } from "$/lib/stores/settings";
   import { onMount, tick } from "svelte";
   import { high_scores, updateHighScore } from "$/lib/stores/scores";
-  import { game_config } from "$/lib/stores/game-config";
+  import { game_config, refreshGameConfig } from "$/lib/stores/game-config";
 
   let is_loading: boolean = true;
   let stopwatch_is_disabled: boolean = false;
@@ -75,6 +75,13 @@
   function handleMenuEvent(type: string) {
     switch (type) {
       case "restart":
+        // if we're in hangul syllables mode, re-generated the random syllables on restart
+        if (
+          $game_config.path.includes("hangul") &&
+          $game_config.path.includes("syllables")
+        )
+          refreshGameConfig();
+
         quiz.reset();
         if (using_stopwatch) {
           stopwatch?.resetTimer();

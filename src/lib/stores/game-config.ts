@@ -42,3 +42,15 @@ export function updateGameConfigAtDepth(new_id: string, depth: number) {
     };
   });
 }
+
+// update the config with no changes, used to refresh the dervied dictionary store when the
+// set of glyphs needs to be re-generated
+export function refreshGameConfig() {
+  game_config.update((config) => {
+    return {
+      id: config.id,
+      path: config.path,
+      is_valid: config.is_valid,
+    };
+  });
+}
