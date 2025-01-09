@@ -8,7 +8,7 @@ import {
   persoarabic,
   hangul,
 } from "$/lib/glyph-database";
-import { arabic_forms, generateRandomHangul } from "$lib/utils";
+import { arabic_forms, generateRandomHangulWeighted } from "$lib/utils";
 
 function processKana(submode: string): string[] {
   return [
@@ -147,7 +147,7 @@ export function getGlyphs(config_path: string[]): string[] {
         case "syllables": {
           const count = parseInt(config_path[2]);
           if (!isNaN(count) && count > 0)
-            return Array.from({ length: count }, generateRandomHangul);
+            return Array.from({ length: count }, generateRandomHangulWeighted);
           return [];
         }
         default:

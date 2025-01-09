@@ -74,6 +74,50 @@ export function generateRandomHangul(): string {
   return symbol;
 }
 
+export function getCumulativeDistribution(weights: number[]): number[] {
+  const cumulative = [];
+
+  let sum = 0;
+  for (let i = 0; i < weights.length; i++) cumulative[i] = sum += weights[i];
+
+  cumulative[weights.length - 1] = 1.0;
+  return cumulative;
+}
+
+export function chooseWeighted(cumulative_weights: number[]): number {
+  // Use binary search
+  let low = 0;
+  let high = cumulative_weights.length - 1;
+  const random_val = Math.random();
+  while (low < high) {
+    const mid = Math.floor((low + high) / 2);
+    if (random_val < cumulative_weights[mid]) high = mid;
+    else low = mid + 1;
+  }
+
+  return low;
+}
+
+let cumulative_initial_consonants = getCumulativeDistribution(
+  hangul.weights.initial_consonants
+);
+let cumulative_vowels = getCumulativeDistribution(hangul.weights.vowels);
+let cumulative_final_consonants = getCumulativeDistribution(
+  hangul.weights.final_consonants
+);
+
+export function generateRandomHangulWeighted(): string {
+  const initial_index = chooseWeighted(cumulative_initial_consonants);
+  const vowel_index = chooseWeighted(cumulative_vowels);
+  const final_index = chooseWeighted(cumulative_final_consonants);
+
+  // Calculate the Unicode character using the Hangul formula
+  const syllable_code =
+    0xac00 + initial_index * 588 + vowel_index * 28 + final_index;
+  const symbol: string = String.fromCharCode(syllable_code);
+  return symbol;
+}
+
 export const arabic_forms: Record<
   string,
   { isolated: string; initial: string; medial: string; final: string }
