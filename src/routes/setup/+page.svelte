@@ -131,7 +131,7 @@
     white-space: nowrap; /* prevent line breaks */
   }
 
-  @media (max-width: 680px) or (max-height: 680px) {
+  @media (max-width: 680px) {
     .button-text {
       display: none;
     }
