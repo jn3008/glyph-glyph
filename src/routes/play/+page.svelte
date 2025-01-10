@@ -114,6 +114,8 @@
 
     quiz.updateIndex(++current_idx);
 
+    await tick(); // update perfect_answers
+
     if (!stopwatch_is_disabled && current_idx == items.length)
       if (using_stopwatch && !stopwatch_is_paused) {
         stopwatch.stopTimer();
@@ -122,7 +124,7 @@
           new_record_set = updateHighScore(configuration, elapsed_time);
       }
 
-    await tick();
+    await tick(); // update high score in UI
   }
 
   function handleKeydown(event: KeyboardEvent) {
