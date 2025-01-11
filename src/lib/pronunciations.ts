@@ -61,8 +61,9 @@ function formatIPA(sounds: string[]): string {
 }
 
 export function getIPA(glyph: string): string {
-  const path = get(game_config)?.path;
-  switch (path[0]) {
+  const path_dict = get(game_config)?.path_dict;
+  // const path = get(game_config)?.path;
+  switch (path_dict.alphabet) {
     case "kana":
       return formatIPA(
         hiragana.sounds[toHiragana(glyph) as keyof typeof hiragana.sounds]
@@ -73,16 +74,21 @@ export function getIPA(glyph: string): string {
       );
     case "cyrillic": {
       const sounds =
-        cyrillic.sounds[path[1] as keyof typeof cyrillic.pronunciations];
+        cyrillic.sounds[
+          path_dict.languages as keyof typeof cyrillic.pronunciations
+        ];
       return formatIPA(sounds[glyph.toLowerCase() as keyof typeof sounds]);
     }
     case "persoarabic": {
       const sounds =
-        persoarabic.sounds[path[1] as keyof typeof persoarabic.sounds];
+        persoarabic.sounds[
+          path_dict.language as keyof typeof persoarabic.sounds
+        ];
 
-      switch (path[1]) {
+      switch (path_dict.language) {
         case "arabic": {
-          const sounds_regional = sounds[path[2] as keyof typeof sounds];
+          const sounds_regional =
+            sounds[path_dict.pronunciation as keyof typeof sounds];
           return formatIPA(
             sounds_regional[
               getIsolatedForm(glyph) as keyof typeof sounds_regional

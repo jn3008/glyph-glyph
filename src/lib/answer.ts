@@ -11,12 +11,12 @@ import { get } from "svelte/store";
 import { arabic_forms } from "$lib/utils";
 
 export function getAnswers(glyph: string): string[] {
-  const path = get(game_config)?.path;
-  switch (path[0]) {
+  const path_dict = get(game_config)?.path_dict;
+  switch (path_dict.alphabet) {
     case "kana":
       return exceptional_answers.get(toHiragana(glyph)) ?? [toRomaji(glyph)];
     case "greek":
-      switch (path[1]) {
+      switch (path_dict.mode) {
         case "transcriptions":
           return greek.transcriptions[
             glyph.toLowerCase() as keyof typeof greek.transcriptions
@@ -29,21 +29,23 @@ export function getAnswers(glyph: string): string[] {
     case "cyrillic": {
       const transcriptions =
         cyrillic.transcriptions[
-          path[1] as keyof typeof cyrillic.transcriptions
+          path_dict.language as keyof typeof cyrillic.transcriptions
         ];
       return transcriptions[glyph.toLowerCase() as keyof typeof transcriptions];
     }
     case "persoarabic": {
       const transcriptions =
         persoarabic.transcriptions[
-          path[1] as keyof typeof persoarabic.transcriptions
+          path_dict.language as keyof typeof persoarabic.transcriptions
         ];
       // return dict[glyph.toLowerCase() as keyof typeof dict]);
 
-      switch (path[1]) {
+      switch (path_dict.language) {
         case "arabic": {
           const transcriptions_regional =
-            transcriptions[path[2] as keyof typeof transcriptions];
+            transcriptions[
+              path_dict.pronunciation as keyof typeof transcriptions
+            ];
           return transcriptions_regional[
             getIsolatedForm(glyph) as keyof typeof transcriptions_regional
           ];
@@ -55,13 +57,13 @@ export function getAnswers(glyph: string): string[] {
       }
     }
     case "hangul": {
-      switch (path[1]) {
+      switch (path_dict.glyphs) {
         case "vowels":
           return hangul.transcriptions.vowels[
             glyph as keyof typeof hangul.transcriptions.vowels
           ];
         case "consonants":
-          switch (path[2]) {
+          switch (path_dict.position) {
             case "choseong":
               return hangul.transcriptions.initial[
                 glyph as keyof typeof hangul.transcriptions.initial

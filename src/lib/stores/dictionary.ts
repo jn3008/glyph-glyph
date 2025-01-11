@@ -1,6 +1,6 @@
 import { derived } from "svelte/store";
 import { toKatakana } from "wanakana";
-import { game_config } from "./game-config";
+import { game_config, generatePathDict } from "./game-config";
 import {
   hiragana,
   greek,
@@ -22,22 +22,23 @@ function processKana(submode: string): string[] {
 type ArabicForms = "isolated" | "final" | "initial" | "medial";
 
 export function getGlyphs(config_path: string[]): string[] {
-  switch (config_path[0]) {
+  const path_dict = generatePathDict(config_path);
+  switch (path_dict.alphabet) {
     case "kana":
-      switch (config_path[1]) {
+      switch (path_dict.type) {
         case "hiragana":
-          return processKana(config_path[2]);
+          return processKana(path_dict.glyphs);
         case "katakana":
-          return processKana(config_path[2]).map((kana) => toKatakana(kana));
+          return processKana(path_dict.glyphs).map((kana) => toKatakana(kana));
         default:
           return [];
       }
     case "greek":
-      switch (config_path[1]) {
+      switch (path_dict.mode) {
         case "transcriptions":
-          switch (config_path[2]) {
+          switch (path_dict.glyphs) {
             case "monographs":
-              switch (config_path[3]) {
+              switch (path_dict.case) {
                 case "upper":
                   return greek.upper_monographs;
                 case "lower":
@@ -46,7 +47,7 @@ export function getGlyphs(config_path: string[]): string[] {
                   return [];
               }
             case "digraphs":
-              switch (config_path[3]) {
+              switch (path_dict.case) {
                 case "upper":
                   return [...greek.upper_monographs, ...greek.digraphs].map(
                     (glyph) => glyph.toUpperCase()
@@ -61,7 +62,7 @@ export function getGlyphs(config_path: string[]): string[] {
           }
 
         case "names":
-          switch (config_path[2]) {
+          switch (path_dict.case) {
             case "upper":
               return greek.upper_monographs;
             case "lower":
@@ -73,70 +74,38 @@ export function getGlyphs(config_path: string[]): string[] {
           return [];
       }
     case "cyrillic": {
-      const alphabet =
-        cyrillic.alphabets[config_path[1] as keyof typeof cyrillic.alphabets];
+      const language =
+        cyrillic.languages[
+          path_dict.language as keyof typeof cyrillic.languages
+        ];
 
-      switch (config_path[2]) {
+      switch (path_dict.case) {
         case "upper":
-          return alphabet.map((glyph) => glyph.toUpperCase());
+          return language.map((glyph) => glyph.toUpperCase());
         case "lower":
-          return alphabet;
+          return language;
         default:
           return [];
       }
     }
     case "persoarabic":
-      const alphabet =
-        persoarabic.alphabets[
-          config_path[1] as keyof typeof persoarabic.alphabets
+      const language =
+        persoarabic.languages[
+          path_dict.language as keyof typeof persoarabic.languages
         ];
 
-      switch (config_path[1]) {
-        case "arabic":
-          switch (config_path[3]) {
-            case "all":
-              return alphabet.flatMap((glyph) => {
-                const forms = arabic_forms[glyph as keyof typeof arabic_forms];
-                return forms
-                  ? ["isolated", "initial", "medial", "final"].map(
-                      (form) => forms[form as ArabicForms]
-                    )
-                  : [];
-              });
-            default:
-              return alphabet.map(
-                (glyph) =>
-                  arabic_forms[glyph as keyof typeof arabic_forms][
-                    config_path[3] as ArabicForms
-                  ]
-              );
-          }
-        default:
-          switch (config_path[2]) {
-            case "all":
-              return alphabet.flatMap((glyph) => {
-                const forms = arabic_forms[glyph as keyof typeof arabic_forms];
-                return forms
-                  ? ["isolated", "initial", "medial", "final"].map(
-                      (form) => forms[form as ArabicForms]
-                    )
-                  : [];
-              });
-            default:
-              return alphabet.map(
-                (glyph) =>
-                  arabic_forms[glyph as keyof typeof arabic_forms][
-                    config_path[2] as ArabicForms
-                  ]
-              );
-          }
-      }
+      return language.map(
+        (glyph) =>
+          arabic_forms[glyph as keyof typeof arabic_forms][
+            path_dict.form as ArabicForms
+          ]
+      );
     case "hangul":
-      switch (config_path[1]) {
+      switch (path_dict.glyphs) {
         case "vowels":
           return hangul.glyphs.vowels;
         case "consonants":
-          switch (config_path[2]) {
+          switch (path_dict.position) {
             case "choseong":
               return hangul.glyphs.initial_consonants;
             case "batchim":
@@ -145,7 +114,7 @@ export function getGlyphs(config_path: string[]): string[] {
               return [];
           }
         case "syllables": {
-          const count = parseInt(config_path[2]);
+          const count = parseInt(path_dict.count);
           if (!isNaN(count) && count > 0) {
             const unique_syllables: Set<string> = new Set();
             while (unique_syllables.size < count)
