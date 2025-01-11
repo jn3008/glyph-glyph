@@ -1,13 +1,20 @@
 <script lang="ts">
   export let title: string = "";
-  export let style: "actived" | "disactivated" = "actived";
+  export let active: boolean = true;
+  export let style: "" | "small-icon" | "menu-icon" = "";
   export let selected: boolean = false;
 
   export let href: string = "";
 </script>
 
 {#if !href}
-  <button class="button {style}" on:click class:selected {title}>
+  <button
+    class="button {style}"
+    class:disactivated={!active}
+    on:click
+    class:selected
+    {title}
+  >
     <div class="effect">
       <slot />
     </div>
@@ -28,6 +35,10 @@
 {/if}
 
 <style lang="postcss">
+  .effect {
+    display: flex;
+  }
+
   .button {
     display: inline-block;
     transition: all 0.2s ease-in-out;
@@ -68,5 +79,49 @@
     pointer-events: none;
     background-color: var(--dark-button-disactivated-color);
     color: var(--dark-button-disactivated-text-color);
+  }
+
+  .button.small-icon {
+    display: flex;
+
+    background-color: transparent;
+    border: none;
+    color: var(--accent-color);
+
+    margin: 0;
+    padding: 0;
+
+    border-radius: 50%;
+
+    &:focus-visible {
+      outline: none;
+      color: var(--background-color);
+      background-color: var(--accent-color);
+    }
+  }
+
+  .button.menu-icon {
+    all: initial;
+    display: flex;
+    font-size: 2.5em;
+    margin-left: 0.25em;
+    margin: 0;
+    padding: 0.175em;
+    border-radius: 50%;
+
+    cursor: pointer;
+    display: flex;
+    transition:
+      transform 50ms var(--ease-out-better),
+      color 125ms var(--ease-out-better),
+      background-color 125ms var(--ease-out-better),
+      border-color 125ms var(--ease-out-better);
+    color: inherit;
+
+    &:focus-visible {
+      outline: none;
+      color: var(--text-color-on-accent-color);
+      background-color: var(--accent-color);
+    }
   }
 </style>

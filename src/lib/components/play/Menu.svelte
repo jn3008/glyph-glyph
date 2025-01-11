@@ -1,10 +1,13 @@
 <script lang="ts">
+  import Button from "$lib/components/Button.svelte";
+
   let restart_animation_playing = false;
 
   export let menu_event: (input_string: string) => void; // a callback passed from the parent
 
   export let is_keyboard_open: boolean;
   export let auto_submit: boolean;
+  export let show_help: boolean;
 </script>
 
 <section class="menu" class:keyboard-open={is_keyboard_open}>
@@ -40,11 +43,12 @@
     </button>
   </div>
 
-  <div class="button-container">
-    <button
-      type="button"
-      class="button tilt"
-      class:reset-animation-playing={restart_animation_playing}
+  <div
+    class="button-container tilt"
+    class:reset-animation-playing={restart_animation_playing}
+  >
+    <Button
+      style="menu-icon"
       title="Restart game"
       on:click={() => {
         menu_event("restart");
@@ -59,7 +63,17 @@
           }}>refresh</span
         >
       </span>
-    </button>
+    </Button>
+  </div>
+
+  <div class="button-container">
+    <Button
+      style="menu-icon"
+      on:click={() => (show_help = !show_help)}
+      title="Help"
+    >
+      <span class="material-symbols-rounded menu-icon">help</span>
+    </Button>
   </div>
 </section>
 
@@ -76,6 +90,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 2em;
+    gap: 0.75em;
   }
 
   .menu.keyboard-open {
@@ -84,7 +99,7 @@
 
   .menu > * {
     margin: 0;
-    margin-left: 0.75em;
+    /* margin-left: 0.75em; */
 
     &:first-child {
       margin-left: 0 !important;
@@ -134,7 +149,8 @@
     display: flex;
   }
 
-  .button.tilt {
+  /* .button.tilt { */
+  .tilt {
     & .tilt-animation-container {
       transition: transform 150ms var(--standard-curve);
     }
@@ -152,7 +168,8 @@
     }
   }
 
-  .button.reset-animation-playing .reset-animation-container {
+  /* .button.reset-animation-playing .reset-animation-container { */
+  .reset-animation-playing .reset-animation-container {
     animation: 500ms counter-clockwise-turn var(--standard-curve);
   }
 

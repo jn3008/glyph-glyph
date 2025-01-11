@@ -19,6 +19,7 @@
 </script>
 
 <div class="preview-container">
+  <div class="preview-title">Glyphs to test:</div>
   <div class="glyphs-container">
     {#each glyphs as glyph}
       <div class="preview-item">
@@ -63,6 +64,8 @@
     max-width: 95vw;
     position: relative;
     margin-bottom: 5em;
+
+    padding: 0.5em;
   }
   .pronunciations-container {
     display: flex;
@@ -112,9 +115,12 @@
     justify-content: center;
     gap: 0.2em;
     margin: 0 auto;
-    padding: 1em;
     position: relative;
     width: 100%;
+
+    background-color: var(--background-contrast);
+    border-radius: 1em;
+    padding: 0.5em;
   }
 
   .ipa-style {
@@ -178,5 +184,13 @@
 
   .glyph-container:hover::after {
     opacity: 1;
+  }
+
+  .preview-title {
+    color: var(--accent-color);
+
+    padding: 0 1em;
+    width: 100%;
+    justify-content: left;
   }
 </style>

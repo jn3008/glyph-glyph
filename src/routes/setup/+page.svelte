@@ -4,6 +4,7 @@
   import Config from "$/lib/components/setup/Config.svelte";
   import Preview from "$/lib/components/setup/Preview.svelte";
   import ColourPalette from "$/lib/components/ColourPalette.svelte";
+  import HelperModal from "$/lib/components/HelperModal.svelte";
 
   import { formatTime } from "$/lib/utils";
   import { onMount } from "svelte";
@@ -30,6 +31,12 @@
 
     return () => unsubscribe();
   });
+
+  let show_help = false;
+
+  const instructions: string = `Learn an alphabet or test your knowledge by piacking your 
+  game configuration.\n\nOnce a configuration is valid, a preview of the set of glyphs will appear;
+   hover/tap on a glyph to see its answer (romanisation/name).\n\nWhen you're ready press "Start".`;
 </script>
 
 <svelte:head>
@@ -40,6 +47,14 @@
   <div class="top-bar">
     <div class="title-container">
       <a href="/" class="title">glyph-glyph</a>
+
+      <Button
+        style="small-icon"
+        on:click={() => (show_help = !show_help)}
+        title="Help"
+      >
+        <span class="material-symbols-rounded small-icon">help</span>
+      </Button>
     </div>
     <span class="palette"><ColourPalette /></span>
   </div>
@@ -51,6 +66,8 @@
       {/if}
     </div>
   {/if}
+
+  <HelperModal bind:is_open={show_help} {instructions} />
 
   <BottomBar>
     <div class="stopwatch-section">
@@ -89,7 +106,7 @@
         </span>
       </Button>
     {:else}
-      <Button style="disactivated">
+      <Button active={false}>
         <span class="button-content">
           <span class="button-text"> Start </span>
           <span class="material-symbols-rounded icon">arrow_forward </span>
@@ -109,12 +126,6 @@
     grid-template-rows: auto 1fr auto;
   }
 
-  .middle-content {
-    overflow-y: auto;
-    flex-grow: 1;
-    overflow: auto;
-    min-height: 2em;
-  }
   .config-container {
     overflow-x: hidden;
     overflow-y: auto;
@@ -179,16 +190,6 @@
     font-size: 1.2em;
   }
 
-  .wrapper {
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-
-    position: relative;
-    overflow-y: hidden;
-    padding-bottom: 6em;
-  }
-
   .top-bar {
     display: flex;
     justify-content: space-between;
@@ -199,10 +200,21 @@
 
     flex-shrink: 0;
   }
+
+  .title {
+    padding: 0.2rem;
+  }
+
   .title-container {
     display: flex;
-    padding: 0.2rem;
+    height: 100%;
 
     align-items: start;
+  }
+
+  .small-icon {
+    font-size: 1.5rem;
+    padding: 0.2rem;
+    margin: 0;
   }
 </style>

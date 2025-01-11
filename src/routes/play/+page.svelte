@@ -3,8 +3,10 @@
   import Input from "$/lib/components/play/Input.svelte";
   import Menu from "$/lib/components/play/Menu.svelte";
   import Stopwatch from "$/lib/components/play/Stopwatch.svelte";
+  import HelperModal from "$/lib/components/HelperModal.svelte";
   import { quiz } from "$/lib/stores/quiz";
-  import { isCorrectAnswer } from "$/lib/answer";
+  import { isCorrectAnswer, getAnswers } from "$/lib/answer";
+  import { dictionary } from "$/lib/stores/dictionary";
   import { settings, toggleAutoSubmit } from "$/lib/stores/settings";
   import { onMount, tick } from "svelte";
   import { high_scores, updateHighScore } from "$/lib/stores/scores";
@@ -71,6 +73,21 @@
             ? "inactive"
             : "normal"
   ) as typeof stopwatch.time_style;
+
+  let show_help = false;
+
+  $: console.log($dictionary[0]);
+  $: console.log(getAnswers($dictionary[0])[0]);
+  $: console.log($dictionary);
+
+  $: instructions =
+    `Type the correct answer for the current (underlined) glyph in the
+   queue.\n\nFor example for ` +
+    $dictionary[0] +
+    `, type "` +
+    getAnswers($dictionary[0])[0] +
+    `" \n\nThere are buttons for restarting and for toggling the auto-submit mechanism 
+   (automatically submits a correct answer)`;
 
   function handleMenuEvent(type: string) {
     switch (type) {
@@ -182,17 +199,19 @@
           menu_event={handleMenuEvent}
           {is_keyboard_open}
           auto_submit={$settings.auto_submit}
+          bind:show_help
         />
       {/if}
     </div>
   </div>
+
+  <HelperModal bind:is_open={show_help} {instructions} />
 </div>
 
 <style lang="postcss">
   .contents {
     display: grid;
-    wdith: 100%;
-    max-width: 100%;
+    width: 100%;
   }
   .play-contents {
     width: 100%;

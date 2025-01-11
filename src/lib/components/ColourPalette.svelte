@@ -7,6 +7,8 @@
   import { appearance as appearance_store } from "$/lib/stores/appearance";
   import type { ThemeAppearance, ThemeColour } from "$/lib/stores/settings";
 
+  import Button from "$lib/components/Button.svelte";
+
   $: theme_colour = $settings.colour;
 
   let palette_drawer_open: boolean = false;
@@ -64,13 +66,13 @@
     </div>
   </div>
 
-  <button
-    class="palette-drawer-handle"
+  <Button
+    style="small-icon"
     on:click={() => (palette_drawer_open = !palette_drawer_open)}
     title="{palette_drawer_open ? 'Close' : 'Open'} palette"
   >
     <span class="material-symbols-rounded palette-icon"> palette </span>
-  </button>
+  </Button>
 </div>
 
 <style>
@@ -139,8 +141,6 @@
     height: 100%;
     background-color: none;
 
-    border: red 2px;
-
     transition: all 0.3s ease;
     pointer-events: all;
     cursor: pointer;
@@ -160,37 +160,9 @@
     background-color: var(--dark-button-color-selected);
   }
 
-  .palette-drawer-handle {
-    cursor: pointer;
-    text-align: center;
-
-    display: flex;
-
-    background-color: transparent;
-    border: 2px red;
-    color: var(--accent-color);
-
-    .palette-icon {
-      font-size: 1.5rem;
-      padding: 0.2rem;
-    }
-
+  .palette-icon {
+    font-size: 1.5rem;
+    padding: 0.2rem;
     margin: 0;
-    padding: 0;
-
-    transition:
-      transform 50ms var(--standard-curve),
-      color 125ms var(--standard-curve),
-      background-color 125ms var(--standard-curve),
-      border-color 125ms var(--standard-curve);
-
-    &:focus-visible {
-      outline: none;
-      color: var(--text-color-on-accent-color);
-      background-color: var(--accent-color);
-    }
-    &:active {
-      transform: translateY(8%) scale(110%, 90%);
-    }
   }
 </style>
