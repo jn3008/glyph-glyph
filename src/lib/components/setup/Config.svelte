@@ -2,6 +2,9 @@
   import {
     game_config,
     updateGameConfigAtDepth,
+    getModesAtDepth,
+    getModesLabel,
+    selectConfigAtDepth,
   } from "$/lib/stores/game-config";
   import { configurations } from "$/lib/glyph-configurations";
   import Button from "$lib/components/Button.svelte";
@@ -12,38 +15,6 @@
   $: setTimeout(() => {
     visible_depth = selected_path.length;
   }, 1);
-
-  // Given a config path that isn't a leaf of the config tree, provide the next possible choices
-  function getModesAtDepth(path: string[]) {
-    let current = configurations;
-    for (const key of path)
-      current = current.find((mode) => mode.key === key)?.modes || [];
-    return current;
-  }
-  // get the label of the next possible choices
-  function getModesLabel(path: string[]) {
-    let current_modes = configurations;
-    let label: string = "";
-
-    for (let i = 0; i < path.length; i++) {
-      const current_mode = current_modes.find((mode) => mode.key === path[i]);
-
-      if (i === path.length - 1) label = current_mode?.modes_label || "";
-      else current_modes = current_mode?.modes || [];
-    }
-
-    return label;
-  }
-
-  // updateGameConfigAtDepth recursively if there's only one choice to make
-  async function selectConfigAtDepth(new_id: string, depth: number) {
-    await updateGameConfigAtDepth(new_id, depth);
-    const modes = getModesAtDepth(selected_path);
-    if (modes.length == 1) {
-      const next_id = modes[0];
-      selectConfigAtDepth(next_id.key, depth + 1);
-    }
-  }
 </script>
 
 <div>

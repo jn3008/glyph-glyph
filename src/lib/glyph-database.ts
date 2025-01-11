@@ -168,7 +168,7 @@ export const greek = {
 // prettier-ignore
 export const cyrillic = {
 	// https://en.wikipedia.org/wiki/Bulgarian_alphabet
-	alphabets: {
+	languages: {
 		bulgarian: [
 			'а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т',
 			'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ь', 'ю', 'я'
@@ -281,7 +281,7 @@ export const cyrillic = {
 
 // prettier-ignore
 export const persoarabic = {
-	alphabets: {
+	languages: {
 		arabic: ['ا', 'ب', 'ت', 'ث', 'ج', 'ح', 'خ', 'د', 'ذ', 'ر', 'ز', 'س', 'ش', 'ص', 'ض', 'ط', 'ظ', 
 						'ع', 'غ', 'ف', 'ق', 'ك', 'ل', 'م', 'ن', 'ه', 'و', 'ي'],
 

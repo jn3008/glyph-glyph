@@ -1,6 +1,7 @@
 export interface Mode {
   key: string;
   label: string;
+  modes_key?: string;
   modes_label?: string;
   modes?: Mode[]; // Recursive type to support nested modes, '?' - optional
   full_key?: string; // This is added dynamically, so it's optional
@@ -11,18 +12,19 @@ const arabic_forms_config: Mode[] = [
   { key: "initial", label: "Initial" },
   { key: "medial", label: "Medial" },
   { key: "final", label: "Final" },
-  { key: "all", label: "All" },
 ];
 
 export const configurations: Mode[] = [
   {
     key: "kana",
     label: "Kana",
+    modes_key: "type",
     modes_label: "Kana Type",
     modes: [
       {
         key: "katakana",
         label: "Katakana",
+        modes_key: "glyphs",
         modes_label: "Characters to include",
         modes: [
           { key: "monographs", label: "Monographs" },
@@ -34,6 +36,7 @@ export const configurations: Mode[] = [
       {
         key: "hiragana",
         label: "Hiragana",
+        modes_key: "chars",
         modes_label: "Characters to include",
         modes: [
           { key: "monographs", label: "Monographs" },
@@ -47,16 +50,19 @@ export const configurations: Mode[] = [
   {
     key: "greek",
     label: "Greek",
+    modes_key: "mode",
     modes_label: "Mode",
     modes: [
       {
         key: "transcriptions",
         label: "Transcriptions",
+        modes_key: "glyphs",
         modes_label: "Characters to include",
         modes: [
           {
             key: "monographs",
             label: "Monographs",
+            modes_key: "case",
             modes_label: "Case",
             modes: [
               { key: "upper", label: "Upper" },
@@ -66,6 +72,7 @@ export const configurations: Mode[] = [
           {
             key: "digraphs",
             label: "+ Digraphs",
+            modes_key: "case",
             modes_label: "Case",
             modes: [
               { key: "upper", label: "Upper" },
@@ -77,6 +84,7 @@ export const configurations: Mode[] = [
       {
         key: "names",
         label: "Names",
+        modes_key: "case",
         modes_label: "Case",
         modes: [
           { key: "upper", label: "Upper" },
@@ -88,11 +96,13 @@ export const configurations: Mode[] = [
   {
     key: "cyrillic",
     label: "Cyrillic",
+    modes_key: "language",
     modes_label: "Language",
     modes: [
       {
         key: "bulgarian",
         label: "Bulgarian",
+        modes_key: "case",
         modes_label: "Case",
         modes: [
           { key: "upper", label: "Upper" },
@@ -102,6 +112,7 @@ export const configurations: Mode[] = [
       {
         key: "russian",
         label: "Russian",
+        modes_key: "case",
         modes_label: "Case",
         modes: [
           { key: "upper", label: "Upper" },
@@ -111,6 +122,7 @@ export const configurations: Mode[] = [
       {
         key: "serbian",
         label: "Serbian",
+        modes_key: "case",
         modes_label: "Case",
         modes: [
           { key: "upper", label: "Upper" },
@@ -122,34 +134,40 @@ export const configurations: Mode[] = [
   {
     key: "persoarabic",
     label: "Perso-Arabic",
+    modes_key: "language",
     modes_label: "Alphabet",
     modes: [
       {
         key: "arabic",
         label: "Arabic",
+        modes_key: "pronunciation",
         modes_label: "Pronunciation",
         modes: [
           {
             key: "standard",
             label: "Standard",
+            modes_key: "form",
             modes_label: "Form",
             modes: arabic_forms_config,
           },
           {
             key: "levantine",
             label: "Levantine",
+            modes_key: "form",
             modes_label: "Form",
             modes: arabic_forms_config,
           },
           {
             key: "gulf",
             label: "Gulf",
+            modes_key: "form",
             modes_label: "Form",
             modes: arabic_forms_config,
           },
           {
             key: "egyptian",
             label: "Egyptian",
+            modes_key: "form",
             modes_label: "Form",
             modes: arabic_forms_config,
           },
@@ -158,12 +176,14 @@ export const configurations: Mode[] = [
       {
         key: "persian",
         label: "Farsi",
+        modes_key: "form",
         modes_label: "Form",
         modes: arabic_forms_config,
       },
       {
         key: "urdu",
         label: "Urdu",
+        modes_key: "form",
         modes_label: "Form",
         modes: arabic_forms_config,
       },
@@ -172,12 +192,14 @@ export const configurations: Mode[] = [
   {
     key: "hangul",
     label: "Korean",
+    modes_key: "glyphs",
     modes_label: "Glyphs",
     modes: [
       { key: "vowels", label: "Vowels" },
       {
         key: "consonants",
         label: "Consonants",
+        modes_key: "position",
         modes_label: "Syllable Position",
         modes: [
           { key: "choseong", label: "Initial" },
@@ -187,6 +209,7 @@ export const configurations: Mode[] = [
       {
         key: "syllables",
         label: "Syllables",
+        modes_key: "count",
         modes_label: "Count",
         modes: [
           { key: "20", label: "20 Random" },
