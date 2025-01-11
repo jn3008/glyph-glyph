@@ -52,7 +52,6 @@
         <div class="button-container">
           <button
             type="button"
-            style="background-color: linear-gradient(to bottom right, black 47%, white 53%);"
             class="color-button {$appearance_store}-theme-{colour} {colour ===
             theme_colour
               ? 'active'
@@ -154,6 +153,15 @@
     border-radius: 0;
 
     color: var(--text-color);
+  }
+
+  @media (max-width: 768px) {
+    /* on mobile, have all palette colours already popped out */
+    .color-button {
+      height: 100% !important;
+      border-radius: 0 !important;
+      color: var(--text-color) !important;
+    }
   }
 
   .appearance {
