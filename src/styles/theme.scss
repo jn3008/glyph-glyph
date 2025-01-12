@@ -37,6 +37,8 @@
 --highlight-color: #db621d;
 
 --backdrop-color: rgba(0, 0, 0, 0.4);
+
+--new-best-time: hsl(180, 40%, 50%);
 }
 
 @mixin dark-theme-colour($hue) {
@@ -79,6 +81,8 @@
 	--highlight-color: #db621d;
 
 	--backdrop-color: rgba(0, 0, 0, 0.4);
+
+	--new-best-time: hsl(180, 40%, 50%);
 }
 
 $themes: (

@@ -39,7 +39,7 @@
     const event = in_event as InputEvent & { currentTarget: HTMLInputElement };
 
     if (isCompositionEvent(event)) return;
-    if (current_glyph === null) return;
+    if (!current_glyph) return;
     if (event.data === null) return; // control key was pressed
 
     // remove any excess spaces from string

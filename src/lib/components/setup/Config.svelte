@@ -92,7 +92,7 @@
     left: 0.8em;
     background-color: var(--background-color);
     padding: 0 0.5em;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: var(--dark-button-color);
   }

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getGlyphs } from "$lib/stores/dictionary";
+  import { getGlyphs } from "$/lib/stores/glyphs";
 
   const glyphs = [
     ...getGlyphs(["kana", "hiragana", "diacritics"]),

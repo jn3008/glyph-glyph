@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { dictionary } from "$lib/stores/dictionary";
+  import { glyphs_list } from "$/lib/stores/glyphs";
   import { getAnswers, isSilent } from "$lib/answer";
   import { getIPA, getPronunciations } from "$lib/pronunciations";
 
-  $: glyphs = $dictionary;
+  $: glyphs = $glyphs_list;
 
   export let show_pronunciations: boolean;
 
@@ -36,7 +36,7 @@
           <span class="glyph">{glyph}</span>
 
           {#if hovered_glyph == glyph}
-            <span class="glyph-info">
+            <span class="glyph-tooltip">
               {isSilent(glyph) ? "Silent" : getAnswers(glyph).join(" / ")}
               <span class="ipa-style">{getIPA(glyph)}</span>
             </span>
@@ -61,25 +61,28 @@
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    max-width: 95vw;
+    /* max-width: 95vw; */
     position: relative;
     margin-bottom: 5em;
 
     padding: 0.5em;
+    max-width: 40rem;
   }
   .pronunciations-container {
     display: flex;
     justify-content: center;
     vertical-align: middle;
     text-align: center;
-    margin: auto;
-    position: absolute;
     font-size: 1em;
     min-height: 3em;
     background-color: transparent;
     border: 2px solid var(--dark-button-color);
-    border-radius: 0.5rem;
-    min-width: 50vw;
+    border-radius: 1rem;
+    width: 100%;
+
+    margin: 0 auto;
+    position: relative;
+
     padding: 0.6rem 1rem;
     top: 100%;
     margin: 0.5em;
@@ -106,21 +109,6 @@
   .pronunciations.is-active {
     opacity: 1;
     transform: scaleY(1);
-  }
-  .glyphs-container {
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.2em;
-    margin: 0 auto;
-    position: relative;
-    width: 100%;
-
-    background-color: var(--background-contrast);
-    border-radius: 1em;
-    padding: 0.5em;
   }
 
   .ipa-style {
@@ -158,28 +146,6 @@
   .glyph-container:hover {
     font-weight: 600;
     color: var(--text-color);
-  }
-
-  .glyph-info {
-    display: flex;
-    flex-direction: column;
-
-    position: absolute;
-    white-space: nowrap; /* Prevent line breaks */
-    bottom: 100%;
-    left: 50%;
-    gap: 0em;
-
-    transform: translateX(-50%);
-    background-color: var(--background-contrast);
-    color: var(--text-color);
-    padding: 0.3rem 0.6rem;
-    overflow: visible;
-    border-radius: 0.5rem;
-    font-size: 1.8rem;
-    pointer-events: none;
-    transition: opacity 0.1s ease-in-out;
-    z-index: 3;
   }
 
   .glyph-container:hover::after {

@@ -19,7 +19,7 @@ export type ThemeColour = (typeof theme_colours)[number];
 export interface Settings {
   appearance: ThemeAppearance;
   colour: ThemeColour;
-  using_stopwatch: boolean;
+  stopwatch_enabled: boolean;
   auto_submit: boolean;
 }
 
@@ -27,7 +27,7 @@ export interface Settings {
 const default_settings: Settings = {
   appearance: "auto",
   colour: "teal",
-  using_stopwatch: true,
+  stopwatch_enabled: true,
   auto_submit: true,
 };
 
@@ -41,7 +41,7 @@ export function toggleStopwatch() {
   settings.update((settings) => {
     return {
       ...settings,
-      using_stopwatch: !settings.using_stopwatch,
+      stopwatch_enabled: !settings.stopwatch_enabled,
     };
   });
 }

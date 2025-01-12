@@ -11,12 +11,15 @@
   import { quiz } from "$/lib/stores/quiz";
   import { game_config } from "$/lib/stores/game-config";
   import { settings, toggleStopwatch } from "$/lib/stores/settings";
-  import { high_scores } from "$/lib/stores/scores";
+  import { times_store } from "$/lib/stores/times";
 
   let is_loading = true;
+  let show_help = false;
+
+  $: stopwatch_enabled = $settings.stopwatch_enabled;
 
   $: configuration = $game_config.id;
-  $: high_score = $high_scores[configuration];
+  $: high_score = $times_store.best_times[configuration];
   $: show_pronunciations = ["greek", "cyrillic"].includes(
     $game_config?.path[0]
   );
@@ -31,8 +34,6 @@
 
     return () => unsubscribe();
   });
-
-  let show_help = false;
 
   const instructions: string = `Learn an alphabet or test your knowledge by piacking your 
   game configuration.\n\nOnce a configuration is valid, a preview of the set of glyphs will appear;
@@ -75,8 +76,8 @@
         on:click={() => {
           toggleStopwatch();
         }}
-        selected={$settings.using_stopwatch}
-        title="Turn stopwatch {$settings.using_stopwatch ? 'off' : 'on'}"
+        selected={stopwatch_enabled}
+        title="Turn stopwatch {stopwatch_enabled ? 'off' : 'on'}"
       >
         <span class="button-content">
           <span class="button-text"> Use Stopwatch </span>
@@ -84,7 +85,7 @@
         </span>
       </Button>
 
-      {#if $game_config.is_valid && $settings.using_stopwatch}
+      {#if $game_config.is_valid && stopwatch_enabled}
         <span class="high-score" class:not-set={high_score < 0}>
           {formatTime(high_score)}s
         </span>

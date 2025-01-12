@@ -1,15 +1,30 @@
+<script context="module" lang="ts">
+  import type { SvelteComponent } from "svelte";
+  export type TimeStyle = "normal" | "incorrect" | "record-set" | "inactive";
+
+  export interface StopwatchProps {
+    is_enabled: boolean;
+    component?: SvelteComponent;
+    is_paused?: boolean;
+    is_inactive?: boolean;
+    elapsed_time?: number;
+    best_time?: number;
+    new_record_set?: boolean;
+    time_style?: TimeStyle;
+  }
+</script>
+
 <script lang="ts">
   import { onMount } from "svelte";
   import { roundToDecimalPlaces, formatTime } from "$/lib/utils";
 
   export let elapsed_time: number = 0;
   export let is_paused: boolean = true;
-  export let is_disabled: boolean = false;
+  export let is_inactive: boolean = false;
   export let best_time: number = -1;
 
   // colour of the stopwatch's time
-  export let time_style: "normal" | "incorrect" | "record-set" | "inactive" =
-    "normal";
+  export let time_style: TimeStyle = "normal";
 
   let timer_interval: number | null = null;
 
@@ -44,8 +59,12 @@
 </script>
 
 <div class="stopwatch">
-  <span class="time {time_style} nowrap">
-    {#if is_disabled}--:--.-{:else}{formatTime(elapsed_time)}{/if}s
+  <span
+    class="time {time_style} nowrap"
+    class:incorrect-color={time_style == "incorrect"}
+    class:new-best-color={time_style == "record-set"}
+  >
+    {#if is_inactive}--:--.-{:else}{formatTime(elapsed_time)}{/if}s
   </span>
   {#if best_time < 0}
     <span class="best-time not-set"> best: --:--.-s</span>
@@ -85,7 +104,7 @@
   }
 
   .time.record-set {
-    color: hsl(180, 40%, 50%);
+    color: var(--new-best-time-color);
   }
 
   .time.incorrect {

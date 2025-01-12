@@ -84,41 +84,6 @@ hr {
   margin: calc(1.5 * var(--line-space)) 0;
 }
 
-.text-link {
-  color: var(--secondary-accent-color);
-  text-decoration: none;
-  border-bottom: 1px solid var(--secondary-accent-color);
-
-  &:active,
-  &:focus-visible {
-    outline: none;
-    color: var(--text-color-on-focus-color);
-    background: var(--focus-color);
-    border-color: var(--focus-color);
-  }
-
-  &[target="_blank"] {
-    &:before {
-      content: "";
-      display: inline-block;
-      vertical-align: baseline;
-      position: relative;
-      top: 0.15em; /* visual balance */
-      width: 1em;
-      height: 1em;
-      background-color: var(--secondary-accent-color);
-      mask-image: url("/icon/open-in-new.svg");
-      mask-repeat: no-repeat;
-      mask-position: 50% 50%;
-    }
-
-    &:active:before,
-    &:focus-visible:before {
-      background-color: var(--text-color-on-focus-color);
-    }
-  }
-}
-
 .content-width {
   max-width: calc(min(40rem, 90vw));
 }
@@ -136,42 +101,49 @@ hr {
   margin-right: auto;
 }
 
-.sr-only {
-  clip: rect(1px, 1px, 1px, 1px);
-  clip-path: inset(50%);
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
+.glyphs-container {
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.2em;
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+
+  background-color: var(--background-contrast);
+  border-radius: 1em;
+  padding: 0.5em;
 }
 
-.glass-morphism {
-  backdrop-filter: blur(8px);
+.glyph-tooltip {
+  display: flex;
+  flex-direction: column;
 
-  /* Fallback for crap browsers like Firefox */
-  @supports (not (backdrop-filter: none)) {
-    background: var(--background-color);
-  }
+  position: absolute;
+  white-space: nowrap;
+  bottom: 100%;
+  left: 50%;
+  gap: 0em;
 
-  &:before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: var(--background-color);
-    opacity: 0.8;
-  }
+  transform: translateX(-50%);
+  background-color: var(--background-contrast);
+  color: var(--text-color);
+  padding: 0.3rem 0.6rem;
+  overflow: visible;
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
+  pointer-events: none;
+  transition: opacity 0.1s ease-in-out;
+  z-index: 3;
+  border: var(--dark-button-color) 2px solid;
+}
 
-  &.contrast {
-    /* Fallback for crap browsers like Firefox */
-    @supports (not (backdrop-filter: none)) {
-      background: var(--background-contrast);
-    }
+.incorrect-color {
+  color: var(--highlight-color);
+}
 
-    &:before {
-      background: var(--background-contrast);
-    }
-  }
+.new-best-color {
+  color: var(--new-best-time);
 }

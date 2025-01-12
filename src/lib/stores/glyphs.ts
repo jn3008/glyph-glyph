@@ -131,7 +131,7 @@ export function getGlyphs(config_path: string[]): string[] {
   }
 }
 
-export const dictionary = derived(game_config, ($config) => {
+export const glyphs_list = derived(game_config, ($config) => {
   if (!$config.is_valid) return [];
   return getGlyphs($config.path);
 });

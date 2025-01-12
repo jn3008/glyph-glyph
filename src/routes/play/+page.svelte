@@ -2,20 +2,27 @@
   import Quiz from "$/lib/components/play/Quiz.svelte";
   import Input from "$/lib/components/play/Input.svelte";
   import Menu from "$/lib/components/play/Menu.svelte";
-  import Stopwatch from "$/lib/components/play/Stopwatch.svelte";
+  import Stopwatch, {
+    type TimeStyle,
+    type StopwatchProps,
+  } from "$/lib/components/play/Stopwatch.svelte";
   import HelperModal from "$/lib/components/HelperModal.svelte";
+  import Button from "$/lib/components/Button.svelte";
+
   import { quiz } from "$/lib/stores/quiz";
   import { isCorrectAnswer, getAnswers } from "$/lib/answer";
-  import { dictionary } from "$/lib/stores/dictionary";
+  import { glyphs_list } from "$/lib/stores/glyphs";
   import { settings, toggleAutoSubmit } from "$/lib/stores/settings";
   import { onMount, tick } from "svelte";
-  import { high_scores, updateHighScore } from "$/lib/stores/scores";
+  import { times_store, updateHighScore } from "$/lib/stores/times";
   import { game_config, refreshGameConfig } from "$/lib/stores/game-config";
+  import { goto } from "$app/navigation";
+
+  $: console.log(quiz);
 
   let is_loading: boolean = true;
-  let stopwatch_is_disabled: boolean = false;
-
   let is_keyboard_open = false;
+  let show_help = false;
 
   function checkKeyboardState() {
     if (window.visualViewport)
@@ -33,7 +40,7 @@
 
     // if the page reloads and current idx > 0 (game in progress),
     // then disable the stopwatch until the game restarts
-    stopwatch_is_disabled = current_idx > 0;
+    stopwatch.is_inactive = current_idx > 0;
     return () => {
       if (window.visualViewport)
         window.visualViewport.removeEventListener("resize", checkKeyboardState);
@@ -49,50 +56,48 @@
   $: items = $quiz.items;
   $: current_idx = $quiz.current_idx;
   $: current_item = items && items[current_idx];
+  $: quiz_finished = current_idx >= items.length;
 
-  $: perfect_answers = items
+  $: perfect_score = items
     .slice(0, current_idx)
     .every((item) => item?.is_correct_answer);
   $: configuration = $game_config.id;
 
-  $: best_time = $high_scores[configuration];
+  let stopwatch: StopwatchProps = {
+    is_enabled: $settings.stopwatch_enabled,
+  };
 
-  $: using_stopwatch = $settings.using_stopwatch;
-  let stopwatch: Stopwatch;
-  let elapsed_time = 0;
-  let stopwatch_is_paused: boolean;
-  let new_record_set: boolean = false;
-  $: time_style = (
-    stopwatch_is_disabled
+  $: stopwatch.is_enabled = $settings.stopwatch_enabled;
+
+  $: stopwatch.best_time = $times_store.best_times[configuration];
+
+  $: stopwatch.time_style = (
+    stopwatch.is_inactive
       ? "inactive"
-      : new_record_set
+      : stopwatch.new_record_set
         ? "record-set"
-        : !perfect_answers
+        : !perfect_score
           ? "incorrect"
-          : stopwatch_is_paused
+          : stopwatch.is_paused
             ? "inactive"
             : "normal"
-  ) as typeof stopwatch.time_style;
+  ) as TimeStyle;
 
-  let show_help = false;
-
-  $: console.log($dictionary[0]);
-  $: console.log(getAnswers($dictionary[0])[0]);
-  $: console.log($dictionary);
+  let stopwatch_checkpoint: number = 0;
 
   $: instructions =
     `Type the correct answer for the current (underlined) glyph in the
    queue.\n\nFor example for ` +
-    $dictionary[0] +
+    $glyphs_list[0] +
     `, type "` +
-    getAnswers($dictionary[0])[0] +
+    getAnswers($glyphs_list[0])[0] +
     `" \n\nThere are buttons for restarting and for toggling the auto-submit mechanism 
    (automatically submits a correct answer)`;
 
   function handleMenuEvent(type: string) {
     switch (type) {
       case "restart":
-        // if we're in hangul syllables mode, re-generated the random syllables on restart
+        // if we're in hangul syllables mode, re-generate the random syllables on restart
         if (
           $game_config.path.includes("hangul") &&
           $game_config.path.includes("syllables")
@@ -100,10 +105,10 @@
           refreshGameConfig();
 
         quiz.reset();
-        if (using_stopwatch) {
-          stopwatch?.resetTimer();
-          stopwatch_is_disabled = false;
-          new_record_set = false;
+        if (stopwatch.is_enabled) {
+          stopwatch.component?.resetTimer();
+          stopwatch.is_inactive = false;
+          stopwatch.new_record_set = false;
         }
         break;
 
@@ -117,29 +122,57 @@
   async function handleSubmit(input: string) {
     if (!$game_config.is_valid || !current_item) return;
 
-    if (using_stopwatch && stopwatch_is_paused) stopwatch.startTimer();
+    if (stopwatch.is_enabled && stopwatch.is_paused)
+      stopwatch.component?.startTimer();
 
     const is_correct = isCorrectAnswer(input, current_item.glyph);
 
     if (!is_correct && input === "") return;
 
+    let time_spent = stopwatch.is_enabled
+      ? (stopwatch.elapsed_time || 0) - stopwatch_checkpoint
+      : 0; // calculate time spent on glyph by subtracting the checkpoint from the current time
+
+    stopwatch_checkpoint = stopwatch.elapsed_time || 0; // update checkpoint with current time
+
     quiz.updateItem(current_idx, (item) => ({
       ...item, // spread existing properties
       answered: input, // add the user's input
       is_correct_answer: is_correct, // add correctness
+      time_spent: time_spent,
     }));
 
     quiz.updateIndex(++current_idx);
 
-    await tick(); // update perfect_answers
+    await tick(); // update perfect_score, quiz_finished
 
-    if (!stopwatch_is_disabled && current_idx == items.length)
-      if (using_stopwatch && !stopwatch_is_paused) {
-        stopwatch.stopTimer();
+    if (quiz_finished) {
+      // Reach the end of the queue
 
-        if (perfect_answers)
-          new_record_set = updateHighScore(configuration, elapsed_time);
+      if (
+        // current_idx == items.length &&
+        !stopwatch.is_inactive &&
+        stopwatch.is_enabled &&
+        !stopwatch.is_paused
+      ) {
+        stopwatch.component?.stopTimer();
+
+        if (perfect_score)
+          stopwatch.new_record_set = updateHighScore(
+            configuration,
+            stopwatch.elapsed_time || 0
+          );
       }
+
+      quiz.updateElapsedTime(stopwatch.elapsed_time || -1);
+
+      goto("/summary", {
+        state: {
+          elapsed_time: Number(stopwatch.elapsed_time ?? 0),
+        },
+      });
+      return;
+    }
 
     await tick(); // update high score in UI
   }
@@ -152,9 +185,8 @@
       event.key !== " " && // skip if space
       event.key.length === 1 && // skip if control character
       ALPHANUMERIC.test(event.key)
-    ) {
+    )
       input_element.focus();
-    }
   }
 </script>
 
@@ -172,14 +204,14 @@
         <span class="config-id">{$game_config.id}</span>
       </div>
       {#if !is_loading}
-        {#if using_stopwatch}
+        {#if stopwatch.is_enabled}
           <Stopwatch
-            bind:this={stopwatch}
-            bind:elapsed_time
-            bind:is_paused={stopwatch_is_paused}
-            is_disabled={stopwatch_is_disabled}
-            {best_time}
-            {time_style}
+            bind:this={stopwatch.component}
+            bind:elapsed_time={stopwatch.elapsed_time}
+            bind:is_paused={stopwatch.is_paused}
+            is_inactive={stopwatch.is_inactive}
+            best_time={stopwatch.best_time}
+            time_style={stopwatch.time_style}
           />
         {/if}
       {/if}
@@ -203,6 +235,22 @@
         />
       {/if}
     </div>
+
+    {#if quiz_finished}
+      <div class="summary-button-container">
+        <Button
+          href="summary"
+          on:click={() => {}}
+          selected={true}
+          title="Summary"
+        >
+          <span class="button-content">
+            <span class="button-text"> Summary </span>
+            <span class="material-symbols-rounded icon">arrow_forward </span>
+          </span>
+        </Button>
+      </div>
+    {/if}
   </div>
 
   <HelperModal bind:is_open={show_help} {instructions} />
@@ -245,5 +293,27 @@
 
   .config-id {
     color: var(--text-color-light);
+  }
+
+  .button-content {
+    display: flex;
+    gap: 0.3em;
+    height: 100%;
+    vertical-align: middle;
+    justify-content: center;
+    margin: auto;
+  }
+
+  .summary-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+
+    *.icon {
+      display: flex;
+      margin: auto;
+      font-size: 1.2em;
+    }
   }
 </style>

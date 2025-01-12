@@ -47,6 +47,17 @@ export function formatTime(time: number): string {
   return `${minutes}:${seconds}.${fraction}`;
 }
 
+// Don't display minutes if time is less than 60 seconds
+export function formatTimeAlt(time: number): string {
+  if (time == null || time < 0) return "--:--.-";
+
+  if (time < 60) {
+    const [seconds, fraction] = time.toFixed(1).split("."); // Ensure one decimal place
+    return `${seconds}.${fraction}`;
+  }
+  return formatTime(time);
+}
+
 export function shuffleArray<T>(array: T[]): T[] {
   const new_array = [...array];
   for (let i = new_array.length - 1; i > 0; i--) {
