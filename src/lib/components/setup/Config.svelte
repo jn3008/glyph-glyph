@@ -67,12 +67,8 @@
     margin: auto;
     padding: 1em;
     gap: 1em;
-
-    @media screen and (max-width: 40em) {
-      padding: 0.5em;
-      gap: 0.5em;
-    }
   }
+
   .sub-selection-container {
     position: relative;
     border: 2px solid var(--dark-button-color);
@@ -85,6 +81,7 @@
     transform: translateY(-3em);
     transition: 0.2s ease;
   }
+
   .sub-selection-container::before {
     content: attr(data-label);
     position: absolute;
@@ -96,11 +93,13 @@
     font-weight: 600;
     color: var(--dark-button-color);
   }
+
   .sub-selection-container.visible::before,
   .sub-selection-container.visible {
     transform: scale(100%) translateX(0);
     opacity: 1;
   }
+
   .sub-selection {
     display: flex;
     flex-wrap: wrap;
@@ -108,6 +107,7 @@
     gap: 1em;
     padding: 1em;
   }
+
   .selection {
     display: flex;
     flex-wrap: wrap;
@@ -115,6 +115,7 @@
     gap: 1em;
     padding: 1em;
   }
+
   .alphabet-selection-container {
     background-color: var(--background-contrast);
     width: 100%;

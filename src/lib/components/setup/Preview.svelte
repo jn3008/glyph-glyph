@@ -19,31 +19,33 @@
 </script>
 
 <div class="preview-container">
-  <div class="preview-title">Glyphs to test:</div>
-  <div class="glyphs-container">
-    {#each glyphs as glyph}
-      <div class="preview-item">
-        <div
-          class="glyph-container"
-          on:mouseenter={() => {
-            onHover(glyph);
-          }}
-          on:mouseleave={() => {
-            hovered_glyph = pronunciations = null;
-          }}
-          role="tooltip"
-        >
-          <span class="glyph">{glyph}</span>
+  <div>
+    <div class="preview-title">Glyphs to test:</div>
+    <div class="glyphs-container">
+      {#each glyphs as glyph}
+        <div class="preview-item">
+          <div
+            class="glyph-container"
+            on:mouseenter={() => {
+              onHover(glyph);
+            }}
+            on:mouseleave={() => {
+              hovered_glyph = pronunciations = null;
+            }}
+            role="tooltip"
+          >
+            <span class="glyph">{glyph}</span>
 
-          {#if hovered_glyph == glyph}
-            <span class="glyph-tooltip">
-              {isSilent(glyph) ? "Silent" : getAnswers(glyph).join(" / ")}
-              <span class="ipa-style">{getIPA(glyph)}</span>
-            </span>
-          {/if}
+            {#if hovered_glyph == glyph}
+              <span class="glyph-tooltip">
+                {isSilent(glyph) ? "Silent" : getAnswers(glyph).join(" / ")}
+                <span class="ipa-style">{getIPA(glyph)}</span>
+              </span>
+            {/if}
+          </div>
         </div>
-      </div>
-    {/each}
+      {/each}
+    </div>
   </div>
   {#if show_pronunciations}
     <div class="pronunciations-container">
@@ -65,7 +67,9 @@
     position: relative;
     margin-bottom: 5em;
 
-    padding: 0.5em;
+    gap: 1em;
+
+    padding: 1em;
     max-width: 40rem;
   }
   .pronunciations-container {

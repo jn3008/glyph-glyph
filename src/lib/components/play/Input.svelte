@@ -56,33 +56,39 @@
   }
 </script>
 
-<form
-  class="answer-input content-width"
-  class:shake-animation-playing={shake_animation_is_playing}
-  on:submit|preventDefault={handleSubmit}
-  on:animationend={() => (shake_animation_is_playing = false)}
->
-  <input
-    type="text"
-    class="text-field"
-    bind:value={input}
-    on:input={handleInput}
-    placeholder="type here..."
-    autocapitalize="none"
-    autocomplete="off"
-    autocorrect="off"
-    spellcheck={false}
-    bind:this={input_element}
-  />
-</form>
+<div class="input-container">
+  <form
+    class="answer-input content-width"
+    class:shake-animation-playing={shake_animation_is_playing}
+    on:submit|preventDefault={handleSubmit}
+    on:animationend={() => (shake_animation_is_playing = false)}
+  >
+    <input
+      type="text"
+      class="text-field"
+      bind:value={input}
+      on:input={handleInput}
+      placeholder="type here..."
+      autocapitalize="none"
+      autocomplete="off"
+      autocorrect="off"
+      spellcheck={false}
+      bind:this={input_element}
+    />
+  </form>
+</div>
 
 <style lang="postcss">
+  .input-container {
+    padding: 0 1rem;
+  }
+
   .answer-input {
     display: flex;
     width: 100%;
     position: relative;
     background-color: var(--background-input);
-    border-bottom: 1px solid var(--border-input);
+    border-bottom: 2px solid var(--border-input);
     border-radius: 9999px;
     margin: 0 auto;
     font-size: 1.4em;
@@ -105,28 +111,6 @@
     }
     &::placeholder {
       color: var(--text-color-low-contrast);
-    }
-  }
-
-  .button {
-    color: inherit;
-    background: none;
-    margin: 0;
-    border: 0;
-    padding: 0;
-    font-size: 1.75em;
-    width: 1.5em;
-    height: 100%;
-
-    position: absolute;
-    right: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &:focus-visible {
-      outline: var(--focus-color) solid 3px;
     }
   }
 

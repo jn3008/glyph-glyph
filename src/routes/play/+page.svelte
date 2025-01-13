@@ -273,7 +273,7 @@
 
   @media (max-width: 680px) or (max-height: 680px) {
     .play-contents {
-      font-size: 70%;
+      font-size: 80%;
     }
   }
 

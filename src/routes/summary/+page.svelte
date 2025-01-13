@@ -326,10 +326,10 @@
   .info-block::before {
     content: attr(data-label);
     position: absolute;
-    top: -0.8em;
-    left: 0.8em;
+    top: -0.7em;
+    left: 0.9em;
     background-color: var(--background-color);
-    padding: 0 0.5em;
+    padding: 0 0.35em;
     font-size: 0.8rem;
     font-weight: 600;
   }

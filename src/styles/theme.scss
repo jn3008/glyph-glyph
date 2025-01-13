@@ -9,7 +9,7 @@
 
 --text-color: #{hsl($hue, 24%, 30%)};
 --text-color-light: #{hsl($hue, 10%, 59%)};
---text-color-low-contrast: #{hsl($hue, 17%, 75%)};
+--text-color-low-contrast: #{hsl($hue, 35%, 75%)};
 --text-color-subtle-alpha: #{hsla($hue, 64%, 90%, 0.55)};
 
 --light-button-color: #{hsl($hue, 36%, 60%)};
@@ -46,13 +46,13 @@
 	--background-contrast: #{hsl($hue, 84%, 3%)};
 	--background-contrast-alpha: #{hsla($hue, 84%, 2%, 0.6)};
 	--background-input: #{hsl($hue, 39%, 12%)};
-	--border-input: #{hsl($hue, 58%, 6%)};
+	--border-input: #{hsl($hue, 58%, 15%)};
 
 	--underline: #{hsl($hue, 39%, 14%)};
 
 	--text-color: #{hsl($hue, 24%, 74%)};
 	--text-color-light: #{hsl($hue, 10%, 41%)};
-	--text-color-low-contrast: #{hsl($hue, 17%, 25%)};
+	--text-color-low-contrast: #{hsl($hue, 35%, 25%)};
 	--text-color-subtle-alpha: #{hsla($hue, 64%, 10%, 0.55)};
 
 	--light-button-color: #{hsl($hue, 36%, 40%)};

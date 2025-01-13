@@ -135,6 +135,7 @@
     display: flex;
     white-space: nowrap;
   }
+
   .config-title-text {
     font-size: 1.25rem;
     font-weight: 500;
@@ -143,6 +144,7 @@
 
   .config-title-container {
     padding: 0.25rem 0.5rem;
+    border-top: 2px solid var(--background-contrast);
   }
 
   .config-container {
@@ -162,7 +164,7 @@
     white-space: nowrap; /* prevent line breaks */
   }
 
-  @media (max-width: 680px) {
+  @media (max-width: 580px) {
     .button-text {
       display: none;
     }
