@@ -6,7 +6,7 @@
   import ColourPalette from "$/lib/components/ColourPalette.svelte";
   import HelperModal from "$/lib/components/HelperModal.svelte";
 
-  import { formatTime } from "$/lib/utils";
+  import { formatTimeAlt } from "$/lib/utils";
   import { onMount } from "svelte";
   import { quiz } from "$/lib/stores/quiz";
   import { game_config } from "$/lib/stores/game-config";
@@ -91,7 +91,7 @@
 
       {#if $game_config.is_valid && stopwatch_enabled}
         <span class="high-score" class:not-set={high_score < 0}>
-          {formatTime(high_score)}s
+          {formatTimeAlt(high_score)}s
         </span>
       {/if}
     </div>

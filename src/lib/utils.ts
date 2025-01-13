@@ -52,7 +52,7 @@ export function formatTimeAlt(time: number): string {
   if (time == null || time < 0) return "--:--.-";
 
   if (time < 60) {
-    const [seconds, fraction] = time.toFixed(1).split("."); // Ensure one decimal place
+    const [seconds, fraction] = time.toFixed(2).split("."); // Ensure one decimal place
     return `${seconds}.${fraction}`;
   }
   return formatTime(time);

@@ -78,7 +78,7 @@
         ? "record-set"
         : !perfect_score
           ? "incorrect"
-          : stopwatch.is_paused
+          : stopwatch.component?.hasStarted()
             ? "inactive"
             : "normal"
   ) as TimeStyle;
@@ -109,6 +109,7 @@
           stopwatch.component?.resetTimer();
           stopwatch.is_inactive = false;
           stopwatch.new_record_set = false;
+          stopwatch_checkpoint = 0;
         }
         break;
 
@@ -122,16 +123,40 @@
   async function handleSubmit(input: string) {
     if (!$game_config.is_valid || !current_item) return;
 
-    if (stopwatch.is_enabled && stopwatch.is_paused)
-      stopwatch.component?.startTimer();
+    if (
+      stopwatch.component &&
+      stopwatch.is_enabled &&
+      !stopwatch.component.hasStarted()
+    )
+      stopwatch.component.startTimer();
+
+    //   console.log(
+    //     stopwatch.component &&
+    //     stopwatch.is_enabled &&
+    //     stopwatch.component.hasStarted()
+    // )
 
     const is_correct = isCorrectAnswer(input, current_item.glyph);
 
     if (!is_correct && input === "") return;
 
-    let time_spent = stopwatch.is_enabled
-      ? (stopwatch.elapsed_time || 0) - stopwatch_checkpoint
-      : 0; // calculate time spent on glyph by subtracting the checkpoint from the current time
+    stopwatch.component?.updateTime();
+    let time_spent =
+      stopwatch.is_enabled &&
+      stopwatch.component &&
+      stopwatch.component.hasStarted()
+        ? (stopwatch.elapsed_time || 0) - stopwatch_checkpoint
+        : 0; // calculate time spent on glyph by subtracting the checkpoint from the current time
+
+    console.log("time_spent", time_spent);
+    console.log("stopwatch.is_enabled", stopwatch.is_enabled);
+    console.log("stopwatch.component", stopwatch.component);
+    console.log(
+      "stopwatch.component?.hasStarted()",
+      stopwatch.component?.hasStarted()
+    );
+    console.log("stopwatch.elapsed_time", stopwatch.elapsed_time);
+    console.log("stopwatch_checkpoint", stopwatch_checkpoint);
 
     stopwatch_checkpoint = stopwatch.elapsed_time || 0; // update checkpoint with current time
 
@@ -153,7 +178,7 @@
         // current_idx == items.length &&
         !stopwatch.is_inactive &&
         stopwatch.is_enabled &&
-        !stopwatch.is_paused
+        stopwatch.component?.hasStarted()
       ) {
         stopwatch.component?.stopTimer();
 
@@ -208,7 +233,6 @@
           <Stopwatch
             bind:this={stopwatch.component}
             bind:elapsed_time={stopwatch.elapsed_time}
-            bind:is_paused={stopwatch.is_paused}
             is_inactive={stopwatch.is_inactive}
             best_time={stopwatch.best_time}
             time_style={stopwatch.time_style}

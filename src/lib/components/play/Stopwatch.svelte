@@ -5,7 +5,6 @@
   export interface StopwatchProps {
     is_enabled: boolean;
     component?: SvelteComponent;
-    is_paused?: boolean;
     is_inactive?: boolean;
     elapsed_time?: number;
     best_time?: number;
@@ -19,13 +18,13 @@
   import { roundToDecimalPlaces, formatTime } from "$/lib/utils";
 
   export let elapsed_time: number = 0;
-  export let is_paused: boolean = true;
   export let is_inactive: boolean = false;
   export let best_time: number = -1;
 
   // colour of the stopwatch's time
   export let time_style: TimeStyle = "normal";
 
+  let start_time: number | null = null;
   let timer_interval: number | null = null;
 
   onMount(() => {
@@ -35,17 +34,23 @@
   });
 
   export function startTimer() {
-    is_paused = false;
-    if (!timer_interval) {
-      timer_interval = setInterval(() => {
-        elapsed_time += 0.1;
-        elapsed_time = roundToDecimalPlaces(elapsed_time, 2);
-      }, 100);
+    start_time = Date.now(); //  - (elapsed_time * 1000); // <- for when we want to pause and start
+
+    timer_interval = setInterval(() => {
+      updateTime();
+    }, 100);
+  }
+
+  export function updateTime() {
+    if (start_time !== null) {
+      const now = Date.now();
+      elapsed_time = roundToDecimalPlaces((now - start_time) / 1000, 2);
+    } else {
+      console.log("start_time is null");
     }
   }
 
   export function stopTimer() {
-    is_paused = true;
     if (timer_interval) {
       clearInterval(timer_interval);
       timer_interval = null;
@@ -55,6 +60,11 @@
   export function resetTimer() {
     stopTimer();
     elapsed_time = 0;
+    start_time = null;
+  }
+
+  export function hasStarted() {
+    return start_time !== null;
   }
 </script>
 
@@ -92,15 +102,6 @@
     font-weight: 400;
     justify-content: right;
     align-items: right;
-  }
-
-  .nowrap {
-    /* display: inline-block;
-    white-space: nowrap; */
-
-    /* display: flex;
-    flex-wrap: nowrap;
-    white-space: nowrap; */
   }
 
   .time.record-set {
