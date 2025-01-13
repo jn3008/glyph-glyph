@@ -3,7 +3,7 @@
   import BottomBar from "$lib/components/BottomBar.svelte";
   import HelperModal from "$/lib/components/HelperModal.svelte";
 
-  import { formatTimeAlt } from "$/lib/utils";
+  import { formatTimeAlt, roundToDecimalPlaces } from "$/lib/utils";
   import { onMount } from "svelte";
   import { quiz, type QuizItem } from "$/lib/stores/quiz";
   import { game_config } from "$/lib/stores/game-config";
@@ -23,6 +23,8 @@
   $: perfect_score = items.every((item) => item?.is_correct_answer);
 
   $: incorrect_items = items.filter((item) => !item?.is_correct_answer);
+  $: n_correct = items.length - incorrect_items.length;
+  $: accuracy_pct = roundToDecimalPlaces((n_correct / items.length) * 100, 2);
 
   $: completed = items
     .slice(1)
@@ -113,6 +115,19 @@
                   </div>
                 </div>
               {/if}
+            </div>
+
+            <div class="info-block info-border" data-label="Accuracy">
+              {#if perfect_score}
+                <div class="time-text-container">All correct!</div>
+                <!-- {:else} -->
+              {/if}
+              <div class="column-container">
+                <div class="column-item time">
+                  {n_correct} / {items.length}
+                </div>
+                <div class="column-item muted-text">{accuracy_pct}%</div>
+              </div>
             </div>
           </div>
         </div>
@@ -253,6 +268,7 @@
 
   .time {
     font-size: 2rem;
+    margin: auto;
   }
   .time-text-container {
     align-items: center;
@@ -321,6 +337,7 @@
 
     background-color: var(--dark-button-color);
     background-color: transparent;
+    position: relative;
   }
 
   .info-block::before {

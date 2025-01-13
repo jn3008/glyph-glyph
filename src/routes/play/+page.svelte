@@ -18,8 +18,6 @@
   import { game_config, refreshGameConfig } from "$/lib/stores/game-config";
   import { goto } from "$app/navigation";
 
-  $: console.log(quiz);
-
   let is_loading: boolean = true;
   let is_keyboard_open = false;
   let show_help = false;
@@ -130,12 +128,6 @@
     )
       stopwatch.component.startTimer();
 
-    //   console.log(
-    //     stopwatch.component &&
-    //     stopwatch.is_enabled &&
-    //     stopwatch.component.hasStarted()
-    // )
-
     const is_correct = isCorrectAnswer(input, current_item.glyph);
 
     if (!is_correct && input === "") return;
@@ -147,16 +139,6 @@
       stopwatch.component.hasStarted()
         ? (stopwatch.elapsed_time || 0) - stopwatch_checkpoint
         : 0; // calculate time spent on glyph by subtracting the checkpoint from the current time
-
-    console.log("time_spent", time_spent);
-    console.log("stopwatch.is_enabled", stopwatch.is_enabled);
-    console.log("stopwatch.component", stopwatch.component);
-    console.log(
-      "stopwatch.component?.hasStarted()",
-      stopwatch.component?.hasStarted()
-    );
-    console.log("stopwatch.elapsed_time", stopwatch.elapsed_time);
-    console.log("stopwatch_checkpoint", stopwatch_checkpoint);
 
     stopwatch_checkpoint = stopwatch.elapsed_time || 0; // update checkpoint with current time
 
