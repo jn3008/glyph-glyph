@@ -36,7 +36,7 @@ export const configurations: Mode[] = [
       {
         key: "hiragana",
         label: "Hiragana",
-        modes_key: "chars",
+        modes_key: "glyphs",
         modes_label: "Characters to include",
         modes: [
           { key: "monographs", label: "Monographs" },
