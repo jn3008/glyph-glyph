@@ -87,7 +87,9 @@
   </div>
 
   <div class="summary-contents">
-    <div class="title-container">Summary</div>
+    <div class="header-container">
+      <div class="content-width"><h1>Summary</h1></div>
+    </div>
     {#if !is_loading}
       <div class="stats-container">
         <div class="info-container">
@@ -233,8 +235,8 @@
 
     grid-template-rows: auto 1fr auto;
   }
-  .title-container {
-    font-size: 2rem;
+
+  .header-container {
     padding: 0.5rem;
     background-color: var(--background-contrast);
   }
@@ -360,10 +362,6 @@
   .column-item {
     display: flex;
     margin: 0 auto;
-  }
-
-  .muted-text {
-    color: var(--text-color-light);
   }
 
   .stat-time {

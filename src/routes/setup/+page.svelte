@@ -48,7 +48,6 @@
   <div class="top-bar">
     <div class="title-container">
       <a href="/" class="title">glyph-glyph</a>
-
       <Button
         style="small-icon"
         on:click={() => (show_help = !show_help)}
@@ -61,6 +60,11 @@
   </div>
   {#if !is_loading}
     <div class="config-container">
+      <div class="config-title-container">
+        <div class="content-width config-title">
+          <span class="config-title-text">Choose your configuration</span>
+        </div>
+      </div>
       <Config />
       {#if $game_config.is_valid}
         <Preview {show_pronunciations} />
@@ -127,6 +131,20 @@
     grid-template-rows: auto 1fr auto;
   }
 
+  .config-title {
+    display: flex;
+    white-space: nowrap;
+  }
+  .config-title-text {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--dark-button-text-color);
+  }
+
+  .config-title-container {
+    padding: 0.25rem 0.5rem;
+  }
+
   .config-container {
     overflow-x: hidden;
     overflow-y: auto;
@@ -135,6 +153,7 @@
 
     padding-bottom: 6em;
   }
+
   .stopwatch-section {
     position: relative;
     display: flex;
@@ -165,6 +184,7 @@
   .high-score.not-set {
     color: var(--text-color-light);
   }
+
   .high-score::before {
     content: "High score";
     position: absolute;
@@ -185,6 +205,7 @@
     justify-content: center;
     margin: auto;
   }
+
   .icon {
     display: flex;
     margin: auto;
