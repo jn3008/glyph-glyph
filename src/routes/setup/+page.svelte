@@ -35,7 +35,7 @@
     return () => unsubscribe();
   });
 
-  const instructions: string = `Learn an alphabet or test your knowledge by piacking your 
+  const instructions: string = `Learn an alphabet or test your knowledge by choosing your 
   game configuration.\n\nOnce a configuration is valid, a preview of the set of glyphs will appear;
    hover/tap on a glyph to see its answer (romanisation/name).\n\nWhen you're ready press "Start".`;
 </script>
