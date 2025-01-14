@@ -48,7 +48,7 @@ You can request a new alphabet or feature by [opening an issue on GitHub](https:
   <img src="static/screenshots/summary2.png" width="80%" style="vertical-align: top;" />
 </div>
 
-## Developing
+## Run locally
 
 Install dependencies with `npm install`, start a development server:
 
