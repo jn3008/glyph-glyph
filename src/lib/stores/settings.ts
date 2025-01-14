@@ -15,6 +15,8 @@ export const theme_colours = [
 ] as const;
 export type ThemeColour = (typeof theme_colours)[number];
 
+const subset_colours: ThemeColour[] = ["teal", "orange", "pink"];
+
 // Define the GameSettings interface
 export interface Settings {
   appearance: ThemeAppearance;
@@ -26,7 +28,7 @@ export interface Settings {
 // Default values for the settings
 const default_settings: Settings = {
   appearance: "auto",
-  colour: "teal",
+  colour: subset_colours[Math.floor(Math.random() * subset_colours.length)],
   stopwatch_enabled: true,
   auto_submit: false,
 };
