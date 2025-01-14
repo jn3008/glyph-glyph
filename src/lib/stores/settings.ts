@@ -28,7 +28,7 @@ const default_settings: Settings = {
   appearance: "auto",
   colour: "teal",
   stopwatch_enabled: true,
-  auto_submit: true,
+  auto_submit: false,
 };
 
 // Create the settings store
