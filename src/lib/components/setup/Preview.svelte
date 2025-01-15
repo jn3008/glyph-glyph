@@ -20,7 +20,10 @@
 
 <div class="preview-container">
   <div>
-    <div class="preview-title">Glyphs to test:</div>
+    <div class="preview-title">
+      <span style="font-weight: 600;">Glyphs you will be tested on:</span><br />
+      (hover/tap on glyphs to learn the answers).
+    </div>
     <div class="glyphs-container">
       {#each glyphs as glyph}
         <div class="preview-item">
@@ -159,7 +162,7 @@
   .preview-title {
     color: var(--accent-color);
 
-    padding: 0 1em;
+    padding: 0.5em 1em;
     width: 100%;
     justify-content: left;
   }
