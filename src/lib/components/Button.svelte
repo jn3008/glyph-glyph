@@ -56,7 +56,7 @@
     padding: 0.6rem 1rem;
     margin: 0;
 
-    max-width: 50vw;
+    white-space: nowrap;
   }
   .button:hover {
     font-weight: 700;

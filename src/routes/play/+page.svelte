@@ -266,15 +266,21 @@
   .contents {
     display: grid;
     width: 100%;
+    overflow: hidden;
   }
   .play-contents {
     width: 100%;
     padding-top: 18vh;
     overflow: hidden;
+
+    padding-top: 0vh;
   }
 
-  .keyboard-open {
+  .play-contents.keyboard-open {
     padding-top: 0vh;
+    overflow: hidden;
+
+    height: var(--viewport-height, 100%);
   }
 
   @media (max-width: 680px) or (max-height: 680px) {

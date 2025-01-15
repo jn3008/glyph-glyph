@@ -219,14 +219,19 @@
     justify-content: space-between;
     align-items: center top;
 
-    top: 0;
-    left: 0;
+    /* width: 100dvw; */
+    /* top: 0; */
+    /* left: 0; */
 
-    flex-shrink: 0;
+    /* flex-shrink: 0; */
+    /* display: grid; */
+
+    /* grid-template-columns: auto 1fr; */
   }
 
   .title {
     padding: 0.2rem;
+    white-space: nowrap;
   }
 
   .title-container {

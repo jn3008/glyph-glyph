@@ -47,7 +47,7 @@
         {/if}
       {/each}
     </div>
-    <div class="palette colour">
+    <div class="palette colours">
       {#each theme_colours as colour}
         <div class="button-container">
           <button
@@ -75,8 +75,17 @@
 </div>
 
 <style>
+  .palette-container {
+    height: 100%;
+    gap: 0;
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto 1fr;
+    /* justify-content: end;  */
+  }
+
   .palette-drawer-contents {
-    display: flex;
     gap: 1em;
     transform: scaleX(0);
 
@@ -86,31 +95,36 @@
     transition:
       transform 0.3s ease-out,
       opacity 0.3s ease-out;
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto minmax(4em, 16em);
   }
   .palette-drawer-contents.open {
     opacity: 1;
     transform: scaleX(1);
   }
-
-  .palette-container {
-    height: 100%;
-    display: flex;
-    gap: 0;
-  }
-
   .icon {
     font-size: 1rem;
     color: inherit;
     margin: auto;
   }
 
-  /* Position the palette in the top-right corner */
   .palette {
     position: relative;
-    top: 0px;
-    right: 0px;
     display: flex;
     z-index: 1000;
+  }
+
+  .palette.colours {
+    display: grid;
+
+    grid-auto-flow: column;
+    grid-template-columns: repeat(auto-fit, 1fr);
+    justify-content: stretch;
+    max-width: 16em;
+    min-width: 4em;
+    width: 100%;
   }
 
   .color-button {
@@ -136,7 +150,6 @@
 
   .button-container {
     display: flex;
-    width: 1em;
     height: 100%;
     background-color: none;
 

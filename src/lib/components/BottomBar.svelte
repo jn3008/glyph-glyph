@@ -15,7 +15,8 @@
     left: 0;
     right: 0;
     height: auto;
-    max-width: 100%;
+    // max-width: 100%;
+    width: 100vw;
     gap: 1em;
     background-color: var(--background-contrast);
     display: flex;
