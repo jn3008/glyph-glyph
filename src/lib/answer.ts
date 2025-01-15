@@ -149,6 +149,6 @@ export function isCorrectAnswer(guess: string, actual: string): boolean {
     case "kana":
       return getAnswers(actual).includes(toRomaji(guess.toLowerCase()));
     default:
-      return getAnswers(actual).includes(guess);
+      return getAnswers(actual).includes(guess.toLowerCase());
   }
 }
