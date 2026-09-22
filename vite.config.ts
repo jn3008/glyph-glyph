@@ -15,7 +15,8 @@ export default defineConfig({
 
   css: {
     preprocessorOptions: {
-      scss: {},
+      // Sass's modern API avoids the deprecated legacy JS API.
+      scss: { api: "modern" },
     },
   },
 });

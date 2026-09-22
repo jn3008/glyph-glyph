@@ -48,9 +48,9 @@
     pauseTransitions();
   });
 
-  function calculateBlur(index: number): number {
+  function calculateBlur(index: number, active_index: number): number {
     const max_blur = 10;
-    let blur = Math.abs(index - current_idx);
+    let blur = Math.abs(index - active_index);
     blur = ease(c01(map(blur, 0, 8, 0, 1)), 2) * max_blur;
     return blur;
   }
@@ -69,7 +69,7 @@
     {#each items as { id, glyph, answered, is_correct_answer }, i (id)}
       <div
         class="quiz-glyph {i === current_idx ? 'current' : ''}"
-        style="filter: blur(calc({calculateBlur(i)}px))"
+        style="filter: blur(calc({calculateBlur(i, current_idx)}px))"
       >
         <QuizItemComponent
           {glyph}

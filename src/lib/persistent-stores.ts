@@ -1,10 +1,11 @@
 import { writable } from 'svelte/store';
+import { browser } from '$app/environment';
 
 // Persistent store for sessionStorage
 export function sessionPersistentStore<T>(key: string, start_value: T) {
 	// Create the writable store
 	const store = writable<T>(start_value, () => {
-		if (typeof sessionStorage !== 'undefined') {
+		if (browser) {
 			const saved_value = sessionStorage.getItem(key);
 			if (saved_value) store.set(JSON.parse(saved_value));
 		}
@@ -14,7 +15,7 @@ export function sessionPersistentStore<T>(key: string, start_value: T) {
 
 	// Save updates to sessionStorage
 	store.subscribe((value) => {
-		if (typeof sessionStorage !== 'undefined') sessionStorage.setItem(key, JSON.stringify(value));
+		if (browser) sessionStorage.setItem(key, JSON.stringify(value));
 	});
 
 	return store;
@@ -24,7 +25,7 @@ export function sessionPersistentStore<T>(key: string, start_value: T) {
 export function localPersistentStore<T>(key: string, start_value: T) {
 	// Create the writable store
 	const store = writable<T>(start_value, () => {
-		if (typeof localStorage !== 'undefined') {
+		if (browser) {
 			const saved_value = localStorage.getItem(key);
 			if (saved_value) {
 				// store.set({ ...start_value, ...JSON.parse(saved_value) });
@@ -47,7 +48,7 @@ export function localPersistentStore<T>(key: string, start_value: T) {
 
 	// Save updates to localStorage
 	store.subscribe((value) => {
-		if (typeof localStorage !== 'undefined') {
+		if (browser) {
 			localStorage.setItem(key, JSON.stringify(value));
 		}
 	});

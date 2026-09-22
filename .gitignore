@@ -27,3 +27,5 @@ vite.config.ts.timestamp-*
 eslint.config.js
 
 todo.md
+
+worktrees/*
