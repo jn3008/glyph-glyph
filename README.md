@@ -13,11 +13,12 @@ The currently available modes are:
 
 #### Greek 🇬🇷 (letter names / transcriptions)
 
-#### Cyrillic 🇧🇬🇷🇺🇷🇸
+#### Cyrillic 🇧🇬🇷🇺🇷🇸🇺🇦
 
 - Bulgarian
 - Russian
 - Serbian
+- Ukrainian
 
 #### Perso-Arabic 🇸🇦🇮🇷🇵🇰
 
