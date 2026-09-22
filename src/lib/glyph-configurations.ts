@@ -129,6 +129,16 @@ export const configurations: Mode[] = [
           { key: "lower", label: "Lower" },
         ],
       },
+      {
+        key: "ukrainian",
+        label: "Ukrainian",
+        modes_key: "case",
+        modes_label: "Case",
+        modes: [
+          { key: "upper", label: "Upper" },
+          { key: "lower", label: "Lower" },
+        ],
+      },
     ],
   },
   {
