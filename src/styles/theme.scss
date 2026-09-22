@@ -86,14 +86,14 @@
 }
 
 $themes: (
-  red: 0,
-	orange: 30,
-  yellow: 55,
-  lime: 90,
-  teal: 155,
-  blue: 200,
-  indigo: 245,
-  pink: 290,
+  "red": 0,
+	"orange": 30,
+  "yellow": 55,
+  "lime": 90,
+  "teal": 155,
+  "blue": 200,
+  "indigo": 245,
+  "pink": 290,
 );
 
 @mixin generate-theme-colors {
