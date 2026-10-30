@@ -9,7 +9,7 @@ import {
 import { toHiragana } from "wanakana";
 import { get } from "svelte/store";
 import {  getIsolatedForm } from "$/lib/answer";
-import { classifyIndic, cross, withVowel } from "./utils";
+import { classifyIndic, cross, withVowel, readAddak } from "./utils";
 
 // Format pronunciations:
 // example input: ['x1', 'y1', 'z1', ..., 'xn', 'yn', 'zn']
@@ -139,6 +139,9 @@ export function getIPA(glyph: string): string {
             sounds_obj_full[glyph as keyof typeof sounds_obj_full],
           );
         case "syllable": {
+          if (path_dict.language === "punjabi" && glyph.includes('ੱ')) {
+            return formatIPA(readAddak(glyph, indic.sounds.punjabi.consonants, true));
+          }
           const matra = language_obj.matras.find((value) =>
             glyph.endsWith(value),
           );
