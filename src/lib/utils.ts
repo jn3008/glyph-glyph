@@ -234,7 +234,7 @@ export function romanizeSyllable(language: string, syllable: string): string[] {
 export function generateRandomConjunct(language: string): string {
   const language_obj =
     indic.languages[language as keyof typeof indic.languages];
-  const consonants = language_obj.consonants;
+  const consonants = language_obj.consonants.filter(c => !['ड़', 'ढ़'].includes(c));
   const left: string = pick(consonants);
   const limited_conjunct_ligatures = (
     language_obj as unknown as {
@@ -282,8 +282,9 @@ export function classifyIndic(
   return "syllable";
 }
 
-export function uniqueRandom(generate: () => string, count: number, max_attempts = count * 20) {
+export function uniqueRandom(generate: () => string, count: number) {
   const unique: Set<string> = new Set();
-    for (let i = 0; i < max_attempts && unique.size < count; i++) unique.add(generate());
+  let attempts = 0;
+  while (unique.size < count && attempts++ < count * 20) unique.add(generate());
   return [...unique];
 }

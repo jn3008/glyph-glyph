@@ -162,13 +162,13 @@ export function getGlyphs(config_path: string[]): string[] {
             ),
             ...uniqueRandom(
               () => generateRandomSyllable(path_dict.language),
-              count,
+              amountPerCategory,
             ),
             ...uniqueRandom(
               () => generateRandomConjunct(path_dict.language),
-              count,
+              amountPerCategory,
             ),
-          ]).slice(0, count) as string[];
+          ]).slice(0, count);
         }
         default:
           return [];

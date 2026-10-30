@@ -97,8 +97,13 @@
       case "restart":
         // if we're in hangul syllables mode, re-generate the random syllables on restart
         if (
-          $game_config.path.includes("hangul") &&
-          $game_config.path.includes("syllables")
+          (
+            $game_config.path.includes("hangul") && $game_config.path.includes("syllables")
+          ) || 
+          (
+            ["syllables","conjuncts","all"].includes($game_config.path_dict.glyphs) &&
+            $game_config.path.includes("indic")
+          )
         )
           refreshGameConfig();
 
