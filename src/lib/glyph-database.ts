@@ -553,7 +553,21 @@ export const indic = {
 				'क़', 'ख़', 'ग़', 'ज़', 'फ़', 'ड़', 'ढ़'
 		  ],
 			matras: ['ा', 'ि', 'ी', 'ु', 'ू', 'ृ', 'े', 'ै', 'ो', 'ौ', 'ं', 'ः'],
-			virama: '्'
+			virama: '्',
+			limited_conjunct_ligatures: { // certain consonants don't form ligatures in conjuncts
+				ङ: ['क', 'ख', 'ग', 'घ', 'म', 'य', 'र'],
+				ट: ['ट', 'ठ', 'य', 'र', 'व'],
+				ठ: ['ठ', 'य', 'र'],
+				ड: ['ड', 'ढ', 'य', 'र'],
+				ड़: ['ड', 'ढ', 'य', 'र'],
+				ड़: ['ड', 'ढ', 'य', 'र'], // with nukta unicode character
+				ढ: ['ढ', 'य', 'र'],
+				ढ़: ['ढ', 'य', 'र'], // with nukta unicode character
+				ढ़: ['ढ', 'य', 'र'],
+
+				द: ['ग', 'घ', 'द', 'ध', 'न', 'ब', 'भ', 'म', 'य', 'र', 'व'],
+				ह: ['ण', 'न', 'म', 'य', 'र', 'ल', 'व'],
+			}
 		},
 		// https://en.wikipedia.org/wiki/Gurmukhi
 		punjabi: {

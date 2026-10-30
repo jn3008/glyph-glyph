@@ -10,6 +10,10 @@ export const cross = (
   containsAdhak: boolean = false,
 ) => a.flatMap((x) => b.map((y) => (containsAdhak ? geminate(x) : x + y)));
 
+export function pick<T> (array: T[]): T {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
 export function map(
   value: number,
   in_min: number,
@@ -195,12 +199,7 @@ export const arabic_forms: Record<
 export function generateRandomSyllable(language: string): string {
   const language_obj =
     indic.languages[language as keyof typeof indic.languages];
-  return (
-    language_obj.consonants[
-      Math.floor(Math.random() * language_obj.consonants.length)
-    ] +
-    language_obj.matras[Math.floor(Math.random() * language_obj.matras.length)]
-  );
+  return (pick(language_obj.consonants) + pick(language_obj.matras));
 }
 
 export function geminate(romanizedSyllable: string): string {
@@ -236,19 +235,19 @@ export function generateRandomConjunct(language: string): string {
   const language_obj =
     indic.languages[language as keyof typeof indic.languages];
   const consonants = language_obj.consonants;
-  if (language === "punjabi") {
-    return (
-      consonants[Math.floor(Math.random() * consonants.length)] +
-      language_obj.virama +
-      ["ਹ", "ਰ", "ਵ"][Math.floor(Math.random() * 3)]
-    );
-  } else {
-    return (
-      consonants[Math.floor(Math.random() * consonants.length)] +
-      language_obj.virama +
-      consonants[Math.floor(Math.random() * consonants.length)]
-    );
-  }
+  const left: string = pick(consonants);
+  const limited_conjunct_ligatures = (
+    language_obj as unknown as {
+      limited_conjunct_ligatures?: Record<string, string[]>;
+    }
+  ).limited_conjunct_ligatures;
+  return (
+    left +
+    language_obj.virama +
+    (language === "punjabi"
+      ? pick(["ਹ", "ਰ", "ਵ"])
+      : pick(limited_conjunct_ligatures?.[left] ?? consonants))
+  );
 }
 
 export function romanizeConjunct(language: string, conjunct: string): string[] {
@@ -283,8 +282,8 @@ export function classifyIndic(
   return "syllable";
 }
 
-export function uniqueRandom(value: () => string, count: number) {
+export function uniqueRandom(generate: () => string, count: number, max_attempts = count * 20) {
   const unique: Set<string> = new Set();
-  for (let i = 0; i < count; i++) unique.add(value());
+    for (let i = 0; i < max_attempts && unique.size < count; i++) unique.add(generate());
   return [...unique];
 }

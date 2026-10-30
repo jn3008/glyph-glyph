@@ -8,7 +8,7 @@ import {
 } from "$/lib/glyph-database";
 import { toHiragana } from "wanakana";
 import { get } from "svelte/store";
-import { isSilent, getIsolatedForm } from "$/lib/answer";
+import {  getIsolatedForm } from "$/lib/answer";
 import { classifyIndic, cross, withVowel } from "./utils";
 
 // Format pronunciations:
