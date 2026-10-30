@@ -32,6 +32,17 @@ The currently available modes are:
 - Consonants
 - Random syllables
 
+### Indic 🇮🇳
+
+- Hindi (Devanagari)
+- Punjabi (Gurmukhi)
+
+  Modes:
+  - Letters only (vowels + consonants)
+  - Syllables (random consonant + diacritic)
+  - Consonant conjunctions (random)
+  - Random practice
+
 ### 🌟 Want a new alphabet/writing system supported?
 
 You can request a new alphabet or feature by [opening an issue on GitHub](https://github.com/jn3008/glyph-glyph/issues).

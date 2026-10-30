@@ -14,6 +14,44 @@ const arabic_forms_config: Mode[] = [
   { key: "final", label: "Final" },
 ];
 
+const indic_language_config = {
+  modes_key: "glyphs",
+  modes_label: "Glyphs",
+  modes: [
+    { key: "letters", label: "Letters" },
+    {
+      key: "syllables",
+      label: "Consonant + Matra",
+      modes_key: "count",
+      modes_label: "Count (random)",
+      modes: [
+        { key: "20", label: "20" },
+        { key: "50", label: "50" },
+      ],
+    },
+    {
+      key: "conjuncts",
+      label: "Conjuncts",
+      modes_key: "count",
+      modes_label: "Count (random)",
+      modes: [
+        { key: "20", label: "20" },
+        { key: "50", label: "50" },
+      ],
+    },
+    {
+      key: "all",
+      label: "All",
+      modes_key: "count",
+      modes_label: "Count (random)",
+      modes: [
+        { key: "20", label: "20" },
+        { key: "50", label: "50" },
+      ],
+    },
+  ],
+};
+
 export const configurations: Mode[] = [
   {
     key: "kana",
@@ -220,11 +258,29 @@ export const configurations: Mode[] = [
         key: "syllables",
         label: "Syllables",
         modes_key: "count",
-        modes_label: "Count",
+        modes_label: "Count (random)",
         modes: [
-          { key: "20", label: "20 Random" },
-          { key: "50", label: "50 Random" },
+          { key: "20", label: "20" },
+          { key: "50", label: "50" },
         ],
+      },
+    ],
+  },
+  {
+    key: "indic",
+    label: "Indic",
+    modes_key: "language",
+    modes_label: "Script",
+    modes: [
+      {
+        key: "hindi",
+        label: "Devanagari (Hindi)",
+        ...indic_language_config,
+      },
+      {
+        key: "punjabi",
+        label: "Gurmukhi (Punjabi)",
+        ...indic_language_config,
       },
     ],
   },

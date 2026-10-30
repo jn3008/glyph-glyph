@@ -1,3 +1,18 @@
+import { hangul, indic } from "$lib/glyph-database";
+
+export const withVowel = (base: string[], v: string) => [
+  ...base,
+  ...base.map((b) => b + v),
+];
+export const cross = (
+  a: string[],
+  b: string[],
+) => a.flatMap((x) => b.map((y) => x + y));
+
+export function pick<T> (array: T[]): T {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
 export function map(
   value: number,
   in_min: number,
@@ -66,8 +81,6 @@ export function shuffleArray<T>(array: T[]): T[] {
   }
   return new_array;
 }
-
-import { hangul } from "$lib/glyph-database";
 
 export function generateRandomHangul(): string {
   const initial_index = Math.floor(
@@ -181,3 +194,109 @@ export const arabic_forms: Record<
   ک: { isolated: "ک", initial: "ﮐ", medial: "ﮑ", final: "ﮏ" }, // Keheh
   ء: { isolated: "ء", initial: "ء", medial: "ء", final: "ء" }, // Hamza
 };
+
+export function generateRandomSyllable(language: string): string {
+  const language_obj =
+    indic.languages[language as keyof typeof indic.languages];
+  const consonant = pick(language_obj.consonants);
+  const matra = pick(language_obj.matras);
+  if (language === "punjabi" && matra === "ੱ") {
+    // The dotted circle holds addak before the consonant it doubles.
+    // Keep these isolated exercises to simple, non-tonal consonants.
+    const consonants = ['ਕ', 'ਗ', 'ਚ', 'ਜ', 'ਟ', 'ਡ', 'ਤ', 'ਦ', 'ਨ', 'ਪ', 'ਬ', 'ਮ', 'ਲ', 'ਸ'];
+    return '◌' + matra + pick(consonants);
+  }
+  return consonant + matra;
+}
+
+export function readAddak(
+  glyph: string,
+  consonants: Record<string, string[]>,
+  ipa = false,
+): string[] {
+  if (!glyph.startsWith('◌ੱ')) return [];
+  const following = consonants[glyph.slice(2)];
+  if (!following) return [];
+  return following.map(sound => ipa ? sound + 'ː' : sound + sound);
+}
+
+export function romanizeSyllable(language: string, syllable: string): string[] {
+  if (language === "punjabi" && syllable.includes('ੱ')) {
+    return readAddak(syllable, indic.transcriptions.punjabi.consonants);
+  }
+  const language_obj =
+    indic.languages[language as keyof typeof indic.languages];
+  const transcriptions_obj =
+    indic.transcriptions[language as keyof typeof indic.transcriptions];
+  const matras = language_obj.matras;
+  const matra = matras.find((value) => syllable.endsWith(value));
+  if (!matra) return [];
+
+  const letter = syllable.slice(0, -matra.length);
+  const letter_transcriptions: string[] =
+    transcriptions_obj.consonants[
+      letter as keyof typeof transcriptions_obj.consonants
+    ];
+  return cross(
+    letter_transcriptions,
+    transcriptions_obj.matras[matra as keyof typeof transcriptions_obj.matras],
+  );
+}
+
+export function generateRandomConjunct(language: string): string {
+  const language_obj =
+    indic.languages[language as keyof typeof indic.languages];
+  const consonants = language_obj.consonants.filter(c => !['ड़', 'ढ़'].includes(c));
+  const left: string = pick(consonants);
+  const limited_conjunct_ligatures = (
+    language_obj as unknown as {
+      limited_conjunct_ligatures?: Record<string, string[]>;
+    }
+  ).limited_conjunct_ligatures;
+  return (
+    left +
+    language_obj.virama +
+    (language === "punjabi"
+      ? pick(["ਹ", "ਰ", "ਵ"])
+      : pick(limited_conjunct_ligatures?.[left] ?? consonants))
+  );
+}
+
+export function romanizeConjunct(language: string, conjunct: string): string[] {
+  const language_obj =
+    indic.languages[language as keyof typeof indic.languages];
+  const transcriptions_obj =
+    indic.transcriptions[language as keyof typeof indic.transcriptions];
+  const [left, right] = conjunct.split(language_obj.virama);
+  if (!right) return [];
+
+  const left_transcriptions: string[] =
+    transcriptions_obj.consonants[
+      left as keyof typeof transcriptions_obj.consonants
+    ];
+  const right_transcriptions: string[] = withVowel(
+    transcriptions_obj.consonants[
+      right as keyof typeof transcriptions_obj.consonants
+    ],
+    "a",
+  );
+  return cross(left_transcriptions, right_transcriptions);
+}
+
+export function classifyIndic(
+  language: string,
+  glyph: string,
+): "letter" | "syllable" | "conjunct" {
+  const lang = indic.languages[language as keyof typeof indic.languages];
+  if (glyph.includes(lang.virama)) return "conjunct";
+  if (lang.vowels.includes(glyph) || lang.consonants.includes(glyph))
+    return "letter";
+  return "syllable";
+}
+
+export function uniqueRandom(generate: () => string, count: number) {
+  const unique: Set<string> = new Set();
+  let attempts = 0;
+  while (unique.size < count && attempts++ < count * 20) unique.add(generate());
+  return [...unique];
+}
