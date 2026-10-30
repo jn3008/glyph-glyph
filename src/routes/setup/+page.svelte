@@ -22,7 +22,7 @@
   $: high_score = $times_store.best_times[configuration];
   $: show_pronunciations = ["greek", "cyrillic"].includes(
     $game_config?.path[0]
-  );
+  ) || ($game_config?.path[0] === "indic" && $game_config?.path[2] === "letters");
 
   // This function helps avoid showing incomplete or uninitialized content to the user.
   // sets `is_loading` to `false` once the store emits its first value, (once the store is loaded)

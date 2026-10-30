@@ -16,8 +16,7 @@ import { classifyIndic, cross, withVowel } from "./utils";
 // output: 'y1 as in x1y1z1 ... yn as in xnynzn'
 function formatPronunciations(glyph: string, pronunciations: string[]): string {
   if (!pronunciations) return "";
-
-  if (isSilent(glyph)) return pronunciations.join(" ");
+  if (pronunciations[1] === '' && pronunciations[2] === '') return pronunciations.join(" ");
 
   const n_pronunciations = pronunciations.length / 3;
   let formatted_parts: string[] = [];
@@ -50,6 +49,15 @@ export function getPronunciations(glyph: string): string {
       return formatPronunciations(
         glyph.toLowerCase(),
         dict[glyph.toLowerCase() as keyof typeof dict]
+      );
+    }
+    case "indic": {
+      const language = path[1] as keyof typeof indic.pronunciations;
+      const category = indic.languages[language].vowels.includes(glyph) ? "vowels" : "consonants";
+      const dict = indic.pronunciations[language][category];
+      return formatPronunciations(
+        glyph,
+        dict[glyph as keyof typeof dict],
       );
     }
     default:

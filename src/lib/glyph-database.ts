@@ -702,5 +702,50 @@ export const indic = {
 				'ੱ': ['ː']
 			}
 	  }
-	}, 
+	},
+	pronunciations: {
+		hindi: {
+			vowels: {
+				अ: ['', 'a', 'bout'],  आ: ['f', 'a', 'ther'],  इ: ['s', 'i', 't'],     ई: ['m', 'ee', 't'],
+				उ: ['p', 'u', 't'],    ऊ: ['m', 'oo', 'n'],    ऋ: ['', 'ri', 'p'],
+				ए: ['s', 'ay', ''],    ऐ: ['b', 'e', 'd'],     ओ: ['b', 'oa', 't'],   औ: ['l', 'aw', ''],
+				अं: ['fi', 'n', 'ger'],  अः: ['similar to अ, but with a breathy h sound afterwards', '', '']
+			},
+			consonants: {
+				क: ['s', 'k', 'y'],        ख: ['bloc', 'kh', 'ead'],  ग: ['', 'g', 'o'],         घ: ['do', 'gh', 'ouse'],    ङ: ['si', 'ng', ''],
+				च: ['', 'ch', 'air'],      छ: ['bea', 'chh', 'ead'],  ज: ['', 'j', 'am'],        झ: ['he', 'dgeh', 'og'],   ञ: ['ca', 'ny', 'on'],
+				ट: ['s', 't', 'op'],       ठ: ['po', 'th', 'ole'],    ड: ['', 'd', 'og'],        ढ: ['re', 'dh', 'ead'],    ण: ['cor', 'n', 'er'],
+				त: ['s', 't', 'yle'],      थ: ['', 't', 'in'],   			द: ['o', 'th', 'er'],      ध: ['a', 'dh', 'ere'],    न: ['', 'n', 'ot'],
+				प: ['s', 'p', 'in'],       फ: ['u', 'ph', 'ill'],     ब: ['', 'b', 'all'],       भ: ['clu', 'bh', 'ouse'],   म: ['', 'm', 'an'],
+				य: ['', 'y', 'es'],        र: ['bu', 'tt', 'er'],     ल: ['', 'l', 'ip'],        व: ['', 'v', 'an'],
+				श: ['', 'sh', 'ip'],       ष: ['pu', 'sh', ''],       स: ['', 's', 'un'],        ह: ['a', 'h', 'ead'],
+				क़: ['similar to क, but in the back of the throat', '', ''],        ख़: ['lo', 'ch', ' (Scottish)'],       ग़: ['similar to ग, but air is released and not blocked', '', ''],       ज़: ['', 'z', 'oo'],       फ़: ['', 'f', 'un'],
+				ड़: ['la', 'dd', 'er (with the tip of your tongue curled)'],     ढ़: ['similar to ड़, but with a breathy h sound afterwards', '', '']
+			}
+		},
+		punjabi: {
+			vowels: {
+				ੳ: ['silent vowel carrier; takes the sound of the vowel attached to it', '', ''],
+				ੲ: ['silent vowel carrier; takes the sound of the vowel attached to it', '', ''],
+				ਅ: ['', 'a', 'bout'],  ਆ: ['f', 'a', 'ther'],  ਇ: ['s', 'i', 't'],   ਈ: ['m', 'ee', 't'],
+				ਉ: ['p', 'u', 't'],    ਊ: ['m', 'oo', 'n'],
+				ਏ: ['s', 'ay', ''],    ਐ: ['b', 'e', 'd'],     ਓ: ['b', 'oa', 't'], ਔ: ['l', 'aw', '']
+			},
+			consonants: {
+				ਸ: ['', 's', 'un'],        ਹ: ['a', 'h', 'ead'],
+				ਕ: ['s', 'k', 'y'],        ਖ: ['bloc', 'kh', 'ead'],  ਗ: ['', 'g', 'o'],         ਘ: ['do', 'gh', 'ouse'],   ਙ: ['si', 'ng', ''],
+				ਚ: ['', 'ch', 'air'],      ਛ: ['bea', 'chh', 'ead'],  ਜ: ['', 'j', 'am'],        ਝ: ['he', 'dgeh', 'og'],   ਞ: ['ca', 'ny', 'on'],
+				ਟ: ['s', 't', 'op'],       ਠ: ['po', 'th', 'ole'],    ਡ: ['', 'd', 'og'],        ਢ: ['re', 'dh', 'ead'],    ਣ: ['cor', 'n', 'er'],
+				ਤ: ['s', 't', 'yle'],      ਥ: ['', 't', 'in'],        ਦ: ['o', 'th', 'er'],      ਧ: ['a', 'dh', 'ere'],     ਨ: ['', 'n', 'ot'],
+				ਪ: ['s', 'p', 'in'],       ਫ: ['u', 'ph', 'ill'],     ਬ: ['', 'b', 'all'],       ਭ: ['clu', 'bh', 'ouse'],  ਮ: ['', 'm', 'an'],
+				ਯ: ['', 'y', 'es'],        ਰ: ['bu', 'tt', 'er'],     ਲ: ['', 'l', 'ip'],        ਵ: ['', 'v', 'an'],
+				ੜ: ['la', 'dd', 'er (with the tip of your tongue curled)'],
+				ਸ਼: ['', 'sh', 'ip'],       ਖ਼: ['lo', 'ch', ' (Scottish)'],
+				ਗ਼: ['similar to ਗ, but air is released and not blocked', '', ''],
+				ਜ਼: ['', 'z', 'oo'],        ਫ਼: ['', 'f', 'un'],
+				ਲ਼: ['similar to ਲ, but with the tip of your tongue curled back', '', ''],
+				ਕ਼: ['similar to ਕ, but in the back of the throat', '', '']
+			}
+  	}
+	}
 }
