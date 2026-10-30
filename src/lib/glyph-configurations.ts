@@ -25,8 +25,8 @@ const indic_language_config = {
       modes_key: "count",
       modes_label: "Count",
       modes: [
-        { key: "20", label: "20" },
-        { key: "50", label: "50" },
+        { key: "20", label: "20 Random" },
+        { key: "50", label: "50 Random" },
       ],
     },
     {
@@ -35,8 +35,8 @@ const indic_language_config = {
       modes_key: "count",
       modes_label: "Count",
       modes: [
-        { key: "20", label: "20" },
-        { key: "50", label: "50" },
+        { key: "20", label: "20 Random" },
+        { key: "50", label: "50 Random" },
       ],
     },
     {
@@ -45,8 +45,8 @@ const indic_language_config = {
       modes_key: "count",
       modes_label: "Count",
       modes: [
-        { key: "20", label: "20" },
-        { key: "50", label: "50" },
+        { key: "20", label: "20 Random" },
+        { key: "50", label: "50 Random" },
       ],
     },
   ],
@@ -270,16 +270,16 @@ export const configurations: Mode[] = [
     key: "indic",
     label: "Indic",
     modes_key: "language",
-    modes_label: "Language",
+    modes_label: "Script",
     modes: [
       {
         key: "hindi",
-        label: "Hindi",
+        label: "Devanagari (Hindi)",
         ...indic_language_config,
       },
       {
         key: "punjabi",
-        label: "Punjabi",
+        label: "Gurmukhi (Punjabi)",
         ...indic_language_config,
       },
     ],
