@@ -1,3 +1,9 @@
+import { hangul, indic } from "$lib/glyph-database";
+
+export const withVowel = (base: string[], v: string) => [...base, ...base.map(b => b + v)];
+export const cross = (a: string[], b: string[], containsAdhak: boolean = false) =>
+  a.flatMap(x => b.map(y => containsAdhak ? geminate(x) : x + y));
+
 export function map(
   value: number,
   in_min: number,
@@ -67,7 +73,6 @@ export function shuffleArray<T>(array: T[]): T[] {
   return new_array;
 }
 
-import { hangul } from "$lib/glyph-database";
 
 export function generateRandomHangul(): string {
   const initial_index = Math.floor(
@@ -181,3 +186,51 @@ export const arabic_forms: Record<
   ک: { isolated: "ک", initial: "ﮐ", medial: "ﮑ", final: "ﮏ" }, // Keheh
   ء: { isolated: "ء", initial: "ء", medial: "ء", final: "ء" }, // Hamza
 };
+
+export function generateRandomSyllable(language: string): string {
+  const language_obj = indic.languages[language as keyof typeof indic.languages];
+  return language_obj.consonants[Math.floor(Math.random() * language_obj.consonants.length)] +
+    language_obj.matras[Math.floor(Math.random() * language_obj.matras.length)];
+}
+
+export function geminate(romanizedSyllable: string): string {
+  return romanizedSyllable.at(0)! + romanizedSyllable.at(0)! + romanizedSyllable.slice(1);
+}
+
+export function romanizeSyllable(language: string, syllable: string): string[] {
+  const language_obj = indic.languages[language as keyof typeof indic.languages];
+  const transcriptions_obj = indic.transcriptions[language as keyof typeof indic.transcriptions];
+  const matras = language_obj.matras;
+  const matra = matras.find((value) => syllable.endsWith(value));
+  if (!matra) return []
+
+  const letter = syllable.slice(0, -matra.length);
+  const letter_transcriptions: string[] = transcriptions_obj.consonants[letter as keyof typeof transcriptions_obj.consonants];
+  return cross(letter_transcriptions, transcriptions_obj.matras[matra as keyof typeof transcriptions_obj.matras], matra === "ੱ");
+}
+
+export function generateRandomConjunct(language: string): string {
+  const language_obj = indic.languages[language as keyof typeof indic.languages];
+  const consonants = language_obj.consonants;
+  if (language === 'punjabi') {
+    return consonants[Math.floor(Math.random() * consonants.length)] 
+      + language_obj.virama + ['ਹ', 'ਰ', 'ਵ'][Math.floor(Math.random() * 3)];
+  } else {
+    return consonants[Math.floor(Math.random() * consonants.length)] 
+      + language_obj.virama + consonants[Math.floor(Math.random() * consonants.length)];
+  }
+}
+
+export function romanizeConjunct(language: string, conjunct: string): string[] {
+  const language_obj = indic.languages[language as keyof typeof indic.languages];
+  const transcriptions_obj = indic.transcriptions[language as keyof typeof indic.transcriptions];
+  const [left, right] = conjunct.split(language_obj.virama);
+  if (!right) return [];
+  
+  const left_transcriptions: string[] = transcriptions_obj.consonants[left as keyof typeof transcriptions_obj.consonants];
+  const right_transcriptions: string[] = withVowel(
+    transcriptions_obj.consonants[right as keyof typeof transcriptions_obj.consonants],
+    "a"
+  )
+  return cross(left_transcriptions, right_transcriptions);
+}

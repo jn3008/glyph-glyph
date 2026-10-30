@@ -1,8 +1,9 @@
 import { game_config } from "$lib/stores/game-config";
-import { hiragana, greek, cyrillic, persoarabic } from "$/lib/glyph-database";
+import { hiragana, greek, cyrillic, persoarabic, indic } from "$/lib/glyph-database";
 import { toHiragana } from "wanakana";
 import { get } from "svelte/store";
 import { isSilent, getIsolatedForm } from "$/lib/answer";
+import { cross, withVowel } from './utils';
 
 // Format pronunciations:
 // example input: ['x1', 'y1', 'z1', ..., 'xn', 'yn', 'zn']
@@ -99,6 +100,46 @@ export function getIPA(glyph: string): string {
           return formatIPA(
             sounds[getIsolatedForm(glyph) as keyof typeof sounds]
           );
+      }
+    }
+    case "indic": {
+      const language_obj =
+        indic.languages[path_dict.language as keyof typeof indic.languages];
+      const sounds_obj =
+        indic.sounds[path_dict.language as keyof typeof indic.sounds];
+      const sounds_obj_full = { ...sounds_obj.vowels, ...sounds_obj.consonants };
+
+      switch (path_dict.glyphs) {
+        case "letters":
+          if (glyph in sounds_obj.consonants)
+            return formatIPA(withVowel(sounds_obj_full[glyph as keyof typeof sounds_obj_full], "ə"));
+          return formatIPA(
+            sounds_obj_full[glyph as keyof typeof sounds_obj_full]
+          );
+        case "matras": {
+          const matra = language_obj.matras.find((value) => glyph.endsWith(value));
+          if (!matra) return "";
+
+          const matra_sound =
+            sounds_obj.matras[matra as keyof typeof sounds_obj.matras];
+          const letter = glyph.slice(0, -matra.length);
+          const letter_sounds =
+            sounds_obj_full[letter as keyof typeof sounds_obj_full];
+
+          return formatIPA(
+            (letter_sounds as string[]).map((sound) => sound + matra_sound[0])
+          );
+        }
+        case "conjuncts": {
+          const [left, right] = glyph.split(language_obj.virama);
+          if (!right) return "";
+
+          const left_sounds: string[] = sounds_obj.consonants[left as keyof typeof sounds_obj.consonants];
+          const right_sounds: string[] = withVowel(sounds_obj.consonants[right as keyof typeof sounds_obj.consonants], "ə");
+          return formatIPA(cross(left_sounds, right_sounds));
+        }
+        default:
+          return "";
       }
     }
     default:

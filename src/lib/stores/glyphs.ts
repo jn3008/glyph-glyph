@@ -7,8 +7,9 @@ import {
   cyrillic,
   persoarabic,
   hangul,
+  indic
 } from "$/lib/glyph-database";
-import { arabic_forms, generateRandomHangulWeighted } from "$lib/utils";
+import { arabic_forms, generateRandomConjunct, generateRandomHangulWeighted, generateRandomSyllable } from "$lib/utils";
 
 function processKana(submode: string): string[] {
   return [
@@ -126,6 +127,31 @@ export function getGlyphs(config_path: string[]): string[] {
         default:
           return [];
       }
+    case "indic": {
+      switch (path_dict.glyphs) {
+        case "letters": {
+          const language = indic.languages[path_dict.language as keyof typeof indic.languages];
+          return [...language.vowels, ...language.consonants];
+        }
+        case "matras": 
+        case "conjuncts": {
+          const count = parseInt(path_dict.count);
+          if (!isNaN(count) && count > 0) {
+            const unique: Set<string> = new Set();
+            while (unique.size < count)
+              unique.add(
+                path_dict.glyphs === "matras" 
+                  ? generateRandomSyllable(path_dict.language)
+                  : generateRandomConjunct(path_dict.language)
+              );
+            return [...unique];
+          }
+          return [];
+        }
+        default: 
+          return [];
+      }
+    }
     default:
       return [];
   }

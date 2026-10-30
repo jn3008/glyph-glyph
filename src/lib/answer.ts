@@ -6,9 +6,10 @@ import {
   exceptional_answers,
   persoarabic,
   hangul,
+  indic
 } from "$/lib/glyph-database";
 import { get } from "svelte/store";
-import { arabic_forms } from "$lib/utils";
+import { arabic_forms, romanizeConjunct, romanizeSyllable } from "$lib/utils";
 
 export function getAnswers(glyph: string): string[] {
   const path_dict = get(game_config)?.path_dict;
@@ -79,6 +80,32 @@ export function getAnswers(glyph: string): string[] {
         case "syllables": {
           return romaniseHangul(glyph);
         }
+      }
+    }
+    case "indic": {
+      const transcriptions_obj =
+        indic.transcriptions[
+          path_dict.language as keyof typeof indic.transcriptions
+        ];
+      const transcription_consonants = Object.fromEntries(
+        Object.entries(transcriptions_obj.consonants).map((
+          [key, value]) => [key, [...value, ...value.map(con => con + "a")]
+        ])
+      );
+      const transcriptions = { 
+        ...transcriptions_obj.vowels, 
+        ...transcription_consonants 
+      };
+
+      switch (path_dict.glyphs) {
+        case "letters":
+          return transcriptions[glyph as keyof typeof transcriptions];
+        case "matras":
+          return romanizeSyllable(path_dict.language, glyph);
+        case "conjuncts":
+          return romanizeConjunct(path_dict.language, glyph);
+        default:
+          return []
       }
     }
     default:

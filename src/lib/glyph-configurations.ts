@@ -14,6 +14,34 @@ const arabic_forms_config: Mode[] = [
   { key: "final", label: "Final" },
 ];
 
+const indic_language_config = {
+  modes_key: "glyphs",
+  modes_label: "Glyphs",
+  modes: [
+    { key: "letters", label: "Letters" },
+    { 
+      key: "matras", 
+      label: "Consonant + Matra",
+      modes_key: "count",
+      modes_label: "Count",
+      modes: [
+        { key: "20", label: "20" },
+        { key: "50", label: "50" },
+      ],
+    },
+    { 
+      key: "conjuncts", 
+      label: "Conjuncts",
+      modes_key: "count",
+      modes_label: "Count",
+      modes: [
+        { key: "20", label: "20" },
+        { key: "50", label: "50" },
+      ],
+    }
+  ]
+}
+
 export const configurations: Mode[] = [
   {
     key: "kana",
@@ -228,6 +256,24 @@ export const configurations: Mode[] = [
       },
     ],
   },
+  {
+    key: "indic",
+    label: "Indic",
+    modes_key: "language",
+    modes_label: "Language",
+    modes: [
+      {
+        key: "hindi",
+        label: "Hindi",
+        ...indic_language_config
+      },
+      {
+        key: "punjabi",
+        label: "Punjabi",
+        ...indic_language_config
+      }
+    ]
+  }
 ];
 
 function generateKeys(modes: Mode[], parent_key = ""): Mode[] {
