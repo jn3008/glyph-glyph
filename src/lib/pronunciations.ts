@@ -8,7 +8,7 @@ import {
 } from "$/lib/glyph-database";
 import { toHiragana } from "wanakana";
 import { get } from "svelte/store";
-import {  getIsolatedForm } from "$/lib/answer";
+import { getIsolatedForm } from "$/lib/answer";
 import { classifyIndic, cross, withVowel, readAddak } from "./utils";
 
 // Format pronunciations:
@@ -38,13 +38,13 @@ export function getPronunciations(glyph: string): string {
       return formatPronunciations(
         glyph.toLowerCase(),
         greek.pronunciations[
-          glyph.toLowerCase() as keyof typeof greek.pronunciations
+        glyph.toLowerCase() as keyof typeof greek.pronunciations
         ]
       );
     case "cyrillic": {
       const dict =
         cyrillic.pronunciations[
-          path[1] as keyof typeof cyrillic.pronunciations
+        path[1] as keyof typeof cyrillic.pronunciations
         ];
       return formatPronunciations(
         glyph.toLowerCase(),
@@ -86,14 +86,14 @@ export function getIPA(glyph: string): string {
     case "cyrillic": {
       const sounds =
         cyrillic.sounds[
-          path_dict.language as keyof typeof cyrillic.pronunciations
+        path_dict.language as keyof typeof cyrillic.pronunciations
         ];
       return formatIPA(sounds[glyph.toLowerCase() as keyof typeof sounds]);
     }
     case "persoarabic": {
       const sounds =
         persoarabic.sounds[
-          path_dict.language as keyof typeof persoarabic.sounds
+        path_dict.language as keyof typeof persoarabic.sounds
         ];
 
       switch (path_dict.language) {
@@ -102,7 +102,7 @@ export function getIPA(glyph: string): string {
             sounds[path_dict.pronunciation as keyof typeof sounds];
           return formatIPA(
             sounds_regional[
-              getIsolatedForm(glyph) as keyof typeof sounds_regional
+            getIsolatedForm(glyph) as keyof typeof sounds_regional
             ],
           );
         }
@@ -121,16 +121,26 @@ export function getIPA(glyph: string): string {
         ...sounds_obj.vowels,
         ...sounds_obj.consonants,
       };
+      const toneFor = (letter: string): string => {
+        if (path_dict.language !== "punjabi") return "";
+        const tones = indic.sounds.punjabi.word_initial_tones;
+        return tones[letter as keyof typeof tones] ?? "";
+      };
+      // Attach tone to the vowel itself, before length/nasalisation marks.
+      const vowelWithTone = (vowel: string, tone: string): string =>
+        vowel.slice(0, 1) + tone + vowel.slice(1);
 
       switch (classifyIndic(path_dict.language, glyph)) {
         case "letter":
-          if (glyph in sounds_obj.consonants)
+          if (glyph in sounds_obj.consonants) {
+            const sounds: string[] = sounds_obj_full[glyph as keyof typeof sounds_obj_full];
+            const tone = toneFor(glyph);
             return formatIPA(
-              withVowel(
-                sounds_obj_full[glyph as keyof typeof sounds_obj_full],
-                ['ਘ', 'ਝ', 'ਢ', 'ਧ', 'ਭ'].includes(glyph) ? "" : "ə",
-              ),
+              tone
+                ? sounds.map(sound => sound + vowelWithTone("ə", tone))
+                : withVowel(sounds, "ə"),
             );
+          }
           return formatIPA(
             sounds_obj_full[glyph as keyof typeof sounds_obj_full],
           );
@@ -150,7 +160,8 @@ export function getIPA(glyph: string): string {
             sounds_obj_full[letter as keyof typeof sounds_obj_full];
 
           return formatIPA(
-            (letter_sounds as string[]).map((sound) => sound + matra_sound[0]),
+            (letter_sounds as string[]).map((sound) =>
+              sound + vowelWithTone(matra_sound[0], toneFor(letter))),
           );
         }
         case "conjunct": {
@@ -159,6 +170,12 @@ export function getIPA(glyph: string): string {
 
           const left_sounds: string[] =
             sounds_obj.consonants[left as keyof typeof sounds_obj.consonants];
+          const tone = toneFor(left);
+          if (tone) {
+            const right_sounds = sounds_obj.consonants[right as keyof typeof sounds_obj.consonants];
+            return formatIPA(cross(left_sounds, right_sounds)
+              .map(sound => sound + vowelWithTone("ə", tone)));
+          }
           const right_sounds: string[] = withVowel(
             sounds_obj.consonants[right as keyof typeof sounds_obj.consonants],
             "ə",
