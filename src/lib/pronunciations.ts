@@ -67,12 +67,8 @@ export function getPronunciations(glyph: string): string {
 
 // Join IPA pronuncations with square brackets around each one
 function formatIPA(sounds: string[]): string {
-  let formatted_parts: string[] = [];
-
-  for (let i = 0; i < sounds.length; i++)
-    formatted_parts.push(`[${sounds[i]}]`);
-
-  return formatted_parts.join(" ");
+  const uniqueSounds = new Set(sounds.map(sound => sound.normalize("NFC")));
+  return [...uniqueSounds].map(sound => `[${sound}]`).join(" ");
 }
 
 export function getIPA(glyph: string): string {

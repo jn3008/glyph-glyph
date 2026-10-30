@@ -60,6 +60,15 @@
 </div>
 
 <style lang="postcss">
+  /* Load the full font: Google Fonts' CSS subsets omit IPA marks such as U+032A. */
+  @font-face {
+    font-family: "Andika IPA";
+    src: url("https://fonts.gstatic.com/s/andika/v27/mem_Ya6iyW-LwqgAbQ.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+
   .preview-container {
     display: flex;
     flex-direction: column;
@@ -120,8 +129,8 @@
 
   .ipa-style {
     color: var(--text-color-light);
-    font-family: "Noto Sans";
-    font-weight: 500;
+    font-family: "Andika IPA", "Noto Sans", sans-serif;
+    font-weight: 400;
 
     display: flex;
     display: block;
