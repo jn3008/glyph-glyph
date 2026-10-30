@@ -234,3 +234,16 @@ export function romanizeConjunct(language: string, conjunct: string): string[] {
   )
   return cross(left_transcriptions, right_transcriptions);
 }
+
+export function classifyIndic(language: string, glyph: string): "letter" | "syllable" | "conjunct" {
+  const lang = indic.languages[language as keyof typeof indic.languages];
+  if (glyph.includes(lang.virama)) return "conjunct";
+  if (lang.vowels.includes(glyph) || lang.consonants.includes(glyph)) return "letter";
+  return "syllable";
+}
+
+export function uniqueRandom(value: () => string, count: number) {
+  const unique: Set<string> = new Set();
+  for (let i = 0; i < count; i++) unique.add(value())
+  return [...unique];
+}

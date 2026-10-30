@@ -7,6 +7,8 @@
     ...getGlyphs(["greek", "transcriptions", "monographs", "lower"]),
     ...getGlyphs(["cyrillic", "bulgarian", "lower"]),
     ...getGlyphs(["persoarabic", "urdu", "transcriptions", "isolated"]),
+    ...getGlyphs(["indic", "hindi", "letters"]),
+    ...getGlyphs(["indic", "punjabi", "letters"])
   ];
 
   let cols: number = 0;

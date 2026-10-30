@@ -9,7 +9,7 @@ import {
   hangul,
   indic
 } from "$/lib/glyph-database";
-import { arabic_forms, generateRandomConjunct, generateRandomHangulWeighted, generateRandomSyllable } from "$lib/utils";
+import { arabic_forms, generateRandomConjunct, generateRandomHangulWeighted, generateRandomSyllable, shuffleArray, uniqueRandom } from "$lib/utils";
 
 function processKana(submode: string): string[] {
   return [
@@ -116,12 +116,7 @@ export function getGlyphs(config_path: string[]): string[] {
           }
         case "syllables": {
           const count = parseInt(path_dict.count);
-          if (!isNaN(count) && count > 0) {
-            const unique_syllables: Set<string> = new Set();
-            while (unique_syllables.size < count)
-              unique_syllables.add(generateRandomHangulWeighted()); // Only adds if unique
-            return Array.from(unique_syllables) as string[];
-          }
+          if (!isNaN(count) && count > 0) return uniqueRandom(() => generateRandomHangulWeighted(), count);
           return [];
         }
         default:
@@ -133,20 +128,28 @@ export function getGlyphs(config_path: string[]): string[] {
           const language = indic.languages[path_dict.language as keyof typeof indic.languages];
           return [...language.vowels, ...language.consonants];
         }
-        case "matras": 
+        case "syllables": 
         case "conjuncts": {
           const count = parseInt(path_dict.count);
-          if (!isNaN(count) && count > 0) {
-            const unique: Set<string> = new Set();
-            while (unique.size < count)
-              unique.add(
-                path_dict.glyphs === "matras" 
-                  ? generateRandomSyllable(path_dict.language)
-                  : generateRandomConjunct(path_dict.language)
-              );
-            return [...unique];
-          }
-          return [];
+          if (isNaN(count) || count <= 0) return [];
+          return uniqueRandom(
+            path_dict.glyphs === "syllables" 
+                ? () => generateRandomSyllable(path_dict.language)
+                : () => generateRandomConjunct(path_dict.language),
+            count
+          );
+        }
+        case "all": {
+          const count = parseInt(path_dict.count);
+          if (isNaN(count) || count <= 0) return [];
+
+          const language = indic.languages[path_dict.language as keyof typeof indic.languages];
+          const amountPerCategory = Math.ceil(count / 3);
+          return shuffleArray([
+            ...shuffleArray([...language.vowels, ...language.consonants]).slice(0, amountPerCategory),
+            ...uniqueRandom(() => generateRandomSyllable(path_dict.language), count),
+            ...uniqueRandom(() => generateRandomConjunct(path_dict.language), count),
+          ]).slice(0, count) as string[];
         }
         default: 
           return [];

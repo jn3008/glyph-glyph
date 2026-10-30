@@ -3,7 +3,7 @@ import { hiragana, greek, cyrillic, persoarabic, indic } from "$/lib/glyph-datab
 import { toHiragana } from "wanakana";
 import { get } from "svelte/store";
 import { isSilent, getIsolatedForm } from "$/lib/answer";
-import { cross, withVowel } from './utils';
+import { classifyIndic, cross, withVowel } from './utils';
 
 // Format pronunciations:
 // example input: ['x1', 'y1', 'z1', ..., 'xn', 'yn', 'zn']
@@ -109,14 +109,14 @@ export function getIPA(glyph: string): string {
         indic.sounds[path_dict.language as keyof typeof indic.sounds];
       const sounds_obj_full = { ...sounds_obj.vowels, ...sounds_obj.consonants };
 
-      switch (path_dict.glyphs) {
-        case "letters":
+      switch (classifyIndic(path_dict.language, glyph)) {
+        case "letter":
           if (glyph in sounds_obj.consonants)
             return formatIPA(withVowel(sounds_obj_full[glyph as keyof typeof sounds_obj_full], "ə"));
           return formatIPA(
             sounds_obj_full[glyph as keyof typeof sounds_obj_full]
           );
-        case "matras": {
+        case "syllable": {
           const matra = language_obj.matras.find((value) => glyph.endsWith(value));
           if (!matra) return "";
 
@@ -130,7 +130,7 @@ export function getIPA(glyph: string): string {
             (letter_sounds as string[]).map((sound) => sound + matra_sound[0])
           );
         }
-        case "conjuncts": {
+        case "conjunct": {
           const [left, right] = glyph.split(language_obj.virama);
           if (!right) return "";
 

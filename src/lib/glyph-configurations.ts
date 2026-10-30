@@ -20,7 +20,7 @@ const indic_language_config = {
   modes: [
     { key: "letters", label: "Letters" },
     { 
-      key: "matras", 
+      key: "syllables", 
       label: "Consonant + Matra",
       modes_key: "count",
       modes_label: "Count",
@@ -32,6 +32,16 @@ const indic_language_config = {
     { 
       key: "conjuncts", 
       label: "Conjuncts",
+      modes_key: "count",
+      modes_label: "Count",
+      modes: [
+        { key: "20", label: "20" },
+        { key: "50", label: "50" },
+      ],
+    },
+    {
+      key: "all",
+      label: "All",
       modes_key: "count",
       modes_label: "Count",
       modes: [

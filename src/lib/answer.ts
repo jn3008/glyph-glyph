@@ -9,7 +9,7 @@ import {
   indic
 } from "$/lib/glyph-database";
 import { get } from "svelte/store";
-import { arabic_forms, romanizeConjunct, romanizeSyllable } from "$lib/utils";
+import { arabic_forms, classifyIndic, romanizeConjunct, romanizeSyllable } from "$lib/utils";
 
 export function getAnswers(glyph: string): string[] {
   const path_dict = get(game_config)?.path_dict;
@@ -97,12 +97,12 @@ export function getAnswers(glyph: string): string[] {
         ...transcription_consonants 
       };
 
-      switch (path_dict.glyphs) {
-        case "letters":
+      switch (classifyIndic(path_dict.language, glyph)) {
+        case "letter":
           return transcriptions[glyph as keyof typeof transcriptions];
-        case "matras":
+        case "syllable":
           return romanizeSyllable(path_dict.language, glyph);
-        case "conjuncts":
+        case "conjunct":
           return romanizeConjunct(path_dict.language, glyph);
         default:
           return []
