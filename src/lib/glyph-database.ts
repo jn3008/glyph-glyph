@@ -534,6 +534,7 @@ export const hangul = {
 	}
 };
 
+const tonal = ' (low tone) <br><i>note: word-initial pronunciation shown; these letters affect tone, and  exact pronunciation depends on their position in a word</i>';
 export const indic = {
 	languages: {
 		// https://en.wikipedia.org/wiki/Devanagari
@@ -687,11 +688,11 @@ export const indic = {
 			},
 			consonants: {
 				ਸ: ["s"], ਹ: ["ɦ"],
-				ਕ: ["k"], ਖ: ["kʰ"], ਗ: ["ɡ"], ਘ: ["ɡʱ"], ਙ: ["ŋ"],
-				ਚ: ["t͡ʃ"], ਛ: ["t͡ʃʰ"], ਜ: ["d͡ʒ"], ਝ: ["d͡ʒʱ"], ਞ: ["ɲ"],
-				ਟ: ["ʈ"], ਠ: ["ʈʰ"], ਡ: ["ɖ"], ਢ: ["ɖʱ"], ਣ: ["ɳ"],
-				ਤ: ["t̪"], ਥ: ["t̪ʰ"], ਦ: ["d̪"], ਧ: ["d̪ʱ"], ਨ: ["n"],
-				ਪ: ["p"], ਫ: ["pʰ"], ਬ: ["b"], ਭ: ["bʱ"], ਮ: ["m"],
+				ਕ: ["k"], ਖ: ["kʰ"], ਗ: ["ɡ"], ਘ: ["kə̀"], ਙ: ["ŋ"],
+				ਚ: ["t͡ʃ"], ਛ: ["t͡ʃʰ"], ਜ: ["d͡ʒ"], ਝ: ["t͡ʃə̀"], ਞ: ["ɲ"],
+				ਟ: ["ʈ"], ਠ: ["ʈʰ"], ਡ: ["ɖ"], ਢ: ["ʈə̀"], ਣ: ["ɳ"],
+				ਤ: ["t̪"], ਥ: ["t̪ʰ"], ਦ: ["d̪"], ਧ: ["t̪ə̀"], ਨ: ["n"],
+				ਪ: ["p"], ਫ: ["pʰ"], ਬ: ["b"], ਭ: ["pə̀"], ਮ: ["m"],
 				ਯ: ["j"], ਰ: ["ɾ"], ਲ: ["l"], ਵ: ["ʋ"], ੜ: ["ɽ"],
 				ਸ਼: ["ʃ"], ਖ਼: ["x"], ਗ਼: ["ɣ"], ਜ਼: ["z"], ਫ਼: ["f"],
 				ਲ਼: ["ɭ"], ਕ਼: ["q"]
@@ -742,11 +743,11 @@ export const indic = {
 			},
 			consonants: {
 				ਸ: ['', 's', 'un'],        ਹ: ['a', 'h', 'ead'],
-				ਕ: ['s', 'k', 'y'],        ਖ: ['bloc', 'kh', 'ead'],  ਗ: ['', 'g', 'o'],         ਘ: ['do', 'gh', 'ouse'],   ਙ: ['si', 'ng', ''],
-				ਚ: ['', 'ch', 'air'],      ਛ: ['bea', 'chh', 'ead'],  ਜ: ['', 'j', 'am'],        ਝ: ['he', 'dgeh', 'og'],   ਞ: ['ca', 'ny', 'on'],
-				ਟ: ['s', 't', 'op'],       ਠ: ['po', 'th', 'ole'],    ਡ: ['', 'd', 'og'],        ਢ: ['re', 'dh', 'ead'],    ਣ: ['cor', 'n', 'er'],
-				ਤ: ['s', 't', 'yle'],      ਥ: ['', 't', 'in'],        ਦ: ['o', 'th', 'er'],      ਧ: ['a', 'dh', 'ere'],     ਨ: ['', 'n', 'ot'],
-				ਪ: ['s', 'p', 'in'],       ਫ: ['u', 'ph', 'ill'],     ਬ: ['', 'b', 'all'],       ਭ: ['clu', 'bh', 'ouse'],  ਮ: ['', 'm', 'an'],
+				ਕ: ['s', 'k', 'y'],        ਖ: ['bloc', 'kh', 'ead'],  ਗ: ['', 'g', 'o'],         ਘ: ['', 'co', 'nnect' + tonal],   ਙ: ['si', 'ng', ''],
+				ਚ: ['', 'ch', 'air'],      ਛ: ['bea', 'chh', 'ead'],  ਜ: ['', 'j', 'am'],        ਝ: ['tea', 'ch', 'er' + tonal],   ਞ: ['ca', 'ny', 'on'],
+				ਟ: ['s', 't', 'op'],       ਠ: ['po', 'th', 'ole'],    ਡ: ['', 'd', 'og'],        ਢ: ['s', 't', 'op' + tonal],    ਣ: ['cor', 'n', 'er'],
+				ਤ: ['s', 't', 'yle'],      ਥ: ['', 't', 'in'],        ਦ: ['o', 'th', 'er'],      ਧ: ['s', 't', 'yle' + tonal],     ਨ: ['', 'n', 'ot'],
+				ਪ: ['s', 'p', 'in'],       ਫ: ['u', 'ph', 'ill'],     ਬ: ['', 'b', 'all'],       ਭ: ['', 'po', 'lice' + tonal],  ਮ: ['', 'm', 'an'],
 				ਯ: ['', 'y', 'es'],        ਰ: ['bu', 'tt', 'er'],     ਲ: ['', 'l', 'ip'],        ਵ: ['', 'v', 'an'],
 				ੜ: ['la', 'dd', 'er (with the tip of your tongue curled)'],
 				ਸ਼: ['', 'sh', 'ip'],       ਖ਼: ['lo', 'ch', ' (Scottish)'],

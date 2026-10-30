@@ -132,7 +132,7 @@ export function getIPA(glyph: string): string {
             return formatIPA(
               withVowel(
                 sounds_obj_full[glyph as keyof typeof sounds_obj_full],
-                "ə",
+                ['ਘ', 'ਝ', 'ਢ', 'ਧ', 'ਭ'].includes(glyph) ? "" : "ə",
               ),
             );
           return formatIPA(
