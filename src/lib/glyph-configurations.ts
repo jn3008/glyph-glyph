@@ -19,8 +19,8 @@ const indic_language_config = {
   modes_label: "Glyphs",
   modes: [
     { key: "letters", label: "Letters" },
-    { 
-      key: "syllables", 
+    {
+      key: "syllables",
       label: "Consonant + Matra",
       modes_key: "count",
       modes_label: "Count",
@@ -29,8 +29,8 @@ const indic_language_config = {
         { key: "50", label: "50" },
       ],
     },
-    { 
-      key: "conjuncts", 
+    {
+      key: "conjuncts",
       label: "Conjuncts",
       modes_key: "count",
       modes_label: "Count",
@@ -48,9 +48,9 @@ const indic_language_config = {
         { key: "20", label: "20" },
         { key: "50", label: "50" },
       ],
-    }
-  ]
-}
+    },
+  ],
+};
 
 export const configurations: Mode[] = [
   {
@@ -275,15 +275,15 @@ export const configurations: Mode[] = [
       {
         key: "hindi",
         label: "Hindi",
-        ...indic_language_config
+        ...indic_language_config,
       },
       {
         key: "punjabi",
         label: "Punjabi",
-        ...indic_language_config
-      }
-    ]
-  }
+        ...indic_language_config,
+      },
+    ],
+  },
 ];
 
 function generateKeys(modes: Mode[], parent_key = ""): Mode[] {

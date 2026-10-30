@@ -7,9 +7,16 @@ import {
   cyrillic,
   persoarabic,
   hangul,
-  indic
+  indic,
 } from "$/lib/glyph-database";
-import { arabic_forms, generateRandomConjunct, generateRandomHangulWeighted, generateRandomSyllable, shuffleArray, uniqueRandom } from "$lib/utils";
+import {
+  arabic_forms,
+  generateRandomConjunct,
+  generateRandomHangulWeighted,
+  generateRandomSyllable,
+  shuffleArray,
+  uniqueRandom,
+} from "$lib/utils";
 
 function processKana(submode: string): string[] {
   return [
@@ -116,7 +123,8 @@ export function getGlyphs(config_path: string[]): string[] {
           }
         case "syllables": {
           const count = parseInt(path_dict.count);
-          if (!isNaN(count) && count > 0) return uniqueRandom(() => generateRandomHangulWeighted(), count);
+          if (!isNaN(count) && count > 0)
+            return uniqueRandom(() => generateRandomHangulWeighted(), count);
           return [];
         }
         default:
@@ -125,33 +133,44 @@ export function getGlyphs(config_path: string[]): string[] {
     case "indic": {
       switch (path_dict.glyphs) {
         case "letters": {
-          const language = indic.languages[path_dict.language as keyof typeof indic.languages];
+          const language =
+            indic.languages[path_dict.language as keyof typeof indic.languages];
           return [...language.vowels, ...language.consonants];
         }
-        case "syllables": 
+        case "syllables":
         case "conjuncts": {
           const count = parseInt(path_dict.count);
           if (isNaN(count) || count <= 0) return [];
           return uniqueRandom(
-            path_dict.glyphs === "syllables" 
-                ? () => generateRandomSyllable(path_dict.language)
-                : () => generateRandomConjunct(path_dict.language),
-            count
+            path_dict.glyphs === "syllables"
+              ? () => generateRandomSyllable(path_dict.language)
+              : () => generateRandomConjunct(path_dict.language),
+            count,
           );
         }
         case "all": {
           const count = parseInt(path_dict.count);
           if (isNaN(count) || count <= 0) return [];
 
-          const language = indic.languages[path_dict.language as keyof typeof indic.languages];
+          const language =
+            indic.languages[path_dict.language as keyof typeof indic.languages];
           const amountPerCategory = Math.ceil(count / 3);
           return shuffleArray([
-            ...shuffleArray([...language.vowels, ...language.consonants]).slice(0, amountPerCategory),
-            ...uniqueRandom(() => generateRandomSyllable(path_dict.language), count),
-            ...uniqueRandom(() => generateRandomConjunct(path_dict.language), count),
+            ...shuffleArray([...language.vowels, ...language.consonants]).slice(
+              0,
+              amountPerCategory,
+            ),
+            ...uniqueRandom(
+              () => generateRandomSyllable(path_dict.language),
+              count,
+            ),
+            ...uniqueRandom(
+              () => generateRandomConjunct(path_dict.language),
+              count,
+            ),
           ]).slice(0, count) as string[];
         }
-        default: 
+        default:
           return [];
       }
     }
