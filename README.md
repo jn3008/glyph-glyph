@@ -2,7 +2,7 @@
 
 A game to help you learn different writing systems.
 
-### [**_Click here to play_**](https://glyph-glyph.jn3008.com)
+### [**_Click here to play_**](https://glyph-glyph.josefff.com)
 
 The currently available modes are:
 
