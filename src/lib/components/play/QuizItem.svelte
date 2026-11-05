@@ -13,6 +13,13 @@
   export let is_current: boolean = false;
   export let element: HTMLDivElement | undefined = undefined;
 
+  let viewport_width = 0;
+  let natural_word_width = 0;
+  $: word_scale =
+    word_mode && viewport_width > 0 && natural_word_width > 0
+      ? Math.min(1, Math.max(1, viewport_width - 32) / natural_word_width)
+      : 1;
+
   let glyph_width = 0;
   let answer_width = 0;
 
@@ -21,9 +28,19 @@
   $: has_incorrect_answer = has_answer ? !is_correct_answer : false;
 </script>
 
+<svelte:window bind:innerWidth={viewport_width} />
+
 <div class="quiz-item-wrapper">
+  {#if word_mode}
+    <span
+      class="word-measure"
+      aria-hidden="true"
+      bind:clientWidth={natural_word_width}>{glyph}</span
+    >
+  {/if}
   <div
     class="quiz-item"
+    style:font-size={word_mode ? `${4 * word_scale}em` : undefined}
     class:has-answer={has_answer}
     class:is-correct={has_correct_answer}
     class:is-incorrect={has_incorrect_answer}
@@ -48,6 +65,16 @@
 <style lang="postcss">
   .quiz-item-wrapper {
     display: inline-block; /* needed to prevent overlapping animations */
+  }
+
+  /* Measure at the normal size so resizing never feeds back into the measurement. */
+  .word-measure {
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+    font-size: 4em;
+    white-space: nowrap;
+    width: max-content;
   }
 
   .quiz-item {

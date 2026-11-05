@@ -45,6 +45,7 @@
   async function pauseTransitions(): Promise<void> {
     no_transition = true;
     await tick();
+    calculateOffset();
     setTimeout(() => {
       no_transition = false;
     }, 2);
@@ -53,6 +54,11 @@
   onMount(() => {
     calculateOffset(); // Ensure offset is recalculated after DOM is rendered
     pauseTransitions();
+    const observer = new ResizeObserver(() => calculateOffset());
+    container
+      .querySelectorAll(".quiz-glyph")
+      .forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
   });
 
   function calculateBlur(index: number, active_index: number): number {
@@ -61,12 +67,9 @@
     blur = ease(c01(map(blur, 0, 8, 0, 1)), 2) * max_blur;
     return blur;
   }
-
-  // Disable transitions temporarily on resize
-  window.addEventListener("resize", () => {
-    pauseTransitions();
-  });
 </script>
+
+<svelte:window on:resize={pauseTransitions} />
 
 <section
   class="quiz-container"
