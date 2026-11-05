@@ -1,4 +1,11 @@
 <script lang="ts">
+  import { game_config } from "$lib/stores/game-config";
+  import { isJapaneseWordMode } from "$lib/japanese-words";
+
+  $: word_mode =
+    $game_config.path_dict.alphabet === "kana" &&
+    isJapaneseWordMode($game_config.path_dict.glyphs);
+
   import { glyphs_list } from "$/lib/stores/glyphs";
   import { getAnswers, isSilent } from "$lib/answer";
   import { getIPA, getPronunciations } from "$lib/pronunciations";
@@ -24,7 +31,7 @@
       <span style="font-weight: 600;">Glyphs you will be tested on:</span><br />
       (hover/tap on glyphs to learn the answers).
     </div>
-    <div class="glyphs-container">
+    <div class="glyphs-container" class:word-mode={word_mode}>
       {#each glyphs as glyph}
         <div class="preview-item">
           <div
@@ -50,6 +57,16 @@
       {/each}
     </div>
   </div>
+  {#if word_mode}
+    <p class="word-notes">
+      {#if $game_config.path_dict.type === "katakana"}
+        Type the romanisation (or translation where applicable). Press Enter to
+        submit. Spaces can be used within answers.
+      {:else}
+        Type the romanisation. Press Enter or Space to submit.
+      {/if} 
+    </p>
+  {/if}
   {#if show_pronunciations}
     <div class="pronunciations-container">
       <span class="pronunciations" class:is-active={pronunciations_shown}>
@@ -63,7 +80,8 @@
   /* Load the full font: Google Fonts' CSS subsets omit IPA marks such as U+032A. */
   @font-face {
     font-family: "Andika IPA";
-    src: url("https://fonts.gstatic.com/s/andika/v27/mem_Ya6iyW-LwqgAbQ.ttf") format("truetype");
+    src: url("https://fonts.gstatic.com/s/andika/v27/mem_Ya6iyW-LwqgAbQ.ttf")
+      format("truetype");
     font-style: normal;
     font-weight: 400;
     font-display: swap;
@@ -136,6 +154,21 @@
     display: block;
     margin: auto;
     font-size: 60%;
+  }
+
+  .word-notes {
+    font-size: 0.85rem;
+    color: var(--text-color-light);
+    text-align: center;
+  }
+
+  .word-notes a {
+    text-decoration: underline;
+  }
+
+  .glyphs-container.word-mode {
+    column-gap: 1.2em;
+    row-gap: 0.6em;
   }
 
   .preview-item {

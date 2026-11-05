@@ -1,4 +1,11 @@
 <script lang="ts">
+  import { game_config } from "$lib/stores/game-config";
+  import { isJapaneseWordMode } from "$lib/japanese-words";
+
+  $: word_mode =
+    $game_config.path_dict.alphabet === "kana" &&
+    isJapaneseWordMode($game_config.path_dict.glyphs);
+
   import QuizItemComponent from "$lib/components/play/QuizItem.svelte";
   import { type QuizItem } from "$/lib/stores/quiz";
   import { onMount, tick } from "svelte";
@@ -22,7 +29,7 @@
 
     if (!container) return;
     const quizItems = container.querySelectorAll(
-      ".quiz-content > .quiz-glyph"
+      ".quiz-content > .quiz-glyph",
     ) as NodeListOf<HTMLElement>;
 
     current_offset = 0;
@@ -38,6 +45,7 @@
   async function pauseTransitions(): Promise<void> {
     no_transition = true;
     await tick();
+    calculateOffset();
     setTimeout(() => {
       no_transition = false;
     }, 2);
@@ -46,6 +54,11 @@
   onMount(() => {
     calculateOffset(); // Ensure offset is recalculated after DOM is rendered
     pauseTransitions();
+    const observer = new ResizeObserver(() => calculateOffset());
+    container
+      .querySelectorAll(".quiz-glyph")
+      .forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
   });
 
   function calculateBlur(index: number, active_index: number): number {
@@ -54,14 +67,15 @@
     blur = ease(c01(map(blur, 0, 8, 0, 1)), 2) * max_blur;
     return blur;
   }
-
-  // Disable transitions temporarily on resize
-  window.addEventListener("resize", () => {
-    pauseTransitions();
-  });
 </script>
 
-<section class="quiz-container" bind:this={container}>
+<svelte:window on:resize={pauseTransitions} />
+
+<section
+  class="quiz-container"
+  class:word-mode={word_mode}
+  bind:this={container}
+>
   <div
     class="quiz-content {no_transition ? 'no-transition' : ''}"
     style="transform: translateX(calc(50vw - {current_offset}px));"
@@ -106,6 +120,10 @@
       padding: 5em 0 2em;
       font-size: 80%;
     }
+  }
+
+  .word-mode .quiz-glyph {
+    padding-inline: 1.8em;
   }
 
   .quiz-glyph {

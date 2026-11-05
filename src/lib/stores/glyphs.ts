@@ -1,3 +1,4 @@
+import { japaneseWords, isJapaneseWordMode } from "$lib/japanese-words";
 import { derived } from "svelte/store";
 import { toKatakana } from "wanakana";
 import { game_config, generatePathDict } from "./game-config";
@@ -33,6 +34,14 @@ export function getGlyphs(config_path: string[]): string[] {
   const path_dict = generatePathDict(config_path);
   switch (path_dict.alphabet) {
     case "kana":
+      if (isJapaneseWordMode(path_dict.glyphs)) {
+        const script = path_dict.type;
+        if (script !== "hiragana" && script !== "katakana") return [];
+        const count = path_dict.glyphs === "words20" ? 20 : 50;
+        return shuffleArray(
+          japaneseWords[script].map((entry) => entry.word),
+        ).slice(0, count);
+      }
       switch (path_dict.type) {
         case "hiragana":
           return processKana(path_dict.glyphs);
@@ -58,7 +67,7 @@ export function getGlyphs(config_path: string[]): string[] {
               switch (path_dict.case) {
                 case "upper":
                   return [...greek.upper_monographs, ...greek.digraphs].map(
-                    (glyph) => glyph.toUpperCase()
+                    (glyph) => glyph.toUpperCase(),
                   );
                 case "lower":
                   return [...greek.lower_monographs, ...greek.digraphs];
@@ -106,7 +115,7 @@ export function getGlyphs(config_path: string[]): string[] {
         (glyph) =>
           arabic_forms[glyph as keyof typeof arabic_forms][
             path_dict.form as ArabicForms
-          ]
+          ],
       );
     case "hangul":
       switch (path_dict.glyphs) {

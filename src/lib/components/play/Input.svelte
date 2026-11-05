@@ -1,4 +1,12 @@
 <script lang="ts">
+  import { game_config } from "$lib/stores/game-config";
+  import { isJapaneseWordMode } from "$lib/japanese-words";
+
+  $: accepts_translation =
+    $game_config.path_dict.alphabet === "kana" &&
+    $game_config.path_dict.type === "katakana" &&
+    isJapaneseWordMode($game_config.path_dict.glyphs);
+
   import { isCorrectAnswer } from "$/lib/answer";
   import { settings } from "$/lib/stores/settings";
 
@@ -14,6 +22,7 @@
   let shake_animation_is_playing = false;
 
   function handleSubmit() {
+    input = input.trim();
     const is_correct = isCorrectAnswer(input, current_glyph);
 
     if (!is_correct) {
@@ -43,9 +52,9 @@
     if (event.data === null) return; // control key was pressed
 
     // remove any excess spaces from string
-    input = input.trim();
+    if (!accepts_translation) input = input.trim();
 
-    if (WHITESPACE.test(event.data)) {
+    if (!accepts_translation && WHITESPACE.test(event.data)) {
       // space was pressed
       handleSubmit();
       return;

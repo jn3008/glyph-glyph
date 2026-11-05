@@ -1,6 +1,7 @@
 export interface Mode {
   key: string;
   label: string;
+  group?: string;
   modes_key?: string;
   modes_label?: string;
   modes?: Mode[]; // Recursive type to support nested modes, '?' - optional
@@ -52,6 +53,15 @@ const indic_language_config = {
   ],
 };
 
+const kana_modes: Mode[] = [
+  { key: "monographs", label: "Monographs", group: "Characters to include" },
+  { key: "diacritics", label: "+ Diacritics", group: "Characters to include" },
+  { key: "digraphs", label: "+ Digraphs", group: "Characters to include" },
+  { key: "all", label: "All", group: "Characters to include" },
+  { key: "words20", label: "20", group: "Random words" },
+  { key: "words50", label: "50", group: "Random words" },
+];
+
 export const configurations: Mode[] = [
   {
     key: "kana",
@@ -64,24 +74,14 @@ export const configurations: Mode[] = [
         label: "Katakana",
         modes_key: "glyphs",
         modes_label: "Characters to include",
-        modes: [
-          { key: "monographs", label: "Monographs" },
-          { key: "diacritics", label: "+ Diacritics" },
-          { key: "digraphs", label: "+ Digraphs" },
-          { key: "all", label: "All" },
-        ],
+        modes: kana_modes,
       },
       {
         key: "hiragana",
         label: "Hiragana",
         modes_key: "glyphs",
         modes_label: "Characters to include",
-        modes: [
-          { key: "monographs", label: "Monographs" },
-          { key: "diacritics", label: "+ Diacritics" },
-          { key: "digraphs", label: "+ Digraphs" },
-          { key: "all", label: "All" },
-        ],
+        modes: kana_modes,
       },
     ],
   },
@@ -305,7 +305,7 @@ type PathType = string; // Mode or string
 
 function extractKeysAndPaths(
   modes: Mode[],
-  parent_path: Mode[] = []
+  parent_path: Mode[] = [],
 ): { keys: string[]; paths: Record<string, PathType[]> } {
   const keys: string[] = [];
   const paths: Record<string, PathType[]> = {};
@@ -331,7 +331,7 @@ function extractKeysAndPaths(
 }
 
 export const { keys: full_keys, paths: full_paths } = extractKeysAndPaths(
-  configurations_with_keys
+  configurations_with_keys,
 );
 
 export type FullKey = (typeof full_keys)[number];

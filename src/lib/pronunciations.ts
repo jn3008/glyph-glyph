@@ -77,7 +77,7 @@ export function getIPA(glyph: string): string {
   switch (path_dict.alphabet) {
     case "kana":
       return formatIPA(
-        hiragana.sounds[toHiragana(glyph) as keyof typeof hiragana.sounds]
+        hiragana.sounds[toHiragana(glyph) as keyof typeof hiragana.sounds] ?? []
       );
     case "greek":
       return formatIPA(
