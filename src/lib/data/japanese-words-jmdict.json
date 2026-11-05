@@ -1,0 +1,3312 @@
+{
+  "source": "https://www.edrdg.org/pub/Nihongo/JMdict_e.gz",
+  "sourceSha256": "9f57d195b6a5ebf28e2beab1c179f437eae1cd16315f36a036bce1ab97388d5f",
+  "copyright": "JMdict: James William Breen and the Electronic Dictionary Research and Development Group",
+  "license": "CC-BY-SA-4.0",
+  "licenseUrl": "https://www.edrdg.org/edrdg/licence.html",
+  "modifications": "Selected common kana readings, with short English glosses only for katakana and trailing parenthetical notes removed; limited to 300 words per script including curated originals.",
+  "words": {
+    "hiragana": [
+      {
+        "word": "おちゃ",
+        "jmdictId": "1002430"
+      },
+      {
+        "word": "あめ",
+        "jmdictId": "1171900"
+      },
+      {
+        "word": "いす",
+        "jmdictId": "1157070"
+      },
+      {
+        "word": "よる",
+        "jmdictId": "1536350"
+      },
+      {
+        "word": "えき",
+        "jmdictId": "1175140"
+      },
+      {
+        "word": "かばん",
+        "jmdictId": "1208910"
+      },
+      {
+        "word": "かわ",
+        "jmdictId": "1390020"
+      },
+      {
+        "word": "いえ",
+        "jmdictId": "1191730"
+      },
+      {
+        "word": "かぞく",
+        "jmdictId": "1192150"
+      },
+      {
+        "word": "はな",
+        "jmdictId": "1194500"
+      },
+      {
+        "word": "うみ",
+        "jmdictId": "1201190"
+      },
+      {
+        "word": "がっこう",
+        "jmdictId": "1206730"
+      },
+      {
+        "word": "ほし",
+        "jmdictId": "1376310"
+      },
+      {
+        "word": "ひる",
+        "jmdictId": "1426250"
+      },
+      {
+        "word": "つくえ",
+        "jmdictId": "1220210"
+      },
+      {
+        "word": "きのう",
+        "jmdictId": "1221130"
+      },
+      {
+        "word": "きょう",
+        "jmdictId": "1233320"
+      },
+      {
+        "word": "そら",
+        "jmdictId": "1245290"
+      },
+      {
+        "word": "くつ",
+        "jmdictId": "1246700"
+      },
+      {
+        "word": "とり",
+        "jmdictId": "1430250"
+      },
+      {
+        "word": "つき",
+        "jmdictId": "1255430"
+      },
+      {
+        "word": "いぬ",
+        "jmdictId": "1258330"
+      },
+      {
+        "word": "かぎ",
+        "jmdictId": "1260490"
+      },
+      {
+        "word": "ごはん",
+        "jmdictId": "1270590"
+      },
+      {
+        "word": "こんにちは",
+        "jmdictId": "1289400"
+      },
+      {
+        "word": "さようなら",
+        "jmdictId": "1291050"
+      },
+      {
+        "word": "やま",
+        "jmdictId": "1302680"
+      },
+      {
+        "word": "こども",
+        "jmdictId": "1307850"
+      },
+      {
+        "word": "とけい",
+        "jmdictId": "1316140"
+      },
+      {
+        "word": "じてんしゃ",
+        "jmdictId": "1318290"
+      },
+      {
+        "word": "くるま",
+        "jmdictId": "1323080"
+      },
+      {
+        "word": "みず",
+        "jmdictId": "1371260"
+      },
+      {
+        "word": "ゆき",
+        "jmdictId": "1386500"
+      },
+      {
+        "word": "せんせい",
+        "jmdictId": "1387990"
+      },
+      {
+        "word": "まど",
+        "jmdictId": "1401400"
+      },
+      {
+        "word": "あさ",
+        "jmdictId": "1428280"
+      },
+      {
+        "word": "でんしゃ",
+        "jmdictId": "1443530"
+      },
+      {
+        "word": "みち",
+        "jmdictId": "1454080"
+      },
+      {
+        "word": "ねこ",
+        "jmdictId": "1467640"
+      },
+      {
+        "word": "ひと",
+        "jmdictId": "1580640"
+      },
+      {
+        "word": "へや",
+        "jmdictId": "1499320"
+      },
+      {
+        "word": "かぜ",
+        "jmdictId": "1499720"
+      },
+      {
+        "word": "ほん",
+        "jmdictId": "1522150"
+      },
+      {
+        "word": "ともだち",
+        "jmdictId": "1540170"
+      },
+      {
+        "word": "さかな",
+        "jmdictId": "1578010"
+      },
+      {
+        "word": "ありがとう",
+        "jmdictId": "1586820"
+      },
+      {
+        "word": "まち",
+        "jmdictId": "1603990"
+      },
+      {
+        "word": "おはよう",
+        "jmdictId": "1612820"
+      },
+      {
+        "word": "あした",
+        "jmdictId": "2857350"
+      },
+      {
+        "word": "とりひき",
+        "jmdictId": "1599120"
+      },
+      {
+        "word": "じゅうぶん",
+        "jmdictId": "1335080"
+      },
+      {
+        "word": "ひとり",
+        "jmdictId": "1576150"
+      },
+      {
+        "word": "しはらい",
+        "jmdictId": "1594480"
+      },
+      {
+        "word": "うりあげ",
+        "jmdictId": "1588500"
+      },
+      {
+        "word": "わがくに",
+        "jmdictId": "1606630"
+      },
+      {
+        "word": "たまご",
+        "jmdictId": "1549140"
+      },
+      {
+        "word": "かしだし",
+        "jmdictId": "1590240"
+      },
+      {
+        "word": "ひごろ",
+        "jmdictId": "1464070"
+      },
+      {
+        "word": "あしあと",
+        "jmdictId": "1581330"
+      },
+      {
+        "word": "てがかり",
+        "jmdictId": "1598300"
+      },
+      {
+        "word": "ごぞんじ",
+        "jmdictId": "1593570"
+      },
+      {
+        "word": "おくりもの",
+        "jmdictId": "1589030"
+      },
+      {
+        "word": "のりかえ",
+        "jmdictId": "1600460"
+      },
+      {
+        "word": "ちゃわん",
+        "jmdictId": "1597530"
+      },
+      {
+        "word": "かわいそう",
+        "jmdictId": "1590740"
+      },
+      {
+        "word": "びょういん",
+        "jmdictId": "1490220"
+      },
+      {
+        "word": "ぎちょう",
+        "jmdictId": "1226140"
+      },
+      {
+        "word": "いいんかい",
+        "jmdictId": "1156110"
+      },
+      {
+        "word": "こくれん",
+        "jmdictId": "1287210"
+      },
+      {
+        "word": "しじ",
+        "jmdictId": "1310150"
+      },
+      {
+        "word": "しごと",
+        "jmdictId": "1304970"
+      },
+      {
+        "word": "いちじ",
+        "jmdictId": "1576100"
+      },
+      {
+        "word": "きもち",
+        "jmdictId": "1591430"
+      },
+      {
+        "word": "けいざい",
+        "jmdictId": "1251320"
+      },
+      {
+        "word": "せいけん",
+        "jmdictId": "1375930"
+      },
+      {
+        "word": "つま",
+        "jmdictId": "1294330"
+      },
+      {
+        "word": "えいが",
+        "jmdictId": "1173720"
+      },
+      {
+        "word": "ほうもん",
+        "jmdictId": "1518120"
+      },
+      {
+        "word": "かくりょう",
+        "jmdictId": "1206310"
+      },
+      {
+        "word": "きた",
+        "jmdictId": "1520670"
+      },
+      {
+        "word": "たいしょう",
+        "jmdictId": "1410120"
+      },
+      {
+        "word": "がいこく",
+        "jmdictId": "1203620"
+      },
+      {
+        "word": "ほうこく",
+        "jmdictId": "1515670"
+      },
+      {
+        "word": "おとこ",
+        "jmdictId": "1419990"
+      },
+      {
+        "word": "けいやく",
+        "jmdictId": "1250190"
+      },
+      {
+        "word": "じょうけん",
+        "jmdictId": "1356510"
+      },
+      {
+        "word": "だんかい",
+        "jmdictId": "1419950"
+      },
+      {
+        "word": "しじょう",
+        "jmdictId": "1308305"
+      },
+      {
+        "word": "さんか",
+        "jmdictId": "1302090"
+      },
+      {
+        "word": "いみ",
+        "jmdictId": "1156800"
+      },
+      {
+        "word": "じじつ",
+        "jmdictId": "1313960"
+      },
+      {
+        "word": "しんぶん",
+        "jmdictId": "1362360"
+      },
+      {
+        "word": "らいねん",
+        "jmdictId": "1548220"
+      },
+      {
+        "word": "かんしん",
+        "jmdictId": "1215870"
+      },
+      {
+        "word": "せいさん",
+        "jmdictId": "1378990"
+      },
+      {
+        "word": "みんかん",
+        "jmdictId": "1528630"
+      },
+      {
+        "word": "こっかい",
+        "jmdictId": "1286240"
+      },
+      {
+        "word": "じょし",
+        "jmdictId": "1345140"
+      },
+      {
+        "word": "そうさい",
+        "jmdictId": "1401580"
+      },
+      {
+        "word": "みとおし",
+        "jmdictId": "1604610"
+      },
+      {
+        "word": "ごぜん",
+        "jmdictId": "1269060"
+      },
+      {
+        "word": "はんだん",
+        "jmdictId": "1478620"
+      },
+      {
+        "word": "じき",
+        "jmdictId": "1316040"
+      },
+      {
+        "word": "けんせつ",
+        "jmdictId": "1257420"
+      },
+      {
+        "word": "たいさく",
+        "jmdictId": "1410050"
+      },
+      {
+        "word": "たいかい",
+        "jmdictId": "1413180"
+      },
+      {
+        "word": "とうきょく",
+        "jmdictId": "1449030"
+      },
+      {
+        "word": "じえいたい",
+        "jmdictId": "1317410"
+      },
+      {
+        "word": "ぎいん",
+        "jmdictId": "1226020"
+      },
+      {
+        "word": "れんぞく",
+        "jmdictId": "1559610"
+      },
+      {
+        "word": "ていど",
+        "jmdictId": "1436540"
+      },
+      {
+        "word": "ようぎしゃ",
+        "jmdictId": "1545390"
+      },
+      {
+        "word": "じたく",
+        "jmdictId": "1318260"
+      },
+      {
+        "word": "はる",
+        "jmdictId": "1341000"
+      },
+      {
+        "word": "きぼ",
+        "jmdictId": "1223090"
+      },
+      {
+        "word": "ごご",
+        "jmdictId": "1268990"
+      },
+      {
+        "word": "なつ",
+        "jmdictId": "1191320"
+      },
+      {
+        "word": "たちば",
+        "jmdictId": "1551710"
+      },
+      {
+        "word": "きょうどう",
+        "jmdictId": "1591660"
+      },
+      {
+        "word": "きじゅん",
+        "jmdictId": "1591210"
+      },
+      {
+        "word": "すいしん",
+        "jmdictId": "1371140"
+      },
+      {
+        "word": "はなし",
+        "jmdictId": "1600900"
+      },
+      {
+        "word": "ほうしん",
+        "jmdictId": "1517040"
+      },
+      {
+        "word": "だいがく",
+        "jmdictId": "1413240"
+      },
+      {
+        "word": "いちば",
+        "jmdictId": "1308300"
+      },
+      {
+        "word": "だんせい",
+        "jmdictId": "1420160"
+      },
+      {
+        "word": "さくねん",
+        "jmdictId": "1298230"
+      },
+      {
+        "word": "じむ",
+        "jmdictId": "1314270"
+      },
+      {
+        "word": "げんち",
+        "jmdictId": "1263860"
+      },
+      {
+        "word": "しつもん",
+        "jmdictId": "1320760"
+      },
+      {
+        "word": "ぶんか",
+        "jmdictId": "1505120"
+      },
+      {
+        "word": "はは",
+        "jmdictId": "1514990"
+      },
+      {
+        "word": "まいにち",
+        "jmdictId": "1524720"
+      },
+      {
+        "word": "おす",
+        "jmdictId": "1589190"
+      },
+      {
+        "word": "かんぶ",
+        "jmdictId": "1212170"
+      },
+      {
+        "word": "しゅうへん",
+        "jmdictId": "1331300"
+      },
+      {
+        "word": "じょうきょう",
+        "jmdictId": "1356700"
+      },
+      {
+        "word": "かいけん",
+        "jmdictId": "1198500"
+      },
+      {
+        "word": "しょうらい",
+        "jmdictId": "1347710"
+      },
+      {
+        "word": "どうじ",
+        "jmdictId": "1452500"
+      },
+      {
+        "word": "れんごう",
+        "jmdictId": "1559450"
+      },
+      {
+        "word": "きせい",
+        "jmdictId": "1223010"
+      },
+      {
+        "word": "ばんぐみ",
+        "jmdictId": "1482340"
+      },
+      {
+        "word": "ちいき",
+        "jmdictId": "1420800"
+      },
+      {
+        "word": "ちょうさ",
+        "jmdictId": "1429120"
+      },
+      {
+        "word": "ことし",
+        "jmdictId": "1579130"
+      },
+      {
+        "word": "しどう",
+        "jmdictId": "1309950"
+      },
+      {
+        "word": "けいえい",
+        "jmdictId": "1251130"
+      },
+      {
+        "word": "きしゃ",
+        "jmdictId": "1223250"
+      },
+      {
+        "word": "ちち",
+        "jmdictId": "1497610"
+      },
+      {
+        "word": "せんしゅ",
+        "jmdictId": "1392250"
+      },
+      {
+        "word": "しゅしょう",
+        "jmdictId": "1329300"
+      },
+      {
+        "word": "せいじか",
+        "jmdictId": "1375980"
+      },
+      {
+        "word": "ぜんねん",
+        "jmdictId": "1393840"
+      },
+      {
+        "word": "さいこう",
+        "jmdictId": "1293850"
+      },
+      {
+        "word": "とうじ",
+        "jmdictId": "1449090"
+      },
+      {
+        "word": "こうか",
+        "jmdictId": "1275130"
+      },
+      {
+        "word": "こうぞう",
+        "jmdictId": "1279790"
+      },
+      {
+        "word": "ぎんこう",
+        "jmdictId": "1243490"
+      },
+      {
+        "word": "ゆしゅつ",
+        "jmdictId": "1538820"
+      },
+      {
+        "word": "せんげん",
+        "jmdictId": "1389680"
+      },
+      {
+        "word": "れんぽう",
+        "jmdictId": "1559790"
+      },
+      {
+        "word": "さいきん",
+        "jmdictId": "1293780"
+      },
+      {
+        "word": "ぶたい",
+        "jmdictId": "1499150"
+      },
+      {
+        "word": "たいおう",
+        "jmdictId": "1409840"
+      },
+      {
+        "word": "しない",
+        "jmdictId": "1308640"
+      },
+      {
+        "word": "いいん",
+        "jmdictId": "1156100"
+      },
+      {
+        "word": "ほんしゃ",
+        "jmdictId": "1522630"
+      },
+      {
+        "word": "しょくいん",
+        "jmdictId": "1357490"
+      },
+      {
+        "word": "ぜんこく",
+        "jmdictId": "1581180"
+      },
+      {
+        "word": "ごうい",
+        "jmdictId": "1284550"
+      },
+      {
+        "word": "げんそく",
+        "jmdictId": "1262070"
+      },
+      {
+        "word": "しきん",
+        "jmdictId": "1312700"
+      },
+      {
+        "word": "だいとうりょう",
+        "jmdictId": "1414650"
+      },
+      {
+        "word": "でんわ",
+        "jmdictId": "1443840"
+      },
+      {
+        "word": "きかん",
+        "jmdictId": "1220550"
+      },
+      {
+        "word": "せいかい",
+        "jmdictId": "1375900"
+      },
+      {
+        "word": "ひつよう",
+        "jmdictId": "1487660"
+      },
+      {
+        "word": "いじ",
+        "jmdictId": "1158450"
+      },
+      {
+        "word": "ほご",
+        "jmdictId": "1513530"
+      },
+      {
+        "word": "かんけい",
+        "jmdictId": "1215810"
+      },
+      {
+        "word": "こくない",
+        "jmdictId": "1286930"
+      },
+      {
+        "word": "ぶんや",
+        "jmdictId": "1504330"
+      },
+      {
+        "word": "とういつ",
+        "jmdictId": "1449670"
+      },
+      {
+        "word": "せきにん",
+        "jmdictId": "1383180"
+      },
+      {
+        "word": "しあい",
+        "jmdictId": "1312420"
+      },
+      {
+        "word": "にちべい",
+        "jmdictId": "1464380"
+      },
+      {
+        "word": "きほん",
+        "jmdictId": "1219190"
+      },
+      {
+        "word": "おおて",
+        "jmdictId": "1414010"
+      },
+      {
+        "word": "ほんぶ",
+        "jmdictId": "1523170"
+      },
+      {
+        "word": "さいだい",
+        "jmdictId": "1294180"
+      },
+      {
+        "word": "きき",
+        "jmdictId": "1218450"
+      },
+      {
+        "word": "ぜんたい",
+        "jmdictId": "1395660"
+      },
+      {
+        "word": "げんざい",
+        "jmdictId": "1263650"
+      },
+      {
+        "word": "ちょうせい",
+        "jmdictId": "1429200"
+      },
+      {
+        "word": "げんじつ",
+        "jmdictId": "1263710"
+      },
+      {
+        "word": "しゅのう",
+        "jmdictId": "1329360"
+      },
+      {
+        "word": "えんじょ",
+        "jmdictId": "1176660"
+      },
+      {
+        "word": "わへい",
+        "jmdictId": "1562210"
+      },
+      {
+        "word": "とくべつ",
+        "jmdictId": "1455280"
+      },
+      {
+        "word": "やくわり",
+        "jmdictId": "1538000"
+      },
+      {
+        "word": "こうどう",
+        "jmdictId": "1282100"
+      },
+      {
+        "word": "あんぜん",
+        "jmdictId": "1153930"
+      },
+      {
+        "word": "もくてき",
+        "jmdictId": "1535560"
+      },
+      {
+        "word": "かくだい",
+        "jmdictId": "1205200"
+      },
+      {
+        "word": "りょうど",
+        "jmdictId": "1554790"
+      },
+      {
+        "word": "やとう",
+        "jmdictId": "1537580"
+      },
+      {
+        "word": "さいばん",
+        "jmdictId": "1296120"
+      },
+      {
+        "word": "おおくらしょう",
+        "jmdictId": "1414430"
+      },
+      {
+        "word": "せんきょ",
+        "jmdictId": "1392190"
+      },
+      {
+        "word": "ぎょうせい",
+        "jmdictId": "1282010"
+      },
+      {
+        "word": "みなみ",
+        "jmdictId": "1459870"
+      },
+      {
+        "word": "こっか",
+        "jmdictId": "1286170"
+      },
+      {
+        "word": "ぐんじ",
+        "jmdictId": "1248080"
+      },
+      {
+        "word": "ざいせい",
+        "jmdictId": "1296830"
+      },
+      {
+        "word": "こうげき",
+        "jmdictId": "1279170"
+      },
+      {
+        "word": "さいしょ",
+        "jmdictId": "1293990"
+      },
+      {
+        "word": "へいわ",
+        "jmdictId": "1508070"
+      },
+      {
+        "word": "しゅっしん",
+        "jmdictId": "1339260"
+      },
+      {
+        "word": "じかん",
+        "jmdictId": "1315920"
+      },
+      {
+        "word": "かてい",
+        "jmdictId": "1192280"
+      },
+      {
+        "word": "けつぎ",
+        "jmdictId": "1254240"
+      },
+      {
+        "word": "こうじょう",
+        "jmdictId": "1578700"
+      },
+      {
+        "word": "へいきん",
+        "jmdictId": "1583870"
+      },
+      {
+        "word": "がくせい",
+        "jmdictId": "1206900"
+      },
+      {
+        "word": "けいき",
+        "jmdictId": "1250830"
+      },
+      {
+        "word": "ひがし",
+        "jmdictId": "1447440"
+      },
+      {
+        "word": "じゆう",
+        "jmdictId": "1318720"
+      },
+      {
+        "word": "じょせい",
+        "jmdictId": "1345250"
+      },
+      {
+        "word": "じけん",
+        "jmdictId": "1313830"
+      },
+      {
+        "word": "けいさつ",
+        "jmdictId": "1252390"
+      },
+      {
+        "word": "かいいん",
+        "jmdictId": "1198230"
+      },
+      {
+        "word": "かこ",
+        "jmdictId": "1196030"
+      },
+      {
+        "word": "はんばい",
+        "jmdictId": "1481800"
+      },
+      {
+        "word": "かいがい",
+        "jmdictId": "1201260"
+      },
+      {
+        "word": "ゆにゅう",
+        "jmdictId": "1538870"
+      },
+      {
+        "word": "じっし",
+        "jmdictId": "1321140"
+      },
+      {
+        "word": "へんか",
+        "jmdictId": "1510890"
+      },
+      {
+        "word": "じどうしゃ",
+        "jmdictId": "1318400"
+      },
+      {
+        "word": "いっぽう",
+        "jmdictId": "1166510"
+      },
+      {
+        "word": "だんし",
+        "jmdictId": "1420070"
+      },
+      {
+        "word": "ぎょうかい",
+        "jmdictId": "1239380"
+      },
+      {
+        "word": "そうごう",
+        "jmdictId": "1596380"
+      },
+      {
+        "word": "りゆう",
+        "jmdictId": "1550140"
+      },
+      {
+        "word": "あき",
+        "jmdictId": "1332650"
+      },
+      {
+        "word": "かんり",
+        "jmdictId": "1214200"
+      },
+      {
+        "word": "せいかつ",
+        "jmdictId": "1378860"
+      },
+      {
+        "word": "こうしょう",
+        "jmdictId": "1272110"
+      },
+      {
+        "word": "じゅうたく",
+        "jmdictId": "1334150"
+      },
+      {
+        "word": "しょうけん",
+        "jmdictId": "1351610"
+      },
+      {
+        "word": "しゃちょう",
+        "jmdictId": "1322920"
+      },
+      {
+        "word": "せんご",
+        "jmdictId": "1607450"
+      },
+      {
+        "word": "がいむしょう",
+        "jmdictId": "1204140"
+      },
+      {
+        "word": "かたち",
+        "jmdictId": "1250220"
+      },
+      {
+        "word": "じょうたい",
+        "jmdictId": "1356730"
+      },
+      {
+        "word": "くうこう",
+        "jmdictId": "1245570"
+      },
+      {
+        "word": "かいふく",
+        "jmdictId": "1199720"
+      },
+      {
+        "word": "しらべ",
+        "jmdictId": "1429050"
+      },
+      {
+        "word": "くに",
+        "jmdictId": "1592250"
+      },
+      {
+        "word": "とち",
+        "jmdictId": "1445470"
+      },
+      {
+        "word": "ふきょう",
+        "jmdictId": "1491950"
+      },
+      {
+        "word": "ひはん",
+        "jmdictId": "1483420"
+      },
+      {
+        "word": "こくみん",
+        "jmdictId": "1287070"
+      },
+      {
+        "word": "しせい",
+        "jmdictId": "1307740"
+      },
+      {
+        "word": "しせつ",
+        "jmdictId": "1310410"
+      },
+      {
+        "word": "たいせい",
+        "jmdictId": "1409550"
+      },
+      {
+        "word": "うごき",
+        "jmdictId": "1451180"
+      },
+      {
+        "word": "ばしょ",
+        "jmdictId": "1355850"
+      },
+      {
+        "word": "こんげつ",
+        "jmdictId": "1289100"
+      },
+      {
+        "word": "あいて",
+        "jmdictId": "1401000"
+      },
+      {
+        "word": "けんきゅう",
+        "jmdictId": "1258520"
+      },
+      {
+        "word": "ほうこう",
+        "jmdictId": "1516990"
+      },
+      {
+        "word": "れきし",
+        "jmdictId": "1558050"
+      },
+      {
+        "word": "きゃく",
+        "jmdictId": "1226630"
+      },
+      {
+        "word": "せいりょく",
+        "jmdictId": "1375150"
+      },
+      {
+        "word": "きょうか",
+        "jmdictId": "1236200"
+      },
+      {
+        "word": "けってい",
+        "jmdictId": "1254380"
+      },
+      {
+        "word": "いちぶ",
+        "jmdictId": "1166180"
+      },
+      {
+        "word": "そうかい",
+        "jmdictId": "1401490"
+      },
+      {
+        "word": "いこう",
+        "jmdictId": "1587200"
+      },
+      {
+        "word": "かお",
+        "jmdictId": "1217730"
+      },
+      {
+        "word": "じんこう",
+        "jmdictId": "1367300"
+      },
+      {
+        "word": "こうりゅう",
+        "jmdictId": "1272580"
+      },
+      {
+        "word": "ないかく",
+        "jmdictId": "1457910"
+      },
+      {
+        "word": "はつげん",
+        "jmdictId": "1477350"
+      },
+      {
+        "word": "きょうぎ",
+        "jmdictId": "1235570"
+      },
+      {
+        "word": "ほうどう",
+        "jmdictId": "1515730"
+      },
+      {
+        "word": "いけん",
+        "jmdictId": "1156530"
+      },
+      {
+        "word": "だいひょう",
+        "jmdictId": "1412170"
+      },
+      {
+        "word": "じしん",
+        "jmdictId": "1318000"
+      },
+      {
+        "word": "せんそう",
+        "jmdictId": "1390360"
+      },
+      {
+        "word": "もくひょう",
+        "jmdictId": "1535650"
+      },
+      {
+        "word": "ぶもん",
+        "jmdictId": "1499540"
+      },
+      {
+        "word": "かつどう",
+        "jmdictId": "1208360"
+      },
+      {
+        "word": "にんげん",
+        "jmdictId": "1366770"
+      },
+      {
+        "word": "かんとく",
+        "jmdictId": "1213720"
+      },
+      {
+        "word": "だい",
+        "jmdictId": "1412560"
+      },
+      {
+        "word": "きじ",
+        "jmdictId": "1223240"
+      },
+      {
+        "word": "かかく",
+        "jmdictId": "1189500"
+      }
+    ],
+    "katakana": [
+      {
+        "word": "アイスクリーム",
+        "translations": [
+          "ice cream"
+        ],
+        "jmdictId": "1013980"
+      },
+      {
+        "word": "アニメ",
+        "translations": [
+          "animation"
+        ],
+        "jmdictId": "1017590"
+      },
+      {
+        "word": "インターネット",
+        "translations": [
+          "internet"
+        ],
+        "jmdictId": "1022880"
+      },
+      {
+        "word": "オレンジ",
+        "translations": [
+          "orange"
+        ],
+        "jmdictId": "1035860"
+      },
+      {
+        "word": "カフェ",
+        "translations": [
+          "cafe"
+        ],
+        "jmdictId": "1038050"
+      },
+      {
+        "word": "カメラ",
+        "translations": [
+          "camera"
+        ],
+        "jmdictId": "1038350"
+      },
+      {
+        "word": "ギター",
+        "translations": [
+          "guitar"
+        ],
+        "jmdictId": "1042820"
+      },
+      {
+        "word": "ケーキ",
+        "translations": [
+          "cake"
+        ],
+        "jmdictId": "1047860"
+      },
+      {
+        "word": "コート",
+        "translations": [
+          "coat"
+        ],
+        "jmdictId": "1049000"
+      },
+      {
+        "word": "コーヒー",
+        "translations": [
+          "coffee"
+        ],
+        "jmdictId": "1049180"
+      },
+      {
+        "word": "コンピューター",
+        "translations": [
+          "computer"
+        ],
+        "jmdictId": "1053350"
+      },
+      {
+        "word": "サッカー",
+        "translations": [
+          "soccer"
+        ],
+        "jmdictId": "1056700"
+      },
+      {
+        "word": "サラダ",
+        "translations": [
+          "salad"
+        ],
+        "jmdictId": "1057850"
+      },
+      {
+        "word": "サンドイッチ",
+        "translations": [
+          "sandwich"
+        ],
+        "jmdictId": "1058580"
+      },
+      {
+        "word": "シャツ",
+        "translations": [
+          "shirt"
+        ],
+        "jmdictId": "1061520"
+      },
+      {
+        "word": "ジュース",
+        "translations": [
+          "juice"
+        ],
+        "jmdictId": "1065950"
+      },
+      {
+        "word": "スカート",
+        "translations": [
+          "skirt"
+        ],
+        "jmdictId": "1067470"
+      },
+      {
+        "word": "スポーツ",
+        "translations": [
+          "sports"
+        ],
+        "jmdictId": "1073210"
+      },
+      {
+        "word": "セーター",
+        "translations": [
+          "sweater"
+        ],
+        "jmdictId": "1074270"
+      },
+      {
+        "word": "ソファ",
+        "translations": [
+          "sofa"
+        ],
+        "jmdictId": "1075480"
+      },
+      {
+        "word": "タクシー",
+        "translations": [
+          "taxi"
+        ],
+        "jmdictId": "1076190"
+      },
+      {
+        "word": "チーズ",
+        "translations": [
+          "cheese"
+        ],
+        "jmdictId": "1077330"
+      },
+      {
+        "word": "チョコレート",
+        "translations": [
+          "chocolate"
+        ],
+        "jmdictId": "1078270"
+      },
+      {
+        "word": "テーブル",
+        "translations": [
+          "table"
+        ],
+        "jmdictId": "1078630"
+      },
+      {
+        "word": "ティー",
+        "translations": [
+          "tea"
+        ],
+        "jmdictId": "1079010"
+      },
+      {
+        "word": "テニス",
+        "translations": [
+          "tennis"
+        ],
+        "jmdictId": "1080000"
+      },
+      {
+        "word": "テレビ",
+        "translations": [
+          "tv"
+        ],
+        "jmdictId": "1080510"
+      },
+      {
+        "word": "トイレ",
+        "translations": [
+          "toilet"
+        ],
+        "jmdictId": "1084810"
+      },
+      {
+        "word": "トマト",
+        "translations": [
+          "tomato"
+        ],
+        "jmdictId": "1085420"
+      },
+      {
+        "word": "ドア",
+        "translations": [
+          "door"
+        ],
+        "jmdictId": "1087820"
+      },
+      {
+        "word": "ノート",
+        "translations": [
+          "note"
+        ],
+        "jmdictId": "1093450"
+      },
+      {
+        "word": "ハンバーガー",
+        "translations": [
+          "hamburger"
+        ],
+        "jmdictId": "1096860"
+      },
+      {
+        "word": "バス",
+        "translations": [
+          "bus"
+        ],
+        "jmdictId": "1098390"
+      },
+      {
+        "word": "バター",
+        "translations": [
+          "butter"
+        ],
+        "jmdictId": "1098620"
+      },
+      {
+        "word": "バナナ",
+        "translations": [
+          "banana"
+        ],
+        "jmdictId": "1099420"
+      },
+      {
+        "word": "パスタ",
+        "translations": [
+          "pasta"
+        ],
+        "jmdictId": "1101460"
+      },
+      {
+        "word": "パン",
+        "translations": [
+          "bread"
+        ],
+        "jmdictId": "1103090"
+      },
+      {
+        "word": "ピアノ",
+        "translations": [
+          "piano"
+        ],
+        "jmdictId": "1106400"
+      },
+      {
+        "word": "ピザ",
+        "translations": [
+          "pizza"
+        ],
+        "jmdictId": "1106620"
+      },
+      {
+        "word": "ベッド",
+        "translations": [
+          "bed"
+        ],
+        "jmdictId": "1119650"
+      },
+      {
+        "word": "ペン",
+        "translations": [
+          "pen"
+        ],
+        "jmdictId": "1121380"
+      },
+      {
+        "word": "ホテル",
+        "translations": [
+          "hotel"
+        ],
+        "jmdictId": "1122650"
+      },
+      {
+        "word": "ミルク",
+        "translations": [
+          "milk"
+        ],
+        "jmdictId": "1131990"
+      },
+      {
+        "word": "メール",
+        "translations": [
+          "email"
+        ],
+        "jmdictId": "1132620"
+      },
+      {
+        "word": "ラジオ",
+        "translations": [
+          "radio"
+        ],
+        "jmdictId": "1138860"
+      },
+      {
+        "word": "レストラン",
+        "translations": [
+          "restaurant"
+        ],
+        "jmdictId": "1145310"
+      },
+      {
+        "word": "レモン",
+        "translations": [
+          "lemon"
+        ],
+        "jmdictId": "1146020"
+      },
+      {
+        "word": "ワイン",
+        "translations": [
+          "wine"
+        ],
+        "jmdictId": "1148850"
+      },
+      {
+        "word": "ビール",
+        "translations": [
+          "beer"
+        ],
+        "jmdictId": "2796520"
+      },
+      {
+        "word": "クラブ",
+        "translations": [
+          "club"
+        ],
+        "jmdictId": "1243910"
+      },
+      {
+        "word": "アルコール",
+        "translations": [
+          "alcohol"
+        ],
+        "jmdictId": "1019280"
+      },
+      {
+        "word": "レベル",
+        "translations": [
+          "level"
+        ],
+        "jmdictId": "1145910"
+      },
+      {
+        "word": "カトリック",
+        "translations": [
+          "catholic"
+        ],
+        "jmdictId": "1037840"
+      },
+      {
+        "word": "パイプ",
+        "translations": [
+          "pipe"
+        ],
+        "jmdictId": "1101120"
+      },
+      {
+        "word": "ブラシ",
+        "translations": [
+          "brush"
+        ],
+        "jmdictId": "1611450"
+      },
+      {
+        "word": "キャッシュカード",
+        "translations": [
+          "cash card"
+        ],
+        "jmdictId": "1041430"
+      },
+      {
+        "word": "ポスター",
+        "translations": [
+          "poster"
+        ],
+        "jmdictId": "1125110"
+      },
+      {
+        "word": "コーナー",
+        "translations": [
+          "corner"
+        ],
+        "jmdictId": "1049110"
+      },
+      {
+        "word": "アイドル",
+        "translations": [
+          "idol"
+        ],
+        "jmdictId": "1014340"
+      },
+      {
+        "word": "サービス",
+        "translations": [
+          "service"
+        ],
+        "jmdictId": "1055000"
+      },
+      {
+        "word": "スーツ",
+        "translations": [
+          "suit"
+        ],
+        "jmdictId": "1066680"
+      },
+      {
+        "word": "パンティー",
+        "translations": [
+          "panties"
+        ],
+        "jmdictId": "1103290"
+      },
+      {
+        "word": "ピクニック",
+        "translations": [
+          "picnic"
+        ],
+        "jmdictId": "1106530"
+      },
+      {
+        "word": "チャンス",
+        "translations": [
+          "chance"
+        ],
+        "jmdictId": "1078040"
+      },
+      {
+        "word": "ユーモア",
+        "translations": [
+          "humour"
+        ],
+        "jmdictId": "1136850"
+      },
+      {
+        "word": "システム",
+        "translations": [
+          "system"
+        ],
+        "jmdictId": "1060300"
+      },
+      {
+        "word": "ブラウス",
+        "translations": [
+          "blouse"
+        ],
+        "jmdictId": "1113650"
+      },
+      {
+        "word": "エッセイ",
+        "translations": [
+          "essay"
+        ],
+        "jmdictId": "1029100"
+      },
+      {
+        "word": "スター",
+        "translations": [
+          "star"
+        ],
+        "jmdictId": "1069210"
+      },
+      {
+        "word": "パート",
+        "translations": [
+          "part"
+        ],
+        "jmdictId": "1100810"
+      },
+      {
+        "word": "スプーン",
+        "translations": [
+          "spoon"
+        ],
+        "jmdictId": "1072590"
+      },
+      {
+        "word": "ミサイル",
+        "translations": [
+          "missile"
+        ],
+        "jmdictId": "1130570"
+      },
+      {
+        "word": "ベランダ",
+        "translations": [
+          "balcony"
+        ],
+        "jmdictId": "1119940"
+      },
+      {
+        "word": "ママ",
+        "translations": [
+          "mom"
+        ],
+        "jmdictId": "1129240"
+      },
+      {
+        "word": "ステージ",
+        "translations": [
+          "stage"
+        ],
+        "jmdictId": "1070320"
+      },
+      {
+        "word": "ムード",
+        "translations": [
+          "mood"
+        ],
+        "jmdictId": "1132190"
+      },
+      {
+        "word": "スライド",
+        "translations": [
+          "slide"
+        ],
+        "jmdictId": "1073760"
+      },
+      {
+        "word": "モダン",
+        "translations": [
+          "modern"
+        ],
+        "jmdictId": "1134990"
+      },
+      {
+        "word": "インテリア",
+        "translations": [
+          "interior"
+        ],
+        "jmdictId": "1023420"
+      },
+      {
+        "word": "ビジネス",
+        "translations": [
+          "business"
+        ],
+        "jmdictId": "1104780"
+      },
+      {
+        "word": "パーティー",
+        "translations": [
+          "party"
+        ],
+        "jmdictId": "1100760"
+      },
+      {
+        "word": "スクール",
+        "translations": [
+          "school"
+        ],
+        "jmdictId": "1068230"
+      },
+      {
+        "word": "パイナップル",
+        "translations": [
+          "pineapple"
+        ],
+        "jmdictId": "1101100"
+      },
+      {
+        "word": "ノンフィクション",
+        "translations": [
+          "nonfiction"
+        ],
+        "jmdictId": "1094340"
+      },
+      {
+        "word": "サイン",
+        "translations": [
+          "sign"
+        ],
+        "jmdictId": "1056230"
+      },
+      {
+        "word": "レンタル",
+        "translations": [
+          "rental"
+        ],
+        "jmdictId": "1146180"
+      },
+      {
+        "word": "ビザ",
+        "translations": [
+          "visa"
+        ],
+        "jmdictId": "1104720"
+      },
+      {
+        "word": "キッチン",
+        "translations": [
+          "kitchen"
+        ],
+        "jmdictId": "1041150"
+      },
+      {
+        "word": "ボート",
+        "translations": [
+          "boat"
+        ],
+        "jmdictId": "1123440"
+      },
+      {
+        "word": "ヘッド",
+        "translations": [
+          "head"
+        ],
+        "jmdictId": "1118380"
+      },
+      {
+        "word": "アリバイ",
+        "translations": [
+          "alibi"
+        ],
+        "jmdictId": "1019160"
+      },
+      {
+        "word": "カセット",
+        "translations": [
+          "cassette"
+        ],
+        "jmdictId": "1037400"
+      },
+      {
+        "word": "タオル",
+        "translations": [
+          "towel"
+        ],
+        "jmdictId": "1076170"
+      },
+      {
+        "word": "ブレーキ",
+        "translations": [
+          "brake"
+        ],
+        "jmdictId": "1114640"
+      },
+      {
+        "word": "アクセサリー",
+        "translations": [
+          "accessory"
+        ],
+        "jmdictId": "1015220"
+      },
+      {
+        "word": "ショッピング",
+        "translations": [
+          "shopping"
+        ],
+        "jmdictId": "1062760"
+      },
+      {
+        "word": "ネクタイ",
+        "translations": [
+          "necktie"
+        ],
+        "jmdictId": "1092820"
+      },
+      {
+        "word": "リクエスト",
+        "translations": [
+          "request"
+        ],
+        "jmdictId": "1141170"
+      },
+      {
+        "word": "データ",
+        "translations": [
+          "data"
+        ],
+        "jmdictId": "1081190"
+      },
+      {
+        "word": "アマチュア",
+        "translations": [
+          "amateur"
+        ],
+        "jmdictId": "1018550"
+      },
+      {
+        "word": "ストライキ",
+        "translations": [
+          "strike"
+        ],
+        "jmdictId": "1071180"
+      },
+      {
+        "word": "キー",
+        "translations": [
+          "key"
+        ],
+        "jmdictId": "1040680"
+      },
+      {
+        "word": "コンクリート",
+        "translations": [
+          "concrete"
+        ],
+        "jmdictId": "1051860"
+      },
+      {
+        "word": "トレーニング",
+        "translations": [
+          "training"
+        ],
+        "jmdictId": "1087100"
+      },
+      {
+        "word": "ドクター",
+        "translations": [
+          "doctor"
+        ],
+        "jmdictId": "1088140"
+      },
+      {
+        "word": "ウインドウ",
+        "translations": [
+          "window"
+        ],
+        "jmdictId": "1025220"
+      },
+      {
+        "word": "アルミ",
+        "translations": [
+          "aluminium"
+        ],
+        "jmdictId": "1019620"
+      },
+      {
+        "word": "モーター",
+        "translations": [
+          "motor"
+        ],
+        "jmdictId": "1134480"
+      },
+      {
+        "word": "バザー",
+        "translations": [
+          "bazaar"
+        ],
+        "jmdictId": "1098360"
+      },
+      {
+        "word": "ビジネスマン",
+        "translations": [
+          "businessman"
+        ],
+        "jmdictId": "1104920"
+      },
+      {
+        "word": "アナウンサー",
+        "translations": [
+          "announcer"
+        ],
+        "jmdictId": "1017330"
+      },
+      {
+        "word": "ダース",
+        "translations": [
+          "dozen"
+        ],
+        "jmdictId": "1076650"
+      },
+      {
+        "word": "タイム",
+        "translations": [
+          "time"
+        ],
+        "jmdictId": "1076010"
+      },
+      {
+        "word": "ルーム",
+        "translations": [
+          "room"
+        ],
+        "jmdictId": "1143830"
+      },
+      {
+        "word": "グループ",
+        "translations": [
+          "group"
+        ],
+        "jmdictId": "1047300"
+      },
+      {
+        "word": "エアコン",
+        "translations": [
+          "aircon"
+        ],
+        "jmdictId": "1027180"
+      },
+      {
+        "word": "テクノロジー",
+        "translations": [
+          "technology"
+        ],
+        "jmdictId": "1079670"
+      },
+      {
+        "word": "エスカレーター",
+        "translations": [
+          "escalator"
+        ],
+        "jmdictId": "1028580"
+      },
+      {
+        "word": "アップ",
+        "translations": [
+          "up"
+        ],
+        "jmdictId": "1016610"
+      },
+      {
+        "word": "ダウン",
+        "translations": [
+          "down"
+        ],
+        "jmdictId": "1076980"
+      },
+      {
+        "word": "ダブル",
+        "translations": [
+          "double"
+        ],
+        "jmdictId": "1077110"
+      },
+      {
+        "word": "ミーティング",
+        "translations": [
+          "meeting"
+        ],
+        "jmdictId": "1130380"
+      },
+      {
+        "word": "バッグ",
+        "translations": [
+          "bag"
+        ],
+        "jmdictId": "1099100"
+      },
+      {
+        "word": "ガソリン",
+        "translations": [
+          "gasoline"
+        ],
+        "jmdictId": "1040250"
+      },
+      {
+        "word": "インテリ",
+        "translations": [
+          "intellectual"
+        ],
+        "jmdictId": "1023410"
+      },
+      {
+        "word": "インタビュー",
+        "translations": [
+          "interview"
+        ],
+        "jmdictId": "1023100"
+      },
+      {
+        "word": "スパイ",
+        "translations": [
+          "spy"
+        ],
+        "jmdictId": "1071940"
+      },
+      {
+        "word": "ソフト",
+        "translations": [
+          "soft"
+        ],
+        "jmdictId": "1075500"
+      },
+      {
+        "word": "ストーブ",
+        "translations": [
+          "stove"
+        ],
+        "jmdictId": "1070790"
+      },
+      {
+        "word": "パンフレット",
+        "translations": [
+          "pamphlet"
+        ],
+        "jmdictId": "1103450"
+      },
+      {
+        "word": "パーセント",
+        "translations": [
+          "percent"
+        ],
+        "jmdictId": "1100610"
+      },
+      {
+        "word": "ボーイフレンド",
+        "translations": [
+          "boyfriend"
+        ],
+        "jmdictId": "1123280"
+      },
+      {
+        "word": "クラシック",
+        "translations": [
+          "classic"
+        ],
+        "jmdictId": "1044020"
+      },
+      {
+        "word": "ページ",
+        "translations": [
+          "page"
+        ],
+        "jmdictId": "1120410"
+      },
+      {
+        "word": "ジャパン",
+        "translations": [
+          "japan"
+        ],
+        "jmdictId": "1065560"
+      },
+      {
+        "word": "サラリーマン",
+        "translations": [
+          "salary man"
+        ],
+        "jmdictId": "1057960"
+      },
+      {
+        "word": "レジャー",
+        "translations": [
+          "leisure"
+        ],
+        "jmdictId": "1145220"
+      },
+      {
+        "word": "チューリップ",
+        "translations": [
+          "tulip"
+        ],
+        "jmdictId": "1078160"
+      },
+      {
+        "word": "ハイウェイ",
+        "translations": [
+          "highway"
+        ],
+        "jmdictId": "1094930"
+      },
+      {
+        "word": "カメラマン",
+        "translations": [
+          "photographer"
+        ],
+        "jmdictId": "1038390"
+      },
+      {
+        "word": "ゴム",
+        "translations": [
+          "gum"
+        ],
+        "jmdictId": "1054570"
+      },
+      {
+        "word": "スピーチ",
+        "translations": [
+          "speech"
+        ],
+        "jmdictId": "1072260"
+      },
+      {
+        "word": "ゼロ",
+        "translations": [
+          "zero"
+        ],
+        "jmdictId": "2839962"
+      },
+      {
+        "word": "キリスト",
+        "translations": [
+          "christ"
+        ],
+        "jmdictId": "1042520"
+      },
+      {
+        "word": "マナー",
+        "translations": [
+          "manners"
+        ],
+        "jmdictId": "1128740"
+      },
+      {
+        "word": "ロック",
+        "translations": [
+          "lock"
+        ],
+        "jmdictId": "1147600"
+      },
+      {
+        "word": "ハード",
+        "translations": [
+          "hard"
+        ],
+        "jmdictId": "1094480"
+      },
+      {
+        "word": "ビタミン",
+        "translations": [
+          "vitamin"
+        ],
+        "jmdictId": "1105160"
+      },
+      {
+        "word": "カルチャー",
+        "translations": [
+          "culture"
+        ],
+        "jmdictId": "1038970"
+      },
+      {
+        "word": "メンバー",
+        "translations": [
+          "member"
+        ],
+        "jmdictId": "1134370"
+      },
+      {
+        "word": "マッチ",
+        "translations": [
+          "match"
+        ],
+        "jmdictId": "1128430"
+      },
+      {
+        "word": "セールスマン",
+        "translations": [
+          "salesman"
+        ],
+        "jmdictId": "1074360"
+      },
+      {
+        "word": "ボール",
+        "translations": [
+          "ball"
+        ],
+        "jmdictId": "1123550"
+      },
+      {
+        "word": "ノック",
+        "translations": [
+          "knock"
+        ],
+        "jmdictId": "1093920"
+      },
+      {
+        "word": "ペンキ",
+        "translations": [
+          "paint"
+        ],
+        "jmdictId": "1121390"
+      },
+      {
+        "word": "シンポジウム",
+        "translations": [
+          "symposium"
+        ],
+        "jmdictId": "1063980"
+      },
+      {
+        "word": "デザート",
+        "translations": [
+          "dessert"
+        ],
+        "jmdictId": "1082850"
+      },
+      {
+        "word": "レギュラー",
+        "translations": [
+          "regular"
+        ],
+        "jmdictId": "1144790"
+      },
+      {
+        "word": "プラットホーム",
+        "translations": [
+          "platform"
+        ],
+        "jmdictId": "1115820"
+      },
+      {
+        "word": "フロント",
+        "translations": [
+          "front"
+        ],
+        "jmdictId": "1112990"
+      },
+      {
+        "word": "カバー",
+        "translations": [
+          "cover"
+        ],
+        "jmdictId": "1037960"
+      },
+      {
+        "word": "プラスチック",
+        "translations": [
+          "plastic"
+        ],
+        "jmdictId": "1115670"
+      },
+      {
+        "word": "ジャーナリズム",
+        "translations": [
+          "journalism"
+        ],
+        "jmdictId": "1064990"
+      },
+      {
+        "word": "バイオリン",
+        "translations": [
+          "violin"
+        ],
+        "jmdictId": "1097740"
+      },
+      {
+        "word": "ミックス",
+        "translations": [
+          "mix"
+        ],
+        "jmdictId": "1130950"
+      },
+      {
+        "word": "ゴール",
+        "translations": [
+          "goal"
+        ],
+        "jmdictId": "1054230"
+      },
+      {
+        "word": "ワット",
+        "translations": [
+          "watt"
+        ],
+        "jmdictId": "1149070"
+      },
+      {
+        "word": "カタログ",
+        "translations": [
+          "catalog"
+        ],
+        "jmdictId": "1037560"
+      },
+      {
+        "word": "パパ",
+        "translations": [
+          "dad"
+        ],
+        "jmdictId": "1102140"
+      },
+      {
+        "word": "スケジュール",
+        "translations": [
+          "schedule"
+        ],
+        "jmdictId": "1068870"
+      },
+      {
+        "word": "クラス",
+        "translations": [
+          "class"
+        ],
+        "jmdictId": "1044070"
+      },
+      {
+        "word": "スタイル",
+        "translations": [
+          "style",
+          "build"
+        ],
+        "jmdictId": "1069520"
+      },
+      {
+        "word": "ジャム",
+        "translations": [
+          "jam"
+        ],
+        "jmdictId": "1065680"
+      },
+      {
+        "word": "アウト",
+        "translations": [
+          "out",
+          "outer"
+        ],
+        "jmdictId": "1014680"
+      },
+      {
+        "word": "ランチ",
+        "translations": [
+          "lunch"
+        ],
+        "jmdictId": "1140100"
+      },
+      {
+        "word": "パスポート",
+        "translations": [
+          "passport"
+        ],
+        "jmdictId": "1101510"
+      },
+      {
+        "word": "シート",
+        "translations": [
+          "seat"
+        ],
+        "jmdictId": "1059450"
+      },
+      {
+        "word": "ラグビー",
+        "translations": [
+          "rugby"
+        ],
+        "jmdictId": "1138690"
+      },
+      {
+        "word": "スタンド",
+        "translations": [
+          "stand"
+        ],
+        "jmdictId": "1069930"
+      },
+      {
+        "word": "コース",
+        "translations": [
+          "course"
+        ],
+        "jmdictId": "1048830"
+      },
+      {
+        "word": "カーテン",
+        "translations": [
+          "curtain"
+        ],
+        "jmdictId": "1036290"
+      },
+      {
+        "word": "クリーム",
+        "translations": [
+          "cream"
+        ],
+        "jmdictId": "1044480"
+      },
+      {
+        "word": "コンサート",
+        "translations": [
+          "concert"
+        ],
+        "jmdictId": "1051970"
+      },
+      {
+        "word": "マンション",
+        "translations": [
+          "mansion",
+          "condominium"
+        ],
+        "jmdictId": "1130040"
+      },
+      {
+        "word": "ベルト",
+        "translations": [
+          "belt"
+        ],
+        "jmdictId": "1120070"
+      },
+      {
+        "word": "フルーツ",
+        "translations": [
+          "fruit"
+        ],
+        "jmdictId": "1112040"
+      },
+      {
+        "word": "サイズ",
+        "translations": [
+          "size"
+        ],
+        "jmdictId": "1055780"
+      },
+      {
+        "word": "リットル",
+        "translations": [
+          "litre"
+        ],
+        "jmdictId": "1141870"
+      },
+      {
+        "word": "ハイキング",
+        "translations": [
+          "hiking"
+        ],
+        "jmdictId": "1095040"
+      },
+      {
+        "word": "センター",
+        "translations": [
+          "centre"
+        ],
+        "jmdictId": "1075040"
+      },
+      {
+        "word": "グリーン",
+        "translations": [
+          "green"
+        ],
+        "jmdictId": "1046950"
+      },
+      {
+        "word": "アイス",
+        "translations": [
+          "ice"
+        ],
+        "jmdictId": "1013970"
+      },
+      {
+        "word": "スケート",
+        "translations": [
+          "skate"
+        ],
+        "jmdictId": "1068770"
+      },
+      {
+        "word": "カップ",
+        "translations": [
+          "cup"
+        ],
+        "jmdictId": "1037670"
+      },
+      {
+        "word": "セット",
+        "translations": [
+          "set"
+        ],
+        "jmdictId": "1074600"
+      },
+      {
+        "word": "ガード",
+        "translations": [
+          "guard"
+        ],
+        "jmdictId": "1039710"
+      },
+      {
+        "word": "ストップ",
+        "translations": [
+          "stop"
+        ],
+        "jmdictId": "1071100"
+      },
+      {
+        "word": "シリーズ",
+        "translations": [
+          "series"
+        ],
+        "jmdictId": "1062910"
+      },
+      {
+        "word": "ワンピース",
+        "translations": [
+          "dress"
+        ],
+        "jmdictId": "1149240"
+      },
+      {
+        "word": "ヘリコプター",
+        "translations": [
+          "helicopter"
+        ],
+        "jmdictId": "1118780"
+      },
+      {
+        "word": "デモ",
+        "translations": [
+          "demonstration"
+        ],
+        "jmdictId": "1084000"
+      },
+      {
+        "word": "ビル",
+        "translations": [],
+        "jmdictId": "1106010"
+      },
+      {
+        "word": "カラー",
+        "translations": [
+          "colour"
+        ],
+        "jmdictId": "1038500"
+      },
+      {
+        "word": "スリル",
+        "translations": [
+          "thrill"
+        ],
+        "jmdictId": "1073960"
+      },
+      {
+        "word": "ガイド",
+        "translations": [
+          "guide"
+        ],
+        "jmdictId": "1039900"
+      },
+      {
+        "word": "プラス",
+        "translations": [
+          "plus"
+        ],
+        "jmdictId": "1115630"
+      },
+      {
+        "word": "マネー",
+        "translations": [
+          "money"
+        ],
+        "jmdictId": "1128940"
+      },
+      {
+        "word": "ミニ",
+        "translations": [
+          "miniskirt"
+        ],
+        "jmdictId": "1131240"
+      },
+      {
+        "word": "タイプ",
+        "translations": [
+          "type"
+        ],
+        "jmdictId": "1075940"
+      },
+      {
+        "word": "レンズ",
+        "translations": [
+          "lens"
+        ],
+        "jmdictId": "1146140"
+      },
+      {
+        "word": "ステレオ",
+        "translations": [
+          "stereo"
+        ],
+        "jmdictId": "1070650"
+      },
+      {
+        "word": "カーネーション",
+        "translations": [
+          "carnation"
+        ],
+        "jmdictId": "1036450"
+      },
+      {
+        "word": "ガソリンスタンド",
+        "translations": [
+          "gas station"
+        ],
+        "jmdictId": "1040260"
+      },
+      {
+        "word": "ジョギング",
+        "translations": [
+          "jogging"
+        ],
+        "jmdictId": "1066360"
+      },
+      {
+        "word": "コンプレックス",
+        "translations": [
+          "complex"
+        ],
+        "jmdictId": "1053800"
+      },
+      {
+        "word": "チェーン",
+        "translations": [
+          "chain"
+        ],
+        "jmdictId": "1077420"
+      },
+      {
+        "word": "バレー",
+        "translations": [
+          "volleyball"
+        ],
+        "jmdictId": "1099950"
+      },
+      {
+        "word": "ラケット",
+        "translations": [
+          "racket"
+        ],
+        "jmdictId": "1138710"
+      },
+      {
+        "word": "ポスト",
+        "translations": [
+          "postbox"
+        ],
+        "jmdictId": "1125150"
+      },
+      {
+        "word": "ビラ",
+        "translations": [
+          "villa"
+        ],
+        "jmdictId": "1105970"
+      },
+      {
+        "word": "エンジン",
+        "translations": [
+          "engine"
+        ],
+        "jmdictId": "1030950"
+      },
+      {
+        "word": "ビーチ",
+        "translations": [
+          "beach"
+        ],
+        "jmdictId": "1104370"
+      },
+      {
+        "word": "パソコン",
+        "translations": [
+          "pc"
+        ],
+        "jmdictId": "1101570"
+      },
+      {
+        "word": "コンピュータ",
+        "translations": [
+          "computer"
+        ],
+        "jmdictId": "1053350"
+      },
+      {
+        "word": "パターン",
+        "translations": [
+          "pattern"
+        ],
+        "jmdictId": "1101600"
+      },
+      {
+        "word": "タイヤ",
+        "translations": [
+          "tyre"
+        ],
+        "jmdictId": "1076120"
+      },
+      {
+        "word": "ガス",
+        "translations": [
+          "gas"
+        ],
+        "jmdictId": "1040060"
+      },
+      {
+        "word": "マーク",
+        "translations": [
+          "mark"
+        ],
+        "jmdictId": "1126140"
+      },
+      {
+        "word": "バーゲン",
+        "translations": [
+          "bargain"
+        ],
+        "jmdictId": "1097030"
+      },
+      {
+        "word": "グラウンド",
+        "translations": [
+          "ground"
+        ],
+        "jmdictId": "1046340"
+      },
+      {
+        "word": "マンホール",
+        "translations": [
+          "manhole"
+        ],
+        "jmdictId": "1130270"
+      },
+      {
+        "word": "マフラー",
+        "translations": [
+          "muffler"
+        ],
+        "jmdictId": "1129210"
+      },
+      {
+        "word": "パジャマ",
+        "translations": [
+          "pyjamas"
+        ],
+        "jmdictId": "1101430"
+      },
+      {
+        "word": "プリント",
+        "translations": [
+          "print"
+        ],
+        "jmdictId": "1116300"
+      },
+      {
+        "word": "レシート",
+        "translations": [
+          "receipt"
+        ],
+        "jmdictId": "1145060"
+      },
+      {
+        "word": "センチ",
+        "translations": [
+          "centimeter"
+        ],
+        "jmdictId": "1075060"
+      },
+      {
+        "word": "バッジ",
+        "translations": [
+          "badge"
+        ],
+        "jmdictId": "1099110"
+      },
+      {
+        "word": "ガレージ",
+        "translations": [
+          "garage"
+        ],
+        "jmdictId": "1040530"
+      },
+      {
+        "word": "パンク",
+        "translations": [
+          "puncture"
+        ],
+        "jmdictId": "1103110"
+      },
+      {
+        "word": "ラッシュ",
+        "translations": [
+          "rush"
+        ],
+        "jmdictId": "1139180"
+      },
+      {
+        "word": "スピーカー",
+        "translations": [
+          "speaker"
+        ],
+        "jmdictId": "1072240"
+      },
+      {
+        "word": "スキー",
+        "translations": [
+          "skiing"
+        ],
+        "jmdictId": "1067770"
+      },
+      {
+        "word": "コミュニケーション",
+        "translations": [
+          "communication"
+        ],
+        "jmdictId": "1050980"
+      },
+      {
+        "word": "コップ",
+        "translations": [
+          "glass"
+        ],
+        "jmdictId": "1050390"
+      },
+      {
+        "word": "ルール",
+        "translations": [
+          "rule"
+        ],
+        "jmdictId": "1143920"
+      },
+      {
+        "word": "アスファルト",
+        "translations": [
+          "asphalt"
+        ],
+        "jmdictId": "1016120"
+      },
+      {
+        "word": "ピストル",
+        "translations": [
+          "pistol"
+        ],
+        "jmdictId": "1106660"
+      },
+      {
+        "word": "リスト",
+        "translations": [
+          "list"
+        ],
+        "jmdictId": "1141500"
+      },
+      {
+        "word": "サークル",
+        "translations": [
+          "circle"
+        ],
+        "jmdictId": "1054850"
+      },
+      {
+        "word": "ハム",
+        "translations": [
+          "ham"
+        ],
+        "jmdictId": "1096180"
+      },
+      {
+        "word": "クイズ",
+        "translations": [
+          "quiz"
+        ],
+        "jmdictId": "1043470"
+      },
+      {
+        "word": "スプレー",
+        "translations": [
+          "spray"
+        ],
+        "jmdictId": "1072750"
+      },
+      {
+        "word": "サングラス",
+        "translations": [
+          "sunglasses"
+        ],
+        "jmdictId": "1058300"
+      },
+      {
+        "word": "ダイナマイト",
+        "translations": [
+          "dynamite"
+        ],
+        "jmdictId": "1076790"
+      },
+      {
+        "word": "メニュー",
+        "translations": [
+          "menu"
+        ],
+        "jmdictId": "1133790"
+      },
+      {
+        "word": "テント",
+        "translations": [
+          "tent"
+        ],
+        "jmdictId": "1081040"
+      },
+      {
+        "word": "インク",
+        "translations": [
+          "ink"
+        ],
+        "jmdictId": "1022210"
+      },
+      {
+        "word": "スリッパ",
+        "translations": [
+          "slipper"
+        ],
+        "jmdictId": "1073900"
+      },
+      {
+        "word": "ロープ",
+        "translations": [
+          "rope"
+        ],
+        "jmdictId": "1146750"
+      },
+      {
+        "word": "コピー",
+        "translations": [
+          "copy"
+        ],
+        "jmdictId": "1050590"
+      },
+      {
+        "word": "ニュース",
+        "translations": [
+          "news"
+        ],
+        "jmdictId": "1091500"
+      },
+      {
+        "word": "メーター",
+        "translations": [
+          "meter"
+        ],
+        "jmdictId": "1132530"
+      },
+      {
+        "word": "オーケストラ",
+        "translations": [
+          "orchestra"
+        ],
+        "jmdictId": "1031610"
+      },
+      {
+        "word": "パトカー",
+        "translations": [
+          "patrol car"
+        ],
+        "jmdictId": "1101950"
+      },
+      {
+        "word": "マヨネーズ",
+        "translations": [
+          "mayonnaise"
+        ],
+        "jmdictId": "1129260"
+      },
+      {
+        "word": "メカニズム",
+        "translations": [
+          "mechanism"
+        ],
+        "jmdictId": "1132960"
+      },
+      {
+        "word": "プライド",
+        "translations": [
+          "pride"
+        ],
+        "jmdictId": "1115390"
+      },
+      {
+        "word": "ブーム",
+        "translations": [
+          "boom"
+        ],
+        "jmdictId": "1113160"
+      },
+      {
+        "word": "サイレン",
+        "translations": [
+          "siren"
+        ],
+        "jmdictId": "1056150"
+      },
+      {
+        "word": "キャンプ",
+        "translations": [
+          "camp"
+        ],
+        "jmdictId": "1042200"
+      },
+      {
+        "word": "オルガン",
+        "translations": [
+          "organ"
+        ],
+        "jmdictId": "1035780"
+      },
+      {
+        "word": "マイク",
+        "translations": [
+          "mic"
+        ],
+        "jmdictId": "1126590"
+      },
+      {
+        "word": "セメント",
+        "translations": [
+          "cement"
+        ],
+        "jmdictId": "1074740"
+      },
+      {
+        "word": "ヒント",
+        "translations": [
+          "hint"
+        ],
+        "jmdictId": "1104300"
+      },
+      {
+        "word": "フライパン",
+        "translations": [
+          "fry pan"
+        ],
+        "jmdictId": "1111160"
+      },
+      {
+        "word": "アンケート",
+        "translations": [
+          "enquette",
+          "survey"
+        ],
+        "jmdictId": "1019940"
+      },
+      {
+        "word": "ディスコ",
+        "translations": [
+          "disco"
+        ],
+        "jmdictId": "1081840"
+      },
+      {
+        "word": "プラン",
+        "translations": [
+          "plan"
+        ],
+        "jmdictId": "1115900"
+      },
+      {
+        "word": "バレエ",
+        "translations": [
+          "ballet"
+        ],
+        "jmdictId": "1099970"
+      },
+      {
+        "word": "ノイローゼ",
+        "translations": [
+          "neurosis"
+        ],
+        "jmdictId": "1093780"
+      },
+      {
+        "word": "デザイン",
+        "translations": [
+          "design"
+        ],
+        "jmdictId": "1082900"
+      },
+      {
+        "word": "ヒット",
+        "translations": [
+          "hit"
+        ],
+        "jmdictId": "1103800"
+      },
+      {
+        "word": "ネオン",
+        "translations": [
+          "neon"
+        ],
+        "jmdictId": "1092740"
+      },
+      {
+        "word": "スイッチ",
+        "translations": [
+          "switch"
+        ],
+        "jmdictId": "1067210"
+      },
+      {
+        "word": "パチンコ",
+        "translations": [
+          "pachinko"
+        ],
+        "jmdictId": "1101660"
+      },
+      {
+        "word": "バスケット",
+        "translations": [
+          "basket"
+        ],
+        "jmdictId": "1098430"
+      },
+      {
+        "word": "タイプライター",
+        "translations": [
+          "typewriter"
+        ],
+        "jmdictId": "1075960"
+      },
+      {
+        "word": "ダイヤ",
+        "translations": [
+          "diamond"
+        ],
+        "jmdictId": "1076860"
+      },
+      {
+        "word": "スタジオ",
+        "translations": [
+          "studio"
+        ],
+        "jmdictId": "1069590"
+      },
+      {
+        "word": "タワー",
+        "translations": [
+          "tower"
+        ],
+        "jmdictId": "1076470"
+      },
+      {
+        "word": "ウエスト",
+        "translations": [
+          "waist"
+        ],
+        "jmdictId": "1026070"
+      },
+      {
+        "word": "ファン",
+        "translations": [
+          "fan"
+        ],
+        "jmdictId": "1108540"
+      },
+      {
+        "word": "ウール",
+        "translations": [
+          "wool"
+        ],
+        "jmdictId": "1025010"
+      },
+      {
+        "word": "ロッカー",
+        "translations": [
+          "locker"
+        ],
+        "jmdictId": "1147560"
+      },
+      {
+        "word": "バケツ",
+        "translations": [
+          "bucket"
+        ],
+        "jmdictId": "1098340"
+      },
+      {
+        "word": "アイロン",
+        "translations": [
+          "iron"
+        ],
+        "jmdictId": "1014590"
+      },
+      {
+        "word": "コットン",
+        "translations": [
+          "cotton"
+        ],
+        "jmdictId": "1050380"
+      },
+      {
+        "word": "シングル",
+        "translations": [
+          "single"
+        ],
+        "jmdictId": "1063530"
+      },
+      {
+        "word": "キログラム",
+        "translations": [
+          "kilogram"
+        ],
+        "jmdictId": "1042620"
+      },
+      {
+        "word": "アルバム",
+        "translations": [
+          "album"
+        ],
+        "jmdictId": "1019450"
+      }
+    ]
+  }
+}

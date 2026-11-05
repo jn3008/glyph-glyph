@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { isJapaneseWordMode } from "$lib/japanese-words";
   import Quiz from "$/lib/components/play/Quiz.svelte";
   import Input from "$/lib/components/play/Input.svelte";
   import Menu from "$/lib/components/play/Menu.svelte";
@@ -89,14 +90,19 @@
     $glyphs_list[0] +
     `, type "` +
     getAnswers($glyphs_list[0])[0] +
-    `" \n\nThere are buttons for restarting and for toggling the auto-submit mechanism 
+    `" ` +
+    ($game_config.path_dict.alphabet === "kana" && $game_config.path_dict.type === "katakana" && isJapaneseWordMode($game_config.path_dict.glyphs)
+      ? "\n\nYou can also type an accepted English meaning. Press Enter to submit; spaces are allowed within answers."
+      : "") +
+    `\n\nThere are buttons for restarting and for toggling the auto-submit mechanism
    (automatically submits a correct answer)`;
 
   function handleMenuEvent(type: string) {
     switch (type) {
       case "restart":
-        // if we're in hangul syllables mode, re-generate the random syllables on restart
+        // Generate a new sample when restarting a random mode.
         if (
+          ($game_config.path_dict.alphabet === "kana" && isJapaneseWordMode($game_config.path_dict.glyphs)) ||
           (
             $game_config.path.includes("hangul") && $game_config.path.includes("syllables")
           ) || 

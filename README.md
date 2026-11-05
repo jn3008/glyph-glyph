@@ -10,6 +10,7 @@ The currently available modes are:
 
 - Katakana
 - Hiragana
+- Random words: 20 or 50 from a pool of 300 per script
 
 #### Greek 🇬🇷 (letter names / transcriptions)
 
@@ -75,3 +76,5 @@ Some design elements and code was inspired by a similar game for learning japane
 [https://github.com/furudean/type-kana](https://github.com/furudean/type-kana)
 
 and my p5js typing game from 2019: [https://editor.p5js.org/jn3008/full/0NVLg4ABL](https://editor.p5js.org/jn3008/full/0NVLg4ABL)
+
+Vocabulary adapted and manually edited from a small selection from [JMdict](https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project), © James William Breen and the Electronic Dictionary Research and Development Group, under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) ([licence statement](https://www.edrdg.org/edrdg/licence.html)).

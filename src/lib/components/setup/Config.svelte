@@ -36,22 +36,31 @@
     {#each Array.from({ length: selected_path.length }, (_, i) => i + 1) as depth}
       {#if getModesAtDepth(selected_path.slice(0, depth)).length > 0}
         <div
-          class="sub-selection-container {depth <= visible_depth
-            ? 'visible'
-            : ''}"
-          data-label={getModesLabel(selected_path.slice(0, depth))}
+          class="option-groups"
+          class:grouped={getModesAtDepth(selected_path.slice(0, depth)).some(
+            (option) => option.group,
+          )}
         >
-          <div class="sub-selection">
-            {#each getModesAtDepth(selected_path.slice(0, depth)) as option}
-              <Button
-                on:click={() => selectConfigAtDepth(option.key, depth)}
-                selected={selected_path[depth] === option.key}
-                title="Select {option.label}"
-              >
-                {option.label}
-              </Button>
-            {/each}
-          </div>
+          {#each [...new Set(getModesAtDepth(selected_path.slice(0, depth)).map((option) => option.group || getModesLabel(selected_path.slice(0, depth))))] as group}
+            <div
+              class="sub-selection-container {depth <= visible_depth
+                ? 'visible'
+                : ''}"
+              data-label={group}
+            >
+              <div class="sub-selection">
+                {#each getModesAtDepth(selected_path.slice(0, depth)).filter((option) => (option.group || getModesLabel(selected_path.slice(0, depth))) === group) as option}
+                  <Button
+                    on:click={() => selectConfigAtDepth(option.key, depth)}
+                    selected={selected_path[depth] === option.key}
+                    title="Select {group}: {option.label}"
+                  >
+                    {option.label}
+                  </Button>
+                {/each}
+              </div>
+            </div>
+          {/each}
         </div>
       {/if}
     {/each}
@@ -59,6 +68,21 @@
 </div>
 
 <style lang="postcss">
+  .option-groups {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+    align-self: center;
+    max-width: 100%;
+  }
+
+  .option-groups.grouped {
+    border: 2px solid var(--dark-button-color);
+    border-radius: 1.75em;
+    padding: 1.25em 1em 1em;
+  }
+
   .selections-container {
     position: relative;
     display: flex;
@@ -73,7 +97,7 @@
     position: relative;
     border: 2px solid var(--dark-button-color);
     border-radius: 1em;
-    margin: auto;
+    margin: 0;
     height: auto;
     display: flex;
 

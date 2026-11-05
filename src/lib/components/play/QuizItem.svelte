@@ -1,11 +1,20 @@
 <script lang="ts">
   import { getAnswers } from "$/lib/answer";
+  import { game_config } from "$lib/stores/game-config";
+  import { isJapaneseWordMode } from "$lib/japanese-words";
+
+  $: word_mode =
+    $game_config.path_dict.alphabet === "kana" &&
+    isJapaneseWordMode($game_config.path_dict.glyphs);
 
   export let glyph: string;
   export let answered: string | undefined = undefined;
   export let is_correct_answer: boolean | undefined = undefined;
   export let is_current: boolean = false;
   export let element: HTMLDivElement | undefined = undefined;
+
+  let glyph_width = 0;
+  let answer_width = 0;
 
   $: has_answer = answered !== undefined;
   $: has_correct_answer = has_answer ? is_correct_answer : false;
@@ -21,10 +30,16 @@
     class:is-current={is_current}
     bind:this={element}
   >
-    <div class="glyph">{glyph}</div>
-    {#if has_incorrect_answer}
-      <div class="romanisation {getAnswers(glyph)[0].length > 3 ? 'long' : ''}">
-        {getAnswers(glyph)[0]}
+    <div class="glyph" bind:clientWidth={glyph_width}>{glyph}</div>
+    {#if has_incorrect_answer || (word_mode && has_answer)}
+      <div
+        class="romanisation"
+        class:long={answer_width > glyph_width}
+        bind:clientWidth={answer_width}
+      >
+        {#each word_mode ? getAnswers(glyph) : getAnswers(glyph).slice(0, 1) as answer}
+          <span>{answer}</span>
+        {/each}
       </div>
     {/if}
   </div>
@@ -45,16 +60,29 @@
 
   .romanisation {
     position: absolute;
-    top: -1.2em;
-    left: 0;
-    right: 0;
+    bottom: calc(100% + 0.15em);
+    left: 50%;
+    width: max-content;
+    transform: translateX(-50%);
     font-size: 0.5em;
     font-weight: 400;
     line-height: 1;
     text-align: center;
   }
+  .romanisation span {
+    display: block;
+  }
+
+  .romanisation span + span {
+    margin-top: 0.2em;
+    font-size: 0.7em;
+  }
+
   .romanisation.long {
-    transform: rotate(calc(-45deg));
+    bottom: calc(100% + 0.35em);
+    left: 0;
+    transform-origin: bottom left;
+    transform: rotate(-45deg);
   }
 
   .is-current {

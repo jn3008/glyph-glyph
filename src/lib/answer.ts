@@ -1,3 +1,8 @@
+import {
+  getJapaneseWordAnswers,
+  isJapaneseWordMode,
+  normalizeJapaneseWordAnswer,
+} from "$lib/japanese-words";
 import { toHiragana, toRomaji } from "wanakana";
 import { game_config } from "$lib/stores/game-config";
 import {
@@ -20,6 +25,8 @@ export function getAnswers(glyph: string): string[] {
   const path_dict = get(game_config)?.path_dict;
   switch (path_dict.alphabet) {
     case "kana":
+      if (isJapaneseWordMode(path_dict.glyphs))
+        return getJapaneseWordAnswers(path_dict.type, glyph);
       return exceptional_answers.get(toHiragana(glyph)) ?? [toRomaji(glyph)];
     case "greek":
       switch (path_dict.mode) {
@@ -180,6 +187,12 @@ export function isCorrectAnswer(guess: string, actual: string): boolean {
   if (!get(game_config)?.is_valid) return false;
   switch (get(game_config).path[0]) {
     case "kana":
+      if (isJapaneseWordMode(get(game_config).path_dict.glyphs)) {
+        const normalized = normalizeJapaneseWordAnswer(guess);
+        return getAnswers(actual).some(
+          (answer) => normalizeJapaneseWordAnswer(answer) === normalized,
+        );
+      }
       return getAnswers(actual).includes(toRomaji(guess.toLowerCase()));
     default:
       return getAnswers(actual).includes(guess.toLowerCase());
