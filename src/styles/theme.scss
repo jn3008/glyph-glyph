@@ -1,93 +1,76 @@
-@mixin light-theme-colour($hue) {
---background-color: #{hsl($hue, 84%, 95%)};
---background-contrast: #{hsl($hue, 84%, 90%)};
---background-contrast-alpha: #{hsla($hue, 84%, 90%, 0.6)};
---background-input: #{hsl($hue, 39%, 88%)};
---border-input: #{hsl($hue, 58%, 80%)};
+@use "sass:color";
+@use "sass:map";
+@use "sass:list";
+@use "sass:math";
+@use "theme-tuning" as tuning;
 
---underline: #{hsl($hue, 39%, 86%)};
-
---text-color: #{hsl($hue, 24%, 30%)};
---text-color-light: #{hsl($hue, 10%, 59%)};
---text-color-low-contrast: #{hsl($hue, 35%, 75%)};
---text-color-subtle-alpha: #{hsla($hue, 64%, 90%, 0.55)};
-
---light-button-color: #{hsl($hue, 36%, 60%)};
---light-button-text-color: #{hsl($hue, 30%, 85%)};
-
---dark-button-color: #{hsl($hue, 45%, 80%)};
---dark-button-text-color: #{hsl($hue, 40%, 70%)};
-
---dark-button-color-selected: #{hsl($hue, 50%, 70%)};
---dark-button-text-color-selected: #{hsl($hue, 30%, 40%)};
-
---dark-button-disactivated-color: #{hsl($hue, 10%, 70%)};
---dark-button-disactivated-text-color: #{hsl($hue, 10%, 40%)};
-
---accent-color: #{hsl($hue, 30%, 60%)};
---underline-color: #{hsl($hue, 22%, 13%)};
---text-color-on-accent-color: white;
---border-color-on-accent-color: white;
-
---text-color-on-secondary-accent-color: white;
-
---focus-color: white;
---text-color-on-focus-color: black;
-
---highlight-color: #db621d;
-
---backdrop-color: rgba(0, 0, 0, 0.4);
-
---new-best-time: hsl(180, 40%, 50%);
-}
-
-@mixin dark-theme-colour($hue) {
-	--background-color: #{hsl($hue, 84%, 5%)};
-	--background-contrast: #{hsl($hue, 84%, 3%)};
-	--background-contrast-alpha: #{hsla($hue, 84%, 2%, 0.6)};
-	--background-input: #{hsl($hue, 39%, 12%)};
-	--border-input: #{hsl($hue, 58%, 15%)};
-
-	--underline: #{hsl($hue, 39%, 14%)};
-
-	--text-color: #{hsl($hue, 24%, 74%)};
-	--text-color-light: #{hsl($hue, 10%, 41%)};
-	--text-color-low-contrast: #{hsl($hue, 35%, 25%)};
-	--text-color-subtle-alpha: #{hsla($hue, 64%, 10%, 0.55)};
-
-	--light-button-color: #{hsl($hue, 36%, 40%)};
-	--light-button-text-color: #{hsl($hue, 30%, 15%)};
-
-	--dark-button-color: #{hsl($hue, 45%, 15%)};
-	--dark-button-text-color: #{hsl($hue, 30%, 30%)};
-
-	--dark-button-disactivated-color: #{hsl($hue, 10%, 15%)};
-	--dark-button-disactivated-text-color: #{hsl($hue, 10%, 30%)};
-
-
-	--dark-button-color-selected: #{hsl($hue, 50%, 23%)};
-	--dark-button-text-color-selected: #{hsl($hue, 30%, 65%)};
-
-	--accent-color: #{hsl($hue, 23%, 37%)};
-	--underline-color: #{hsl($hue, 22%, 13%)};
-	--text-color-on-accent-color: white;
-	--border-color-on-accent-color: white;
-
-	--text-color-on-secondary-accent-color: white;
-
-	--focus-color: white;
-	--text-color-on-focus-color: black;
-
-	--highlight-color: #db621d;
-
-	--backdrop-color: rgba(0, 0, 0, 0.4);
-
-	--new-best-time: hsl(180, 40%, 50%);
-}
+// Original colour values. The palette hue is applied when generating CSS.
+$base-colours: (
+  light: (
+    background-color: hsl(0deg, 84%, 95%),
+    background-contrast: hsl(0deg, 84%, 90%),
+    background-contrast-alpha: hsla(0deg, 84%, 90%, 0.6),
+    background-input: hsl(0deg, 39%, 88%),
+    border-input: hsl(0deg, 58%, 80%),
+    underline: hsl(0deg, 39%, 86%),
+    text-color: hsl(0deg, 24%, 30%),
+    text-color-light: hsl(0deg, 10%, 59%),
+    text-color-low-contrast: hsl(0deg, 35%, 75%),
+    text-color-subtle-alpha: hsla(0deg, 64%, 90%, 0.55),
+    light-button-color: hsl(0deg, 36%, 60%),
+    light-button-text-color: hsl(0deg, 30%, 85%),
+    dark-button-color: hsl(0deg, 45%, 80%),
+    dark-button-text-color: hsl(0deg, 40%, 70%),
+    dark-button-color-selected: hsl(0deg, 50%, 70%),
+    dark-button-text-color-selected: hsl(0deg, 30%, 40%),
+    dark-button-disactivated-color: hsl(0deg, 10%, 70%),
+    dark-button-disactivated-text-color: hsl(0deg, 10%, 40%),
+    accent-color: hsl(0deg, 30%, 60%),
+    underline-color: hsl(0deg, 22%, 13%),
+    text-color-on-accent-color: white,
+    border-color-on-accent-color: white,
+    text-color-on-secondary-accent-color: white,
+    focus-color: white,
+    text-color-on-focus-color: black,
+    highlight-color: #db621d,
+    backdrop-color: rgba(0, 0, 0, 0.4),
+    new-best-time: hsl(180, 40%, 50%),
+  ),
+  dark: (
+    background-color: hsl(0deg, 84%, 5%),
+    background-contrast: hsl(0deg, 84%, 3%),
+    background-contrast-alpha: hsla(0deg, 84%, 2%, 0.6),
+    background-input: hsl(0deg, 39%, 12%),
+    border-input: hsl(0deg, 58%, 15%),
+    underline: hsl(0deg, 39%, 14%),
+    text-color: hsl(0deg, 24%, 74%),
+    text-color-light: hsl(0deg, 10%, 41%),
+    text-color-low-contrast: hsl(0deg, 35%, 25%),
+    text-color-subtle-alpha: hsla(0deg, 64%, 10%, 0.55),
+    light-button-color: hsl(0deg, 36%, 40%),
+    light-button-text-color: hsl(0deg, 30%, 15%),
+    dark-button-color: hsl(0deg, 45%, 15%),
+    dark-button-text-color: hsl(0deg, 30%, 30%),
+    dark-button-disactivated-color: hsl(0deg, 10%, 15%),
+    dark-button-disactivated-text-color: hsl(0deg, 10%, 30%),
+    dark-button-color-selected: hsl(0deg, 50%, 23%),
+    dark-button-text-color-selected: hsl(0deg, 30%, 65%),
+    accent-color: hsl(0deg, 23%, 37%),
+    underline-color: hsl(0deg, 22%, 13%),
+    text-color-on-accent-color: white,
+    border-color-on-accent-color: white,
+    text-color-on-secondary-accent-color: white,
+    focus-color: white,
+    text-color-on-focus-color: black,
+    highlight-color: #db621d,
+    backdrop-color: rgba(0, 0, 0, 0.4),
+    new-best-time: hsl(180, 40%, 50%),
+  ),
+);
 
 $themes: (
   "red": 0,
-	"orange": 30,
+  "orange": 30,
   "yellow": 55,
   "lime": 90,
   "teal": 155,
@@ -96,21 +79,108 @@ $themes: (
   "pink": 290,
 );
 
-@mixin generate-theme-colors {
-  @each $theme, $hue in $themes {
-    .light-theme-#{$theme} {
-      @include light-theme-colour($hue);
+// Adjust lightness and saturation while preserving hue and alpha.
+@function tuned-colour($base, $mode, $palette, $token, $hue, $semantic: false) {
+  $profile: map.get(tuning.$palettes, $mode, $palette);
+  $shared: map.get(tuning.$tokens, $mode, $token);
+  $local: null;
+  @if map.has-key($profile, tokens) {
+    $local: map.get($profile, tokens, $token);
+  }
+  $contrast: 1;
+  $brightness: 0%;
+  $brightness-scale: 1;
+  $saturation-scale: 1;
+  @if not $semantic {
+    $contrast: map.get($profile, contrast);
+    $brightness-scale: math.div(map.get($profile, brightness), 0.7);
+    @if map.has-key($profile, brightness-offset) {
+      $brightness: map.get($profile, brightness-offset);
     }
-    .dark-theme-#{$theme} {
-      @include dark-theme-colour($hue);
+    @if map.has-key($profile, saturation) {
+      $saturation-scale: math.div(map.get($profile, saturation), 0.8);
+    }
+  } @else {
+    $hue: color.channel($base, "hue", $space: hsl);
+  }
+  @each $adjustment in ($shared, $local) {
+    @if $adjustment != null {
+      @if map.has-key($adjustment, contrast) {
+        $contrast: $contrast * map.get($adjustment, contrast);
+      }
+      @if map.has-key($adjustment, saturation) {
+        $saturation-scale: $saturation-scale *
+          math.div(map.get($adjustment, saturation), 0.8);
+      }
+      @if map.has-key($adjustment, brightness-offset) {
+        $brightness: $brightness + map.get($adjustment, brightness-offset);
+      }
+      @if map.has-key($adjustment, brightness) {
+        $brightness-scale: $brightness-scale *
+          math.div(map.get($adjustment, brightness), 0.7);
+      }
+    }
+  }
+  $anchor: color.channel(
+    map.get($base-colours, $mode, background-color),
+    "lightness",
+    $space: hsl
+  );
+  $lightness: color.channel($base, "lightness", $space: hsl);
+  $adjusted: clamp(
+    0%,
+    ($anchor + ($lightness - $anchor) * $contrast + $brightness) *
+      $brightness-scale,
+    100%
+  );
+  $saturation: clamp(
+    0%,
+    color.channel($base, "saturation", $space: hsl) * $saturation-scale,
+    100%
+  );
+  @return color.change(
+    $base,
+    $hue: $hue,
+    $lightness: $adjusted,
+    $saturation: $saturation,
+    $space: hsl
+  );
+}
+
+@each $palette, $hue in $themes {
+  @each $mode in (light, dark) {
+    .#{$mode}-theme-#{$palette} {
+      @each $token, $base in map.get($base-colours, $mode) {
+        // Keep semantic colours (orange mistakes, teal records, black/white
+        // foregrounds and the neutral backdrop) independent of palette tuning.
+        $semantic: list.index(
+            (
+              text-color-on-accent-color,
+              border-color-on-accent-color,
+              text-color-on-secondary-accent-color,
+              focus-color,
+              text-color-on-focus-color,
+              highlight-color,
+              backdrop-color,
+              new-best-time
+            ),
+            $token
+          ) !=
+          null;
+        --#{$token}: #{tuned-colour(
+            $base,
+            $mode,
+            $palette,
+            $token,
+            $hue,
+            $semantic
+          )};
+      }
     }
   }
 }
 
-@include generate-theme-colors;
-
-
 a {
-	text-decoration: none;
-	color: var(--text-color);
+  text-decoration: none;
+  color: var(--text-color);
 }
