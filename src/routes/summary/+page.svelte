@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { configLink } from "$lib/setup-url";
   import Button from "$lib/components/Button.svelte";
   import BottomBar from "$lib/components/BottomBar.svelte";
   import HelperModal from "$/lib/components/HelperModal.svelte";
@@ -47,7 +48,7 @@
     {
       min: items[1],
       max: items[1],
-    }
+    },
   );
 
   $: is_best_time =
@@ -210,7 +211,7 @@
 
   <BottomBar>
     <Button
-      href="setup"
+      href={configLink("/setup", $game_config.id)}
       on:click={() => {
         quiz.reset();
       }}
@@ -224,7 +225,7 @@
     </Button>
 
     <Button
-      href="play"
+      href={configLink("/play", $game_config.id)}
       on:click={() => {
         quiz.reset();
       }}

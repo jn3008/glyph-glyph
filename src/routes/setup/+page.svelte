@@ -9,7 +9,15 @@
   import { formatTimeAlt } from "$/lib/utils";
   import { onMount } from "svelte";
   import { quiz } from "$/lib/stores/quiz";
-  import { game_config } from "$/lib/stores/game-config";
+  import { game_config, updateGameConfig } from "$/lib/stores/game-config";
+  import { afterNavigate, replaceState } from "$app/navigation";
+  import { page } from "$app/state";
+  import {
+    configFromHash,
+    isConfigPath,
+    urlWithConfig,
+    configLink,
+  } from "$lib/setup-url";
   import { settings, toggleStopwatch } from "$/lib/stores/settings";
   import { times_store } from "$/lib/stores/times";
 
@@ -20,19 +28,51 @@
 
   $: configuration = $game_config.id;
   $: high_score = $times_store.best_times[configuration];
-  $: show_pronunciations = ["greek", "cyrillic"].includes(
-    $game_config?.path[0]
-  ) || ($game_config?.path[0] === "indic" && $game_config?.path[2] === "letters");
+  $: show_pronunciations =
+    ["greek", "cyrillic"].includes($game_config?.path[0]) ||
+    ($game_config?.path[0] === "indic" && $game_config?.path[2] === "letters");
 
-  // This function helps avoid showing incomplete or uninitialized content to the user.
-  // sets `is_loading` to `false` once the store emits its first value, (once the store is loaded)
-  onMount(() => {
-    // wait for stores to load
-    const unsubscribe = quiz.subscribe(() => {
-      is_loading = false;
+  let synced_hash = "";
+  let unsubscribe_config: (() => void) | undefined;
+
+  function restoreUrlConfig(reset_missing = false) {
+    const from_url = configFromHash(window.location.hash);
+    const fallback = reset_missing ? "" : $game_config.id;
+    // Rebuild derived config fields rather than trusting a possibly older session.
+    updateGameConfig(from_url ?? (isConfigPath(fallback) ? fallback : ""));
+  }
+
+  function onUrlChange() {
+    if (window.location.pathname.replace(/\/$/, "") !== "/setup") return;
+    if (unsubscribe_config && window.location.hash !== synced_hash) {
+      restoreUrlConfig(true);
+    }
+  }
+
+  // The router must be initialized before calling its replaceState helper.
+  afterNavigate(() => {
+    if (unsubscribe_config) {
+      onUrlChange();
+      return;
+    }
+    unsubscribe_config = game_config.subscribe((config) => {
+      const current = new URL(window.location.href);
+      const next = urlWithConfig(current, config.id);
+      if (next.href !== current.href) replaceState(next, page.state);
+      synced_hash = next.hash;
     });
+  });
 
-    return () => unsubscribe();
+  onMount(() => {
+    restoreUrlConfig();
+    is_loading = false;
+    window.addEventListener("hashchange", onUrlChange);
+    window.addEventListener("popstate", onUrlChange);
+    return () => {
+      unsubscribe_config?.();
+      window.removeEventListener("hashchange", onUrlChange);
+      window.removeEventListener("popstate", onUrlChange);
+    };
   });
 
   const instructions: string = `Learn an alphabet or test your knowledge by choosing your 
@@ -98,7 +138,7 @@
 
     {#if $game_config.is_valid}
       <Button
-        href="play"
+        href={configLink("/play", $game_config.id)}
         on:click={() => {
           quiz.reset();
         }}
