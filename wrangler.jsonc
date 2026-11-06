@@ -3,6 +3,7 @@
   "name": "glyph-glyph",
   "compatibility_date": "2026-10-30",
   "assets": {
-    "directory": "./build"
+    "directory": "./build",
+    "not_found_handling": "single-page-application"
   }
 }

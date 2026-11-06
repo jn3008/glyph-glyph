@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { configLink } from "$lib/setup-url";
+  import { game_config } from "$lib/stores/game-config";
   import Button from "$lib/components/Button.svelte";
 
   let restart_animation_playing = false;
@@ -12,7 +14,11 @@
 
 <section class="menu" class:keyboard-open={is_keyboard_open}>
   <div class="button-container">
-    <a href="setup" class="button" title="Go back">
+    <a
+      href={configLink("/setup", $game_config.id)}
+      class="button"
+      title="Go back"
+    >
       <span class="material-symbols-rounded menu-icon">arrow_back</span>
     </a>
   </div>

@@ -1,3 +1,5 @@
+import { get } from "svelte/store";
+import { game_config } from "./game-config";
 import { shuffleArray } from "$/lib/utils";
 import type { Readable } from "svelte/store";
 import { glyphs_list } from "$/lib/stores/glyphs";
@@ -12,6 +14,7 @@ export interface QuizItem {
 }
 
 export interface Quiz {
+  config_id?: string;
   items: QuizItem[];
   current_idx: number;
   elapsed_time: number;
@@ -24,6 +27,7 @@ function createQuiz(dictionary: string[]): Quiz {
   }));
 
   return {
+    config_id: get(game_config).id,
     items: shuffled_items,
     current_idx: 0,
     elapsed_time: -1,
@@ -36,7 +40,7 @@ export interface QuizStore extends Readable<Quiz> {
   sync(
     new_items: QuizItem[],
     new_current_idx: number,
-    new_elapsed_time: number
+    new_elapsed_time: number,
   ): void;
   updateIndex(new_current_idx: number): void;
   updateItem(new_index: number, callback: (item: QuizItem) => QuizItem): void;
@@ -53,7 +57,7 @@ export function createQuizStore(): QuizStore {
 
   const quiz_data = sessionPersistentStore<Quiz>(
     "quiz-session",
-    createQuiz(glyphs)
+    createQuiz(glyphs),
   );
 
   return {
@@ -66,6 +70,7 @@ export function createQuizStore(): QuizStore {
     sync(new_items, new_current_idx, new_elapsed_time) {
       quiz_data.update(() => {
         return {
+          config_id: get(game_config).id,
           items: new_items,
           current_idx: new_current_idx,
           elapsed_time: new_elapsed_time,
@@ -74,8 +79,9 @@ export function createQuizStore(): QuizStore {
     },
 
     updateIndex(new_current_idx) {
-      quiz_data.update(({ items, elapsed_time }) => {
+      quiz_data.update(({ config_id, items, elapsed_time }) => {
         return {
+          config_id,
           items: items,
           current_idx: new_current_idx,
           elapsed_time: elapsed_time,
@@ -84,9 +90,10 @@ export function createQuizStore(): QuizStore {
     },
 
     updateItem(index, callback) {
-      quiz_data.update(({ items, current_idx, elapsed_time }) => {
+      quiz_data.update(({ config_id, items, current_idx, elapsed_time }) => {
         items[index] = callback(items[index]);
         return {
+          config_id,
           items: items,
           current_idx: current_idx,
           elapsed_time: elapsed_time,
@@ -95,8 +102,9 @@ export function createQuizStore(): QuizStore {
     },
 
     updateElapsedTime(new_elapsed_time: number): void {
-      quiz_data.update(({ items, current_idx, elapsed_time }) => {
+      quiz_data.update(({ config_id, items, current_idx, elapsed_time }) => {
         return {
+          config_id,
           items: items,
           current_idx: current_idx,
           elapsed_time: new_elapsed_time,

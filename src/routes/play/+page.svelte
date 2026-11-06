@@ -16,8 +16,50 @@
   import { settings, toggleAutoSubmit } from "$/lib/stores/settings";
   import { onMount, tick } from "svelte";
   import { times_store, updateHighScore } from "$/lib/stores/times";
-  import { game_config, refreshGameConfig } from "$/lib/stores/game-config";
-  import { goto } from "$app/navigation";
+  import {
+    game_config,
+    refreshGameConfig,
+    updateGameConfig,
+  } from "$/lib/stores/game-config";
+  import { goto, afterNavigate, replaceState } from "$app/navigation";
+  import { page } from "$app/state";
+  import { full_keys } from "$lib/glyph-configurations";
+  import { configFromHash, configLink, urlWithConfig } from "$lib/setup-url";
+
+  let synced_hash: string | undefined;
+
+  function restorePlayConfig() {
+    const previous = $game_config.id;
+    const id = configFromHash(window.location.hash) ?? previous;
+    if (!full_keys.includes(id)) {
+      void goto(configLink("/setup", id), { replaceState: true });
+      return;
+    }
+    const resume =
+      previous === id &&
+      ($quiz.config_id ?? previous) === id &&
+      $quiz.items.length > 0;
+    updateGameConfig(id);
+    if (!resume) {
+      quiz.reset();
+      stopwatch.component?.resetTimer();
+      stopwatch_checkpoint = 0;
+      input = "";
+    }
+    stopwatch.is_inactive = $quiz.current_idx > 0;
+    const current = new URL(window.location.href);
+    const next = urlWithConfig(current, id);
+    if (next.href !== current.href) replaceState(next, page.state);
+    synced_hash = next.hash;
+    is_loading = false;
+  }
+
+  function onUrlChange() {
+    if (window.location.pathname.replace(/\/$/, "") !== "/play") return;
+    if (window.location.hash !== synced_hash) restorePlayConfig();
+  }
+
+  afterNavigate(onUrlChange);
 
   let is_loading: boolean = true;
   let is_keyboard_open = false;
@@ -33,17 +75,13 @@
       checkKeyboardState();
     }
 
-    const unsubscribe = quiz.subscribe(() => {
-      is_loading = false;
-    });
-
-    // if the page reloads and current idx > 0 (game in progress),
-    // then disable the stopwatch until the game restarts
-    stopwatch.is_inactive = current_idx > 0;
+    window.addEventListener("hashchange", onUrlChange);
+    window.addEventListener("popstate", onUrlChange);
     return () => {
       if (window.visualViewport)
         window.visualViewport.removeEventListener("resize", checkKeyboardState);
-      unsubscribe();
+      window.removeEventListener("hashchange", onUrlChange);
+      window.removeEventListener("popstate", onUrlChange);
     };
   });
 
@@ -89,9 +127,11 @@
    queue.\n\nFor example for ` +
     $glyphs_list[0] +
     `, type "` +
-    getAnswers($glyphs_list[0])[0] +
+    ($glyphs_list[0] ? getAnswers($glyphs_list[0])[0] : "") +
     `" ` +
-    ($game_config.path_dict.alphabet === "kana" && $game_config.path_dict.type === "katakana" && isJapaneseWordMode($game_config.path_dict.glyphs)
+    ($game_config.path_dict.alphabet === "kana" &&
+    $game_config.path_dict.type === "katakana" &&
+    isJapaneseWordMode($game_config.path_dict.glyphs)
       ? "\n\nYou can also type an accepted English meaning. Press Enter to submit; spaces are allowed within answers."
       : "") +
     `\n\nThere are buttons for restarting and for toggling the auto-submit mechanism
@@ -102,14 +142,14 @@
       case "restart":
         // Generate a new sample when restarting a random mode.
         if (
-          ($game_config.path_dict.alphabet === "kana" && isJapaneseWordMode($game_config.path_dict.glyphs)) ||
-          (
-            $game_config.path.includes("hangul") && $game_config.path.includes("syllables")
-          ) || 
-          (
-            ["syllables","conjuncts","all"].includes($game_config.path_dict.glyphs) &&
-            $game_config.path.includes("indic")
-          )
+          ($game_config.path_dict.alphabet === "kana" &&
+            isJapaneseWordMode($game_config.path_dict.glyphs)) ||
+          ($game_config.path.includes("hangul") &&
+            $game_config.path.includes("syllables")) ||
+          (["syllables", "conjuncts", "all"].includes(
+            $game_config.path_dict.glyphs,
+          ) &&
+            $game_config.path.includes("indic"))
         )
           refreshGameConfig();
 
@@ -178,7 +218,7 @@
         if (perfect_score)
           stopwatch.new_record_set = updateHighScore(
             configuration,
-            stopwatch.elapsed_time || 0
+            stopwatch.elapsed_time || 0,
           );
       }
 
